@@ -5,31 +5,12 @@
 
 #include <unistd.h>
 
-
-class interpreter {
-
-public:
-    
-    void run() {
-
-    }
-
-    void loop() {
-
-    }
-
-    void calculate() {
-        
-    }
-
-
-private:
-    std::string expression;
-
-};
+#include "interpreter.h"
 
 int main() {
 
+    Interpreter interpreter;
+    interpreter.run();
 
     return 0;
 }
