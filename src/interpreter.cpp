@@ -2,12 +2,14 @@
 #include <string>
 #include <cmath>
 #include <vector>
-
+#include <algorithm>
 #include <unistd.h>
 #include "interpreter.h"
 
 
-Interpreter::Interpreter() {
+Interpreter::Interpreter() 
+: mode(INTERPRET_MODE)
+{
 
 }
 
@@ -16,7 +18,10 @@ Interpreter::~Interpreter() {
 }
 
 void Interpreter::run() {
-    loop();
+    while (1) {
+        loop();    
+    }
+    
 }
 
 void Interpreter::loop() {
@@ -25,12 +30,8 @@ void Interpreter::loop() {
     getline(std::cin, expression);
 
     // remove spaces
-    for (int i = 0; i < expression.length(); i++) {
-        if (expression[i] == ' ') {
-            expression.erase(i, i+1);
-        }
-    }
-   
+    std::string::iterator pos = std::remove(expression.begin(), expression.end(), ' ');
+    expression.erase(pos, expression.end());
     calculate();
 }
 

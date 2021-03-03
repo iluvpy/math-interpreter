@@ -3,6 +3,10 @@
 
 #include <string>
 
+#define INTERPRET_MODE 1 
+#define FILE_MODE 2 
+#define COMPILE_MODE 3
+
 class Interpreter {
 
 public:
@@ -20,6 +24,8 @@ public:
 
 private:
     std::string expression;
+    bool running = true;
+    int mode;
 
 };
 
