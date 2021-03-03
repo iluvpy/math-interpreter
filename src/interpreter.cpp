@@ -8,7 +8,8 @@
 
 
 Interpreter::Interpreter() 
-: mode(INTERPRET_MODE)
+: mode(INTERPRET_MODE), 
+  expression("")
 {
 
 }
@@ -25,18 +26,34 @@ void Interpreter::run() {
 }
 
 void Interpreter::loop() {
-    std::cout << expression << std::endl;
+    // gets input / updates input
+    // and formats the input
+    input(); 
+
+    if (mode == INTERPRET_MODE)
+        std::cout << expression << std::endl;
+        calculate();
+}
+
+
+void Interpreter::input() {
     std::cout << "input> ";
     getline(std::cin, expression);
 
     // remove spaces
     std::string::iterator pos = std::remove(expression.begin(), expression.end(), ' ');
     expression.erase(pos, expression.end());
-    calculate();
 }
 
-void Interpreter::calculate() {
 
+void Interpreter::calculate() {
+    if (getParentethisCount() == 0) {
+
+    }
+}
+
+int Interpreter::getOperators() {
+    
 }
 
 int Interpreter::getParentethisCount() {

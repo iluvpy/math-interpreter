@@ -6,6 +6,10 @@
 #define INTERPRET_MODE 1 
 #define FILE_MODE 2 
 #define COMPILE_MODE 3
+#define LIBRARY 4
+
+
+typedef signed char int8;
 
 class Interpreter {
 
@@ -15,9 +19,12 @@ public:
     ~Interpreter();
 
     void run(); 
+    void input();
     void loop(); 
     void calculate(); 
     void output(); 
+
+    int getOperators();
     int getParentethisCount();
     
 
