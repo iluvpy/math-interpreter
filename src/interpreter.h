@@ -8,8 +8,9 @@
 #define COMPILE_MODE 3
 #define LIBRARY 4
 
+#define ARITHMETIC_ERROR 5
 
-typedef signed char int8;
+typedef int8_t int8;
 
 class Interpreter {
 
@@ -23,16 +24,24 @@ public:
     void loop(); 
     void calculate(); 
     void output(); 
+    void throwErrors(int error=NULL);
+    void clear();
 
+    int errorCheck();
     int getOperators();
-    int getParentethisCount();
     
+    int getParentethisCount();
+    std::vector<float> getNumbers(int position);
 
 
 private:
     std::string expression;
     bool running = true;
     int mode;
+    int length; // length of the input string
+
+    std::vector<int> multiplication_positions;
+    std::vector<int> errors;
 
 };
 

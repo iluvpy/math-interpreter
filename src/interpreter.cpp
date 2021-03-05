@@ -29,10 +29,15 @@ void Interpreter::loop() {
     // gets input / updates input
     // and formats the input
     input(); 
-
+    errorCheck();
+    throwErrors(); 
     if (mode == INTERPRET_MODE)
         std::cout << expression << std::endl;
         calculate();
+
+
+    throwErrors(); 
+    clear(); // clears all vectors
 }
 
 
@@ -43,21 +48,51 @@ void Interpreter::input() {
     // remove spaces
     std::string::iterator pos = std::remove(expression.begin(), expression.end(), ' ');
     expression.erase(pos, expression.end());
+
+    length = expression.length();
 }
 
 
 void Interpreter::calculate() {
     if (getParentethisCount() == 0) {
+        for (int i = 0; i < length; i++) {
+            if (i > 0 && i < length) {
+                
+            }
+        }
+    }
+}
+
+// gets the numbers x, y in x + y
+// or in x*y
+// and so on
+std::vector<float> Interpreter::getNumbers(int position /*position of arithmetic sign ie: +, *, -, /  */) {
+    // this would mean that the arithmetic sign ie + - * etc
+    // is at the start or at the end of the math expression
+    if (position-1 < length || position+1 > length) {
+        errors.push_back(ARITHMETIC_ERROR);
+        return std::vector<float>{NULL};
+    }
+
+    // update length 
+    length = expression.length();
+}
+
+void Interpreter::throwErrors(int error) {
+    if (error == NULL) {
 
     }
 }
 
-int Interpreter::getOperators() {
-    
+void Interpreter::clear() {
+    multiplication_positions.clear();
+    errors.clear();
 }
 
 int Interpreter::getParentethisCount() {
     int count = 0;
-    for (char ch : expression) {count++;}
+    for (char ch : expression) {
+        if (ch == '(' | ')') {count++;}
+    }
     return count;
 }
