@@ -9,6 +9,10 @@
 
 #define ARITHMETIC_ERROR 5
 
+#define ARITHMETIC_OPERATOR '+' | '-' | '*' | '^' | '/' | ':'
+#define BRACKETS '(' | ')' // maybe add '['   ']' and other brackets
+
+
 typedef int8_t int8;
 
 #endif // DEFINES_H
