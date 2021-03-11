@@ -4,16 +4,23 @@
 #include <vector>
 
 #include <unistd.h>
-#include "interpreter.h"
+#include "defines.h"
+#include "functions.h"
 
 /*
     DISCLAIMER:
     TO BUILD YOU NEED TO ADD --DDebug
 */
 
-int main() {
-    Interpreter interpreter;
-    interpreter.run();
+
+int main(void) {
+    Args args;
+    args.running = true;
+
+    while (args.running) {
+        args.math_expression = input();
+        calculate(args);
+    }
 
     return 0;
 }
