@@ -29,7 +29,21 @@ bool isBracket(char ch) {
     ); // TODO: maybe add [] or {}
 }
 
+bool isFloatAsString(std::string str) {
+    for (char ch : str) {
+        if (ch == '.' || ch == ',') {
+            return true;
+        }
+    }
+    return false;
+}
 
+bool isDot(char ch) {
+    return (
+        ch == '.' ||
+        ch == ','
+    );
+}
 
 void removeChar(std::string& str, char ch)  {
     auto positions = std::remove(str.begin(), str.end(), ch);
@@ -55,18 +69,31 @@ std::vector<float64> getNumbersWithArithmeticOp(Args& args, int64 pos) {
         return std::vector<float64>{ERROR__};
     }
 
-    std::string number_1;
-    for (int i = 0; i < math_expression_length; i++) {
-        if (isdigit(args.math_expression[i])) {
-            number_1.append(to_string(args.math_expression[i]));
+    std::string number1;
+    for (int i = pos; i < math_expression_length; i++) {
+        if (isdigit(args.math_expression[i] || args.math_expression[i] == '.')) {
+            number1.append(to_string(args.math_expression[i]));
             continue; // jump to the start of loop
         }
         break;
     }
 
     std::string number2;
+    std::string temporary_string; // holds the inverted number
+    for (int i = pos; i > -1; i--) {
+        if (isdigit(args.math_expression[i])) {
+            temporary_string.append(to_string(args.math_expression[i]));
+        }
+    }
 
+    for (int i = temporary_string.length(); i > -1; i--) {
+        number2.append(to_string(temporary_string[i]));
+    }
     
+    return std::vector<float64> {
+        std::stod(number2),
+        std::stod(number1)
+    };
     
 }
 
