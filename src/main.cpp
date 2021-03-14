@@ -18,7 +18,7 @@ int main(void) {
     args.running = true;
 
     while (args.running) {
-        args.math_expression = input();
+        args.math_expression = input(); // you could also put your own input // you need to remove spaces 
         calculate(args);
     }
 

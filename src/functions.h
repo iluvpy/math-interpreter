@@ -45,6 +45,18 @@ bool isDot(char ch) {
     );
 }
 
+// how similar a string is to some other string
+// :param: str1 is the string you are comparing to str2
+// :return: returns the percentage of how similar the two strings are
+//TODO: add functionality to this function
+float64 is_similar(std::string str1, std::string str2) {
+    int length_str1 = str1.length();
+    int length_str2 = str2.length();
+
+    
+}
+
+// completly removes all uccencies of a char inside a string
 void removeChar(std::string& str, char ch)  {
     auto positions = std::remove(str.begin(), str.end(), ch);
     str.erase(positions, str.end());
@@ -57,21 +69,20 @@ void removeChar(std::string& str, char ch)  {
     :return: the numbers in x+y, x-y, etc
 */
 
-std::vector<float64> getNumbersWithArithmeticOp(Args& args, int64 pos) {
+std::vector<float64> getNumbersWithArithmeticOp(Args& args, uint64 pos) {
     std::vector<float64> numbers;
-    int64 math_expression_length = args.math_expression.length();
+    uint64 math_expression_length = args.math_expression.length();
 
     // checks if the arithmetic operator is 
     // in front or at the end of the math expression
     // e.g  +1+1 or 32-5-
-    auto _npos = args.math_expression.npos;
-    if (pos+1 == _npos || pos-1 == _npos) {
+    if (pos+1 > math_expression_length || pos-1 < math_expression_length) {
         return std::vector<float64>{ERROR__};
     }
 
     std::string number1;
     for (int i = pos; i < math_expression_length; i++) {
-        if (isdigit(args.math_expression[i] || args.math_expression[i] == '.')) {
+        if (isdigit(args.math_expression[i] || isDot(args.math_expression[i]))) {
             number1.append(to_string(args.math_expression[i]));
             continue; // jump to the start of loop
         }
@@ -91,7 +102,7 @@ std::vector<float64> getNumbersWithArithmeticOp(Args& args, int64 pos) {
     }
     
     return std::vector<float64> {
-        std::stod(number2),
+        std::stod(number2), // casting string to double
         std::stod(number1)
     };
     
@@ -117,9 +128,10 @@ std::string calculate(Args& args) {
 
 
     // find an arithmetic sign
-    for (char ch : args.math_expression)  {
-        if (isArithmeticOperator(ch)) {
-
+    for (int i = 0; i < args.math_expression.length(); i++)  {
+        if (isArithmeticOperator(args.math_expression[i])) {
+            std::vector<float64> numbers = getNumbersWithArithmeticOp(args, i);
+            std::cout << numbers[0] << " " << numbers[1] << std::endl;
         }
     }
 
