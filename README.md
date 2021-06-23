@@ -1,2 +1,2 @@
 # math-interpreter
-a math interpreter written in C++
+    a math interpreter written in C
