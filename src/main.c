@@ -4,6 +4,7 @@
 
 #include "console.h"
 #include "utils.h"
+#include "vector.h"
 
 
 void handleFlags(int argc, char **argv) {
@@ -23,10 +24,12 @@ void end(char *input) {
 
 // executes the command if typed in
 int executes(char *input) {
-    if (input[0] == 'q') {
+    debug("input was: ");
+    printf("%s\n", input);
+    if (input == "q") {
         return -1;
     }
-    else if (input[0] == 'c') {
+    else if (input == "c") {
         clear_console();
     }
     else if (!string_digit(input) && input != NULL) {
@@ -38,6 +41,12 @@ int main(int argc, char **argv) {
     
     bool running = true;
     char *input;
+
+    Vector v;
+    initV(&v);
+    appendV(&v, 100);
+    printf("set first element of v to %d\n", Vget(&v, 0));
+
     while (running) { 
         input = start();
         int res = executes(input);
@@ -47,5 +56,6 @@ int main(int argc, char **argv) {
         end(input);
     }
 
+    deleteVec(&v);
     return 0;
 }
