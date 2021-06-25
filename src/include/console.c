@@ -3,10 +3,12 @@
 #include <string.h>
 #include "console.h"
 
+void clear_console() {
+    system("clear"); // XXX this only works for linux the command for windows is 'cls'
+}
 
-// console
 void printlnColor(char *text, char *ansi) {
-    printf("%s%s%s", ansi, text, KNRM);
+    printf("%s%s%s\n", ansi, text, KNRM);
 } 
 
 void printRed(char *text) {
@@ -37,7 +39,9 @@ char* dynInput() {
         text[i] = inp_[i];
     }
     free(inp_);
-
+    if (i == 0) {
+        return NULL;
+    }
     return text;
 }
 

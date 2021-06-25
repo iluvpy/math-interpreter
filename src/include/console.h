@@ -16,6 +16,8 @@
 #define ENDL 0x0a
 #define FREE_DINP_T(t) free(t)
 
+
+void clear_console();
 void printlnColor(char *text, char *ansi);
 void printRed(char *text);
 
