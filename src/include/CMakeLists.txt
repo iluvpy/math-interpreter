@@ -1,1 +1,1 @@
-add_library(include utils.c)
+add_library(include utils.c console.c vector.c)

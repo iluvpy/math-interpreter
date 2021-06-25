@@ -1,18 +1,17 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <string.h>
+#include "defines.h"
 
-// console
 
-#define KNRM  "\x1B[0m" // reset color
-#define KRED  "\x1B[31m" // red
-#define KGRN  "\x1B[32m" // green
-#define KYEL  "\x1B[33m" // yellow
-#define KBLU  "\x1B[34m" // blue
-#define KMAG  "\x1B[35m" // magenta
-#define KCYN  "\x1B[36m" // cyan
-#define KWHT  "\x1B[37m" // white
+#define IF_QUIT(t) t == "q" || t == "quit"
 
-void printRed(char *text);
+// returns the percentage of similarity (1 is 100% and 0 would be 0%)
+f32 is_similar(char *s1, char *s2) {
+    int l1 = strlen(s1);
+    int l2 = strlen(s2); 
+    int sims = 0;
+}
 
 #endif // UTILS_H

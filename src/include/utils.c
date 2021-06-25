@@ -1,7 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "utils.h"
 
-
-void printRed(char *text) {
-    printf("%s%s%s", KRED, text, KNRM);
-}
