@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <ctype.h>
 
 #include "console.h"
 #include "utils.h"
@@ -8,6 +9,8 @@
 void handleFlags(int argc, char **argv) {
     // XXX add handling for flags
 }
+
+
 
 char* start() {
     printf("> ");
@@ -23,18 +26,24 @@ int executes(char *input) {
     if (input[0] == 'q') {
         return -1;
     }
+    else if (input[0] == 'c') {
+        clear_console();
+    }
+    else if (!string_digit(input) && input != NULL) {
+        printlnColor("ERROR: not a command ", KRED);
+    }
 }
 
 int main(int argc, char **argv) {
     
     bool running = true;
     char *input;
-    while (running) {
+    while (running) { 
         input = start();
         int res = executes(input);
         if (res < 0) {running = false;}
 
-        
+
         end(input);
     }
 
