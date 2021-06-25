@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.20.0)
 project(math-interp)
 
+set(CMAKE_C_STANDARD 11)
+
 add_subdirectory(include)
 
 include_directories(${CMAKE_SOURCE_DIR}/include/)
