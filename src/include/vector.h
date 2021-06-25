@@ -3,17 +3,29 @@
 
 #include <stdlib.h>
 
-typedef struct 
+
+
+typedef struct
 {
     int length;
     int *start;   
-} iVector;
+} Vector;
 
-void initVector(iVector *v, int len);
-void appendV(iVector *v, int n);
-void deleteVec(iVector *v);
+typedef struct
+{
+    int length;
+    char **start;
+} sVector;
 
-iVector* reallocVec(iVector *v, size_t new_size);
+void initV(Vector *v);
+void initsV(sVector *v);
+void appendV(Vector *v, int n);
+void appendsV(sVector *v, char *s);
+void deleteVec(Vector *v);
+void deletesVec(sVector *v);
+
+
+Vector* reallocVec(Vector *v, size_t new_size);
 
 
 #endif // VECTOR_H
