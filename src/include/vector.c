@@ -61,6 +61,7 @@ char* sVget(sVector *v, int i) {
 
 void deleteVec(Vector *v) {
     if (v->ptr != NULL) {free(v->ptr);};
+    v->ptr = NULL;
 }
 
 void deletesVec(sVector *v) {
@@ -70,5 +71,6 @@ void deletesVec(sVector *v) {
         }
         free(v->ptr);
     }
+    v->ptr = NULL;
 }
 

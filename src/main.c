@@ -20,20 +20,23 @@ char* start() {
 
 void end(char *input) {
     free_dinput(input);
+    input = NULL;
 }
 
 // executes the command if typed in
 int executes(char *input) {
-    debug("input was: ");
-    printf("%s\n", input);
-    if (input == "q") {
-        return -1;
-    }
-    else if (input == "c") {
-        clear_console();
-    }
-    else if (!string_digit(input) && input != NULL) {
-        printlnColor("ERROR: not a command ", KRED);
+    if (input != NULL) {
+        printf("input was: %s\n", input);
+        size_t len = strlen(input);
+        if (input[0] == 'q') {
+            return -1;
+        }
+        else if (input[0] == 'c') {
+            clear_console();
+        }
+        else if (!string_digit(input)) {
+            printlnColor("ERROR: not a command ", KRED);
+        }
     }
 }
 
@@ -41,11 +44,6 @@ int main(int argc, char **argv) {
     
     bool running = true;
     char *input;
-
-    Vector v;
-    initV(&v);
-    appendV(&v, 100);
-    printf("set first element of v to %d\n", Vget(&v, 0));
 
     while (running) { 
         input = start();
@@ -55,7 +53,6 @@ int main(int argc, char **argv) {
 
         end(input);
     }
-
-    deleteVec(&v);
+    
     return 0;
 }

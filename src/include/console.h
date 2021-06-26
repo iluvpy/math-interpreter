@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-#define KNRM  "\x1B[0m" // reset color
+#define KNRM  "\x1B[0m" // reset color (normal text color)
 #define KRED  "\x1B[31m" // red
 #define KGRN  "\x1B[32m" // green
 #define KYEL  "\x1B[33m" // yellow
@@ -18,11 +18,18 @@
 
 
 void clear_console();
+void printColor(char *text, char *ansi);
 void printlnColor(char *text, char *ansi);
 void printRed(char *text);
+void printlnRed(char *text);
+void printlnGreen(char *text);
+void printGreen(char *text);
 
-void secureInp(char **text, size_t max_bytes);
+void secureInp(char *text, size_t max_bytes);
 void free_dinput(char *t);
+
+// dynamic input (size can vary)
+// needs to be freed afterwards
 char* dynInput();
 
 #endif // CONSOLE_H
