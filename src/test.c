@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
     char d1[] = "123456789"; // digit
     char d2[] = "123.65432"; // digit
     char d3[] = "234d2rfgs"; // not a digit 
-    char *result_text = NULL;
+
     char *color_text;
     char *rev_test = "hello";
 
@@ -36,13 +36,15 @@ int main(int argc, char const *argv[])
     printlnGreen("green text");
     printlnRed("red text");
 
-    getColorText(color_text, "Red", KRED);
+    // get color text
+    getColorText(&color_text, "Red", KRED);
     printf("testing get color text; %s <- red?\n", color_text);
-    free(color_text);
-    char rev_cpy[strlen(rev_test)];
-    strcpy(rev_cpy, rev_test);
-    rev_str(rev_test);
-    printf("testing rev str; '%s' becomes: %s\n", rev_cpy, rev_test);
+
+    // reverse string
+    printf("testing rev_str: '%s' becomes -> ", rev_test);
+    rev_str(&rev_test, rev_test);
+    printf("%s\n", rev_test);
+
     
     printTest("Util test");
     bool res1 = string_digit(d1);
@@ -61,6 +63,8 @@ int main(int argc, char const *argv[])
     print_res("appended 100 to vector successfully: ", (Vget(&v, 0) == 100));
     deleteVec(&v);
     print_res("deleted vector successfully: ", (v.ptr == NULL));
-    free(result_text);
+
+    free(color_text);
+    free(rev_test);
     return 0;
 }

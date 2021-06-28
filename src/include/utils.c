@@ -20,8 +20,8 @@ char* boolstr(bool b) {
     return b ? "True" : "False";
 }
 
-void getColorText(char *dest, char *src, char *ansi) {    
-    size_t d_len = strlen(dest)+strlen(ansi);
+void getColorText(char **dest, char *src, char *ansi) { 
+    size_t d_len = strlen(src)+strlen(ansi);
     size_t dd_len = d_len+strlen(KNRM);
     char d[d_len];
     char *dd = (char*)malloc(dd_len);
@@ -29,17 +29,20 @@ void getColorText(char *dest, char *src, char *ansi) {
     strcat(d, src);
     strcat(dd, d);
     strcat(dd, KNRM);
-    dest = dd;
+    *dest = dd;
+}
+
+void delColorText(char **text) {
+
 }
 
 // reverses text
-void rev_str(char *text) {
-    size_t len = strlen(text);
+void rev_str(char **dest, char *src) {
+    size_t len = strlen(src);
     char *rev = (char*)malloc(len);
-    strcpy(rev, text);   
-    for (int i = len-1; i >= 0; i--) {
-        rev[i] = text[len-i];
+    for (int i = len; i >= 0; i--) {
+        rev[i] = src[len-i]; 
     }
-    text = rev;
+    *dest = rev;
 }
 
