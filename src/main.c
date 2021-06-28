@@ -38,6 +38,7 @@ int executes(char *input) {
             printlnColor("ERROR: not a command ", KRED);
         }
     }
+    return 0;
 }
 
 int main(int argc, char **argv) {
