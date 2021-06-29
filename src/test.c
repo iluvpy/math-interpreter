@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
     char d1[] = "123456789"; // digit
     char d2[] = "123.65432"; // digit
     char d3[] = "234d2rfgs"; // not a digit 
-
+    char *hello_world = "hello world";
     char *color_text;
     char *rev_test = "hello";
 
@@ -36,6 +36,7 @@ int main(int argc, char const *argv[])
     printlnGreen("green text");
     printlnRed("red text");
 
+    printTest("text functions");
     // get color text
     getColorText(&color_text, "Red", KRED);
     printf("testing get color text; %s <- red?\n", color_text);
@@ -58,11 +59,22 @@ int main(int argc, char const *argv[])
     printTest("Vector test");
     Vector v;
     initV(&v);
-    printf("initalized vector, length: %d\n", v.length);
+    printf("initalized vector, length: %ld\n", v.length);
     appendV(&v, 100);
     print_res("appended 100 to vector successfully: ", (Vget(&v, 0) == 100));
     deleteVec(&v);
     print_res("deleted vector successfully: ", (v.ptr == NULL));
+
+    printTest("String Vector test");
+    sVector sv;
+    initsV(&sv);
+    printf("initialized svector, length: %ld\n", sv.length);
+    appendsV(&sv, hello_world);
+    printf("appended %s to svector, result: %s\n", hello_world, sVget(&sv, 0));
+    
+    deletesVec(&sv);
+    print_res("deleted svector successfully: ", (sv.ptr == NULL));
+
 
     free(color_text);
     free(rev_test);
