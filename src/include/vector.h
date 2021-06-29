@@ -5,15 +5,15 @@
 #include "defines.h"
 
 
-typedef struct
+typedef struct Vector
 {
-    int length;
+    size_t length;
     int *ptr;   
 } Vector;
 
-typedef struct
+typedef struct sVector
 {
-    int length;
+    size_t length;
     char **ptr;
 } sVector;
 
