@@ -2,8 +2,10 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <math.h>
 
 #include "defines.h"
+
 
 void initV(Vector *v) {
     v->length = 0; 
@@ -50,18 +52,22 @@ int Vget(Vector *v, int i) {
 }
 
 char* sVget(sVector *v, int i) {
-    if (i > 0 && i < v->length) {
+    if (i >= 0 && i < v->length) {
         return v->ptr[i];
     }
     else {
         debug("tried to access non existent index");
     }
+    return NULL;
 }
 
 
 void deleteVec(Vector *v) {
-    if (v->ptr != NULL) {free(v->ptr);};
-    v->ptr = NULL;
+    if (v->ptr != NULL) {
+        free(v->ptr);
+        v->ptr = NULL;
+    }
+    v->length = 0;
 }
 
 void deletesVec(sVector *v) {
@@ -70,7 +76,8 @@ void deletesVec(sVector *v) {
             free(v->ptr[i]);
         }
         free(v->ptr);
+        v->ptr = NULL;
     }
-    v->ptr = NULL;
+    v->length = 0;
 }
 
