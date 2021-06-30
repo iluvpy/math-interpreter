@@ -1,5 +1,5 @@
 # math-interpreter
-    a math interpreter written in C
+    a math interpreter written in C++
 
 ## Usage
     type in `./math-interp` when you have the binary in your directory, or
