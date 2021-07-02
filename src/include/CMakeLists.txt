@@ -1,1 +1,1 @@
-add_library(utils.cpp engine.cpp)
+add_library(include cstr.c)
