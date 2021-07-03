@@ -7,11 +7,13 @@
 
 cstr *minput(size_t max) {
     char *str = malloc(max);
-    fgets(str, max, stdin);
-    return allocate_cstr(str);
+    str = fgets(str, max, stdin);
+    if (str == NULL) {return NULL;}
+    return get_cstr(str);
 }
 
  // gets input dynamically
 char *dinput() {
 
 }
+
