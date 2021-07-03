@@ -1,1 +1,1 @@
-add_library(include cstr.c)
+add_library(include cstr.c console.c)
