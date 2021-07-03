@@ -3,6 +3,8 @@ project(math)
 
 set(CMAKE_C_STANDARD 11)
 
+add_definitions(-DDEBUG -g)
+
 add_subdirectory(include)
 include_directories(${CMAKE_SOURCE_DIR}/include/) 
 
