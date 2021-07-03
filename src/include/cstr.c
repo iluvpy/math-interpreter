@@ -1,64 +1,96 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "cstr.h"
-
-
-void init_cstr(cstr *cs, char *s) {
-    cs->size = strlen(s);
-    cs->str = s;
-}
 
 // manipulators
 
 // appends src to dest
-void append_cstr(cstr *dest, char *src) {
+void append_str(cstr *dest, char *src) {
     if (dest != NULL && src != NULL) {
+
         dest->size += strlen(src);
-        char *cpy = dest->str;
-        dest->str = malloc(dest->size);
-        strcat(dest->str, cpy);
+        dest->str = realloc(dest->str, dest->size);
         strcat(dest->str, src);
-        
+        dest->free_str = true;
     }
 }
+
+// appends src to dest
+void append_cstr(cstr *dest, cstr *src) {
+    if (dest != NULL && src != NULL) {
+        append_str(dest, src->str);
+    }
+}
+
 
 // deletes whole cstring and not only the string pointer
 void del_cstr(cstr *s) {
     if (s != NULL) {
-        free_cstr(s);
-        free(s);
+        free_cstr_str(s);
+        free(s); 
         s = NULL;
     }
 }
 
-// frees the char * of the cstring
-void free_cstr(cstr *s) {
+// frees the underlying char * of s
+// when free_str is true
+void free_cstr_str(cstr *s) {
     if (s != NULL) {
-        free(s->str);
-        s->str = NULL;
+        if (s->free_str) {
+            free(s->str);
+            s->free_str = false;
+        }
     }
 }
+
+
 
 // getters
 
 // returns the char * of s
 char *getcstr(cstr *s) {
     if (s != NULL) {
-        return (s->str != NULL) ? s->str : CSTR_NULL;
+        return (s->str != NULL) ? s->str : NULL;
     }
 }
 
 
 // generates a new cstr and allocates memory
 cstr *get_cstr(char *src) {
-    cstr *s = malloc(sizeof(cstr));
+    cstr *s = malloc(CSTR_SIZE_);
     s->size = strlen(src);
-    s->str = malloc(s->size);
     s->str = src;
+    s->free_str = false;
     return s;
 }
+
+// works like get_cstr but 
+// allocates the memory for the 
+// underlying char *
+cstr *allocate_cstr(char *src) {
+    cstr *s = malloc(CSTR_SIZE_);
+    s->size = strlen(src);
+    s->str = malloc(s->size);
+    strcpy(s->str, src);
+    s->free_str = true;
+    return s;
+} 
+
+// adds 2 cstrings together creating a new one
+cstr *add_cstr(cstr *x, cstr *y) {
+    if (x != NULL && y != NULL) {
+        char res[x->size+x->size];
+        strcat(res, getcstr(x));
+        strcat(res, getcstr(y));
+        return allocate_cstr(res); 
+    }
+
+    return NULL;
+}
+
 
 // other
 void stdout_cstr(cstr *s) {
