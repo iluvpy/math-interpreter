@@ -10,7 +10,6 @@
 // appends src to dest
 void append_str(cstr *dest, char *src) {
     if (dest != NULL && src != NULL) {
-
         dest->size += strlen(src);
         dest->str = realloc(dest->str, dest->size);
         strcat(dest->str, src);
@@ -25,6 +24,30 @@ void append_cstr(cstr *dest, cstr *src) {
     }
 }
 
+// removes char at index
+void cstr_remove(cstr *s, size_t index) {
+    if (s != NULL) {
+        s->size--;
+        char cpy[s->size];
+        for (int i = 0; i < s->size; i++) {
+            if (i >= s->size-1) {break;}
+            if (i != index) {
+                cpy[i] = s->str[i];
+                continue;
+            }
+            i--;
+        }
+        if (s->free_str) {free_cstr_str(s);}
+        s->str = malloc(s->size);
+        strcpy(s->str, cpy);
+        s->free_str = true;
+    }
+}
+
+// delets all occurencies of c in str
+void cstr_delc(cstr *s, char c) {
+
+}
 
 // deletes whole cstring and not only the string pointer
 void del_cstr(cstr *s) {
@@ -59,6 +82,7 @@ char *getcstr(cstr *s) {
 
 
 // generates a new cstr and allocates memory
+// uses src as the char pointer
 cstr *get_cstr(char *src) {
     cstr *s = malloc(CSTR_SIZE_);
     s->size = strlen(src);
@@ -79,11 +103,12 @@ cstr *allocate_cstr(char *src) {
     return s;
 } 
 
+
 // adds 2 cstrings together creating a new one
 cstr *add_cstr(cstr *x, cstr *y) {
     if (x != NULL && y != NULL) {
         char res[x->size+x->size];
-        strcat(res, getcstr(x));
+        strcpy(res, getcstr(x));
         strcat(res, getcstr(y));
         return allocate_cstr(res); 
     }
