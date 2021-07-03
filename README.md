@@ -2,7 +2,7 @@
     a math interpreter written in C
 
 ## Usage
-    type in `./math-interp` when you have the binary in your directory, or
+    type in `./math` when you have the binary in your directory, or
     when you installed the math interpreter on your system you can just run `math-interp`
 
     then something like this should pop up
