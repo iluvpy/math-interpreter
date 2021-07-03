@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
     printf("text 2 (max characters %ld): ", max_chars);
     cstr *text2 = minput(100);
 
-
+    text1 = getnew_cstr(text1, "changed to this ");
     cstr *result = add_cstr(text1, text2);
 
     printf("result: \n%s", getcstr(result));
@@ -18,6 +18,6 @@ int main(int argc, char **argv) {
     del_cstr(text1);
     del_cstr(text2);
     del_cstr(result);
-    printf("exiting\n");
+    printf("\nexiting\n");
     return 0;
 }

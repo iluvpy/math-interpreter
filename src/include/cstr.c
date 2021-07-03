@@ -80,6 +80,21 @@ char *getcstr(cstr *s) {
     }
 }
 
+// creates a cstr from an allocated char *
+cstr *cstr_fallocstr(char *src) {
+    cstr *cs = get_cstr(src);
+    cs->free_str = true;
+    return cs;
+}   
+
+// change cstr value 
+// uses get_cstr to create new cstr
+cstr *getnew_cstr(cstr *cs, char *src) {
+    if (cs != NULL) {
+        del_cstr(cs);
+        return get_cstr(src);
+    }
+}   
 
 // generates a new cstr and allocates memory
 // uses src as the char pointer

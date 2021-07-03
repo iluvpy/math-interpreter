@@ -4,12 +4,13 @@
 #include "cstr.h"
 #include "console.h"
 
-
+// max input
+// set max bytes
 cstr *minput(size_t max) {
     char *str = malloc(max);
     str = fgets(str, max, stdin);
     if (str == NULL) {return NULL;}
-    return get_cstr(str);
+    return cstr_fallocstr(str);
 }
 
  // gets input dynamically

@@ -35,9 +35,16 @@ void free_cstr_str(cstr *s);
 
 // getters
 
-// returns the char * of s
-char *getcstr(cstr *s);
+// creates a cstr from an allocated char *
+// i.e it handles the char *
+// differently and dealocates the char * on changes
+cstr *cstr_fallocstr(char *src);
 
+// generates a new cstr and allocates memory
+// uses src as the char pointer
+char *getcstr(cstr *s);
+// change cstr value 
+cstr *getnew_cstr(cstr *cs, char *src);
 cstr *get_cstr(char *src);
 cstr *allocate_cstr(char *src);
 // adds 2 cstrings together creating a new one
