@@ -21,7 +21,7 @@ char *dinput() {
     size_t len = DINP_LEN;
     char *inp = malloc(len);
     int i = 0;
-    char c;
+    char c = NULL;
     while ((c = getchar()) && c != '\n') {
         inp[i] = c;
         i++;

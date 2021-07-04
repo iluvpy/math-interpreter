@@ -22,9 +22,7 @@ cstr *cstrdinput();
 
 // output
 
-void print_color() {
-    
-}
+void print_color();
 
 
 // other
