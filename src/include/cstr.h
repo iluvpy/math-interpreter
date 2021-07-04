@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 #define CSTR_SIZE_ sizeof(cstr)
 
@@ -56,9 +57,14 @@ cstr *allocate_cstr(char *src);
 
 // adds 2 cstrings together creating a new one
 cstr *add_cstr(cstr *x, cstr *y);
+// returns the sum of ascii values 
+int str_sum(char *s);
+// returns the sum of ascii values 
+int cstr_sum(cstr *s);
 
 // other
 void stdout_cstr(cstr *s, bool endl);
 
+bool cstr_eq_str(cstr *cs, char *s);
 
 #endif /* CSTR_H */

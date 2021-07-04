@@ -144,7 +144,26 @@ cstr *add_cstr(cstr *x, cstr *y) {
 }
 
 
+int str_sum(char *s) {
+    size_t sum = 0;
+    for (int i = 0; i < strlen(s); i++) {
+        sum += s[i];
+    }
+    return sum;
+}
+
+// returns the sum of ascii values 
+int cstr_sum(cstr *s) {
+    return str_sum(s->str);
+}
+
+
 // other
 void stdout_cstr(cstr *s, bool endl) {
     printf("%s%c", getcstr(s), (endl) ? '\n' : '\0');
+}
+
+
+bool cstr_eq_str(cstr *cs, char *s) {
+    return (cstr_sum(cs) - str_sum(s) == 0);
 }
