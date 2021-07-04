@@ -29,6 +29,7 @@ void cstr_delc(cstr *str, char c);
 
 // frees s
 void del_cstr(cstr *s); 
+
 // frees the underlying char * of s
 // when free_str is true
 void free_cstr_str(cstr *s);
@@ -36,22 +37,28 @@ void free_cstr_str(cstr *s);
 // getters
 
 // creates a cstr from an allocated char *
-// i.e it handles the char *
-// differently and dealocates the char * on changes
-cstr *cstr_fallocstr(char *src);
+// deallocates the used char * when needed
+// instead of just overriding it
+cstr *cstr_from_allocstr(char *src);
+
 
 // generates a new cstr and allocates memory
 // uses src as the char pointer
 char *getcstr(cstr *s);
-// change cstr value 
+
+
+// change cstr value to new value
+// uses get_cstr to create new cstr
 cstr *getnew_cstr(cstr *cs, char *src);
+cstr *allocnew_cstr(cstr *cs, char *src);
 cstr *get_cstr(char *src);
 cstr *allocate_cstr(char *src);
+
 // adds 2 cstrings together creating a new one
 cstr *add_cstr(cstr *x, cstr *y);
 
 // other
-void stdout_cstr(cstr *s);
+void stdout_cstr(cstr *s, bool endl);
 
 
 #endif /* CSTR_H */

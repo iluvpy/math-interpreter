@@ -81,13 +81,15 @@ char *getcstr(cstr *s) {
 }
 
 // creates a cstr from an allocated char *
-cstr *cstr_fallocstr(char *src) {
+// deallocates the used char * when needed
+// instead of just overriding it
+cstr *cstr_from_allocstr(char *src) {
     cstr *cs = get_cstr(src);
     cs->free_str = true;
     return cs;
 }   
 
-// change cstr value 
+// change cstr value to new value
 // uses get_cstr to create new cstr
 cstr *getnew_cstr(cstr *cs, char *src) {
     if (cs != NULL) {
@@ -96,8 +98,18 @@ cstr *getnew_cstr(cstr *cs, char *src) {
     }
 }   
 
+// change cstr value to new value
+// uses allocate_cstr to create new cstr
+// i.e it allocates new memory for src
+cstr *allocnew_cstr(cstr *cs, char *src) {
+    if (cs != NULL) {
+        del_cstr(cs);
+        return allocate_cstr(src);
+    }
+}
+
 // generates a new cstr and allocates memory
-// uses src as the char pointer
+// uses src as the char pointer without allocating a new one
 cstr *get_cstr(char *src) {
     cstr *s = malloc(CSTR_SIZE_);
     s->size = strlen(src);
@@ -108,7 +120,7 @@ cstr *get_cstr(char *src) {
 
 // works like get_cstr but 
 // allocates the memory for the 
-// underlying char *
+// underlying char * and copies src into it
 cstr *allocate_cstr(char *src) {
     cstr *s = malloc(CSTR_SIZE_);
     s->size = strlen(src);
@@ -133,6 +145,6 @@ cstr *add_cstr(cstr *x, cstr *y) {
 
 
 // other
-void stdout_cstr(cstr *s) {
-    printf("%s", getcstr(s));
+void stdout_cstr(cstr *s, bool endl) {
+    printf("%s%c", getcstr(s), (endl) ? '\n' : '\0');
 }
