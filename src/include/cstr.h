@@ -8,7 +8,6 @@
 #define CSTR_SIZE_ sizeof(cstr)
 
 typedef struct cstr 
-
 {
     size_t size; // characters
     char *str;
@@ -43,10 +42,7 @@ void free_cstr_str(cstr *s);
 cstr *cstr_from_allocstr(char *src);
 
 
-// generates a new cstr and allocates memory
-// uses src as the char pointer
-char *getcstr(cstr *s);
-
+char *getstr(cstr *s);
 
 // change cstr value to new value
 // uses get_cstr to create new cstr

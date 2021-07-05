@@ -73,8 +73,9 @@ void free_cstr_str(cstr *s) {
 
 // getters
 
+
 // returns the char * of s
-char *getcstr(cstr *s) {
+char *getstr(cstr *s) {
     if (s != NULL) {
         return (s->str != NULL) ? s->str : NULL;
     }
@@ -141,8 +142,8 @@ cstr *allocate_cstr(char *src) {
 cstr *add_cstr(cstr *x, cstr *y) {
     if (x != NULL && y != NULL) {
         char res[x->size+x->size];
-        strcpy(res, getcstr(x));
-        strcat(res, getcstr(y));
+        strcpy(res, getstr(x));
+        strcat(res, getstr(y));
         return allocate_cstr(res); 
     }
 
@@ -166,7 +167,7 @@ int cstr_sum(cstr *s) {
 
 // other
 void stdout_cstr(cstr *s, bool endl) {
-    printf("%s%c", getcstr(s), (endl) ? '\n' : '\0');
+    printf("%s%c", getstr(s), (endl) ? '\n' : '\0');
 }
 
 
