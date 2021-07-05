@@ -5,14 +5,8 @@
     type in `./math` when you have the binary in your directory, or
     when you installed the math interpreter on your system you can just run `math-interp`
 
-    then something like this should pop up
-
-    `
-    >
-    `
+    then something looking like a console should popup
     where you can start typing your math expressions
-
-    for syntax, go to the syntax section
 
 ## Syntax
 
