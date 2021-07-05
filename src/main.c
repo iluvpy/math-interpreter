@@ -40,10 +40,10 @@ int main(int argc, char **argv)
     while (running) {
         printf("math# ");
         input = cstrdinput();
-
-        if (input->str == NULL) {
-            del_cstr(input);
-            continue;
+        
+        // NULL when no input is given i.e enter was pressed
+        if (input == NULL) {
+            continue; // return to start
         }
 
         int res = commands(input); 

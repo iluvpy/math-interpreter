@@ -62,7 +62,7 @@ void del_cstr(cstr *s) {
 // when free_str is true
 void free_cstr_str(cstr *s) {
     if (s != NULL) {
-        if (s->free_str) {
+       if (s->free_str && s->str != NULL) {
             free(s->str);
             s->free_str = false;
         }
@@ -84,7 +84,9 @@ char *getcstr(cstr *s) {
 // deallocates the used char * when needed
 // instead of just overriding it
 cstr *cstr_from_allocstr(char *src) {
+    if (src == NULL) {return NULL;}
     cstr *cs = get_cstr(src);
+    if (cs == NULL) {return NULL;}
     cs->free_str = true;
     return cs;
 }   
@@ -111,11 +113,15 @@ cstr *allocnew_cstr(cstr *cs, char *src) {
 // generates a new cstr and allocates memory
 // uses src as the char pointer without allocating a new one
 cstr *get_cstr(char *src) {
+    if (src == NULL) {return NULL;}
     cstr *s = malloc(CSTR_SIZE_);
     s->size = strlen(src);
     s->str = src;
     s->free_str = false;
     return s;
+
+    
+    
 }
 
 // works like get_cstr but 
