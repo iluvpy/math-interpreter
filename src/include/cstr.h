@@ -41,7 +41,7 @@ void free_cstr_str(cstr *s);
 // instead of just overriding it
 cstr *cstr_from_allocstr(char *src);
 
-
+// returns the char * of s
 char *getstr(cstr *s);
 
 // change cstr value to new value
