@@ -12,11 +12,16 @@
 cstr *minput(size_t max);
 
 
-// gets input dynamically
+// returns input from stdin in form of a char *
+// input is handled dynamically so thers no maximum size
+// input needs to be freed from memory after usage
+// call free on the used pointer after wards
 char *dinput();
-// works like dinput but returns cstr instead
 
-
+// returns input from stdin in form of a cstr *
+// input is handled dynamically so thers no maximum size
+// input needs to be freed from memory after usage
+// call del_cstr to delete ptr afterwards
 cstr *cstrdinput(); 
 
 
