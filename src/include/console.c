@@ -21,8 +21,8 @@ char *dinput() {
     size_t len = DINP_LEN;
     char *inp = malloc(len);
     int i = 0;
-    char c = NULL;
-    while ((c = getchar()) && c != '\n') {
+    char c;
+    while ((c = getchar()) && c != EOF && c != '\n') {
         inp[i] = c;
         i++;
         if (i >= len) {
@@ -30,6 +30,13 @@ char *dinput() {
             inp = realloc(inp, len);
         }
     }
+    
+    // return null if enter was pressed immediately
+    if (i == 0) {
+        free(inp);
+        return NULL;
+    }
+
     // resize to correct size
     size_t size = strlen(inp);
     inp = realloc(inp, size);
@@ -38,7 +45,7 @@ char *dinput() {
 
 // works like dinput but returns cstr instead
 cstr *cstrdinput() {
-    cstr *inp = cstr_from_allocstr(dinput());
+    return cstr_from_allocstr(dinput());
 }
 
 

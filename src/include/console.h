@@ -3,7 +3,7 @@
 
 #include "cstr.h"
 
-#define DINP_LEN 512
+#define DINP_LEN 128
 
 // input
 
