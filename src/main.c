@@ -25,8 +25,7 @@ void help() {
 
 // checks for commands
 int commands(cstr *input) {
-    int n = cstr_sum(input);
-    if (isalpha(getstr(input)[0]) || cstr_eq_str(input, " ")) {
+    if (isalpha(getstr(input)[0])) {
         if (cstr_eq_str(input, Q_CMD)) {return -1;}
         if (cstr_eq_str(input, H_CMD)) {help();}
         else if (cstr_eq_str(input, CLR_CMD)) {clear_console();}
@@ -34,7 +33,6 @@ int commands(cstr *input) {
             printf("Unknown command '%s'\n", getstr(input));
         }
     }
-    
     return 0;
 }
 
@@ -47,7 +45,6 @@ int main(int argc, char **argv)
     while (running) {
         printf("math# ");
         input = cstrdinput();
-        
         // NULL when no input is given i.e enter was pressed
         if (input == NULL) {
             continue; // return to start
@@ -58,7 +55,7 @@ int main(int argc, char **argv)
             del_cstr(input);
             break;
         }
-    
+        
         // free memory for input
         del_cstr(input);
     }
