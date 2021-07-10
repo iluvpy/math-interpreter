@@ -35,7 +35,6 @@ void cstr_remove(cstr *s, size_t index) {
                 cpy[i] = s->str[i];
                 continue;
             }
-            i--;
         }
         if (s->free_str) {free_cstr_str(s);}
         s->str = malloc(s->size);
@@ -46,7 +45,8 @@ void cstr_remove(cstr *s, size_t index) {
 
 // delets all occurencies of c in str
 void cstr_delc(cstr *s, char c) {
-
+    size_t no_c_size; 
+    
 }
 
 // deletes whole cstring and not only the string pointer
@@ -83,11 +83,10 @@ char *getstr(cstr *s) {
 
 // creates a cstr from an allocated char *
 // deallocates the used char * when needed
-// instead of just overriding it
+// instead of just overwiting it
 cstr *cstr_from_allocstr(char *src) {
     if (src == NULL) {return NULL;}
     cstr *cs = get_cstr(src);
-    if (cs == NULL) {return NULL;}
     cs->free_str = true;
     return cs;
 }   
@@ -104,6 +103,7 @@ cstr *getnew_cstr(cstr *cs, char *src) {
 // change cstr value to new value
 // uses allocate_cstr to create new cstr
 // i.e it allocates new memory for src
+// instead of just using that char *
 cstr *allocnew_cstr(cstr *cs, char *src) {
     if (cs != NULL) {
         del_cstr(cs);
@@ -119,10 +119,7 @@ cstr *get_cstr(char *src) {
     s->size = strlen(src);
     s->str = src;
     s->free_str = false;
-    return s;
-
-    
-    
+    return s;    
 }
 
 // works like get_cstr but 
