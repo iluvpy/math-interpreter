@@ -25,12 +25,11 @@ char *dinput() {
     char *inp = malloc(len);
     int i = 0;
     char c;
-    while ((c = getchar()) && c != EOF && c != '\n') {
+    while ((c = fgetc(stdin)) && c != EOF && c != '\n') {
         inp[i] = c;
         i++;
         if (i >= len) {
-            len += DINP_LEN;
-            inp = realloc(inp, len);
+            inp = realloc(inp,  len += DINP_LEN);
         }
     }
     
@@ -42,7 +41,7 @@ char *dinput() {
 
     // resize to correct size
     size_t size = strlen(inp);
-    inp = realloc(inp, size);
+    inp = realloc(inp, size+1);
     return inp;
 }
 
@@ -57,6 +56,14 @@ cstr *cstrdinput() {
 
 // output 
 
+void printcolor(char *text, char *color) {
+    printf("%s%s%s", color, text, Reset);
+}
+
+void printlncolor(char *text, char *color) {
+    printcolor(text, color);
+    putc(10, stdin);
+}
 
 
 // other
