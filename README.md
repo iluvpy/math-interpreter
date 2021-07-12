@@ -1,9 +1,12 @@
 # math-interpreter
     a math interpreter written in C
 
+#State 
+    in development; none of the current syntax is working
+    
+
 ## Usage
-    type in `./math` when you have the binary in your directory, or
-    when you installed the math interpreter on your system you can just run `math-interp`
+    type in `./math` when you have the binary in your directory
 
     then something looking like a console should popup
     where you can start typing your math expressions
