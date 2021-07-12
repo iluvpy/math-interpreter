@@ -1,7 +1,7 @@
 # math-interpreter
     a math interpreter written in C
 
-#State 
+# State 
     in development; none of the current syntax is working
     
 
