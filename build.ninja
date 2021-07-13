@@ -1,0 +1,16 @@
+cflags = -std=c11 -O0 -Wall -Werror -g -DDEBUG -I./src/include/
+
+rule cc
+  command = clang -c $in -o $out $cflags
+
+rule link
+  command = clang $in -o $out 
+
+build lib/console.o : cc src/include/console.c
+build lib/cstr.o : cc src/include/cstr.c
+build lib/debug.o : cc src/include/debug.c
+build lib/utils.o : cc src/include/utils.c 
+
+build obj/main.o : cc src/main.c 
+
+build mathc: link obj/main.o lib/console.o lib/cstr.o lib/debug.o lib/utils.o
