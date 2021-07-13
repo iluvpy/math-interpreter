@@ -2,4 +2,5 @@
 /obj
 /lib
 mathc
+test
 *.ninja_log
