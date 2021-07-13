@@ -21,7 +21,8 @@ svector *svec_from_cstr(cstr *str) {
 void svec_append(svector *vec, cstr *str) {
 	if (vec != NULL && str != NULL) {
 		vec->length++;
-		vec->vector = realloc(vec->vector, vec->length*CSTR_PTR_SIZE);
+		if (vec->vector == NULL) { vec->vector = malloc(vec->length*CSTR_PTR_SIZE); }
+		else { vec->vector = realloc(vec->vector, vec->length*CSTR_PTR_SIZE); }
 		vec->vector[vec->length] = cstr_cpy(str);
 	}
 }
