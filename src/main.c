@@ -6,10 +6,6 @@
 #include "utils.h"
 
 
-#define CLR_CMD "cls"
-#define H_CMD "h"
-#define Q_CMD "q"
-
 #define tostr(s) getcstr(s)
 
 
@@ -32,7 +28,7 @@ int commands(cstr *input) {
         else {
             printf("Unknown command '%s'\n", getstr(input));
         }
-    }
+    } 
     return 0;
 }
 
@@ -44,11 +40,9 @@ int main(int argc, char **argv)
     help();
     while (running) {
         printf("math# ");
-        input = cstrdinput();
-        // NULL when no input is given i.e enter was pressed
-        if (input == NULL) {
-            continue; // return to start
-        }
+		input = dynamic_input();
+		if (input == NULL) continue; // no input was given
+		// get input dynamically
 
         int res = commands(input); 
         if (res < 0) {

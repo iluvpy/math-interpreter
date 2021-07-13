@@ -12,45 +12,35 @@
 cstr *minput(size_t max) {
     char *str = malloc(max);
     str = fgets(str, max, stdin);
-    if (str == NULL) {return NULL;}
+	size_t size = strlen(str)+1;
+	str = realloc(str, size);
+	str[size-2] = '\0'; // overwrite endline char (last char)
     return cstr_from_allocstr(str);
 }
 
-// returns input from stdin in form of a char *
-// input is handled dynamically so thers no maximum size
-// input needs to be freed from memory after usage
-// call free on the used pointer after wards
-char *dinput() {
-    size_t len = DINP_LEN;
-    char *inp = malloc(len);
-    int i = 0;
-    char c;
-    while ((c = fgetc(stdin)) && c != EOF && c != '\n') {
-        inp[i] = c;
-        i++;
-        if (i >= len) {
-            inp = realloc(inp,  len += DINP_LEN);
-        }
-    }
-    
-    // return null if enter was pressed immediately
-    if (i == 0) {
-        free(inp);
-        return NULL;
-    }
+// gets input dynamically
+cstr *dynamic_input() {
+	size_t len = INPUT_LENGTH;
+	char *input_ = malloc(len);
+	int i = 0;
+	char c;
+	while ((c = fgetc(stdin)) && c != '\n' && c != EOF) {
+		input_[i] = c;
 
-    // resize to correct size
-    size_t size = strlen(inp);
-    inp = realloc(inp, size+1);
-    return inp;
-}
+		i++;
+		if (i > len) {
+			len += INPUT_LENGTH;
+			input_ = realloc(input_, len);
+		}	
+	}
 
-// returns input from stdin in form of a cstr *
-// input is handled dynamically so thers no maximum size
-// input needs to be freed from memory after usage
-// call del_cstr to delete ptr afterwards
-cstr *cstrdinput() {
-    return cstr_from_allocstr(dinput());
+	// no input was given
+	if (i == 0) return NULL;
+	// resize to correct size and set null char
+	input_ = realloc(input_, i);
+	input_[i] = '\0';
+
+	return cstr_from_allocstr(input_); // create cstr from allocated char*
 }
 
 

@@ -38,7 +38,7 @@ void free_cstr_str(cstr *s);
 
 // creates a cstr from an allocated char *
 // deallocates the used char * when needed
-// instead of just overriding it
+// instead of just overwriting it
 cstr *cstr_from_allocstr(char *src);
 
 // returns the char * of s
