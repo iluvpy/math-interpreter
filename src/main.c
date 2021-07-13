@@ -27,7 +27,7 @@ int commands(cstr *input) {
         if (cstr_eq_str(input, H_CMD)) {help();}
         else if (cstr_eq_str(input, CLR_CMD)) {clear_console();}
         else {
-            printf("Unknown command '%s'\n", getstr(input));
+            printcolor(FgRed ,"Unknown command '%s'\n", getstr(input));
         }
     } 
     return 0;
@@ -55,6 +55,6 @@ int main(int argc, char **argv)
     }
 
 
-    printf("exiting\n");
+    printcolor(FgCyan ,"exiting ):\n");
     return 0;
 }
