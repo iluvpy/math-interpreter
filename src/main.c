@@ -11,11 +11,12 @@
 
 // prints out the help menu
 void help() {
-    printf("math debug version \n");
-    printf("comannds: \n");
-    printf("%s to show this menu again\n", H_CMD);
-    printf("%s to clear the console\n", CLR_CMD);
-    printf("%s to exit\n\n", Q_CMD);
+    printcolor(FgMagenta, "\nmathc debug version \n");
+    printcolor(FgGreen ,"------- Comannds -------\n");
+    printcolor(FgBlue, "'%s' to show this menu again\n", H_CMD);
+    printcolor(FgBlue, "'%s' to clear the console\n", CLR_CMD);
+    printcolor(FgBlue, "'%s' to exit\n\n", Q_CMD);
+	
 }
 
 
@@ -42,10 +43,9 @@ int main(int argc, char **argv)
         printf("math# ");
 		input = dynamic_input();
 		if (input == NULL) continue; // no input was given
-		// get input dynamically
 
         int res = commands(input); 
-        if (res < 0) {
+        if (res < 0) { // quit command
             del_cstr(input);
             break;
         }
