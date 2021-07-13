@@ -1,2 +1,4 @@
-/bin/**
 *.txt
+/obj
+/lib
+mathc
