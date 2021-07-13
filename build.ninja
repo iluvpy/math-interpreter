@@ -10,9 +10,12 @@ build lib/console.o : cc src/include/console.c
 build lib/cstr.o : cc src/include/cstr.c
 build lib/debug.o : cc src/include/debug.c
 build lib/utils.o : cc src/include/utils.c 
-build lib/engine.o : cc src/include/engine.c 
 build lib/strvec.o : cc src/include/strvec.c 
-
+build lib/lexer.o : cc src/include/lexer.c
+# build main.c
 build obj/main.o : cc src/main.c 
+# build test.c
+build obj/test.o : cc src/test.c
 
 build mathc: link obj/main.o lib/console.o lib/cstr.o lib/debug.o lib/utils.o lib/strvec.o lib/engine.o
+build test: link  obj/test.o lib/console.o lib/cstr.o lib/debug.o lib/utils.o lib/strvec.o lib/engine.o
