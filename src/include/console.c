@@ -46,8 +46,29 @@ cstr *dynamic_input() {
 
 // output 
 
-void printcolor(char *text, char *color) {
-    printf("%s%s%s", color, text, Reset);
+void printcolor(char *color, char *format, ...) {
+	va_list argp;
+  	va_start(argp, format);
+	fputs(color, stdout);
+  	while (*format != '\0') {
+    	if (*format == '%') {
+			format++;
+			if (*format == 'c') {
+				char char_to_print = va_arg(argp, int);
+				putchar(char_to_print);
+			} 
+			else if (*format == 's') {
+				char *string = va_arg(argp, char*);
+				fputs(string, stdout);
+			}
+    	} 
+		else {
+     	 	putchar(*format);
+    	}
+    	format++;
+  	}
+	fputs(Reset, stdout);
+  	va_end(argp);
 }
 
 void printlncolor(char *text, char *color) {

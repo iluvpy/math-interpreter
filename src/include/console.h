@@ -1,6 +1,6 @@
-#ifndef CONSOLE_C
-#define CONSOLE_C
+#pragma once
 
+#include <stdarg.h>
 #include "cstr.h"
 
 
@@ -34,7 +34,7 @@ cstr *dynamic_input(); // gets input dynamically
 // output
 
 // prints text in color 
-void printcolor(char *text, char *color);
+void printcolor(char *color, char *format, ...);
 // print text in color and endlines
 void printlncolor(char *text, char *color);
 // other
@@ -42,6 +42,5 @@ void printlncolor(char *text, char *color);
 
 void clear_console();
 
-#endif // CONSOEL_H
 
 
