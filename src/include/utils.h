@@ -1,6 +1,3 @@
-#ifndef UTILS_H
-#define UTILS_H
+#pragma once
 
 char *bool_str(bool b);
-
-#endif // UTILS_H
