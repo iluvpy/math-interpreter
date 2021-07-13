@@ -1,12 +1,11 @@
-#ifndef CSTR_H
-#define CSTR_H
+#pragma once
 
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
 
 #define CSTR_SIZE_ sizeof(cstr)
-
+#define CSTR_PTR_SIZE sizeof(cstr*)
 typedef struct cstr 
 {
     size_t size; // characters
@@ -50,6 +49,8 @@ cstr *getnew_cstr(cstr *cs, char *src);
 cstr *allocnew_cstr(cstr *cs, char *src);
 cstr *get_cstr(char *src);
 cstr *allocate_cstr(char *src);
+// returns copy of src
+cstr *cstr_cpy(cstr *src);
 
 // adds 2 cstrings together creating a new one
 cstr *add_cstr(cstr *x, cstr *y);
@@ -63,4 +64,4 @@ void stdout_cstr(cstr *s, bool endl);
 
 bool cstr_eq_str(cstr *cs, char *s);
 
-#endif /* CSTR_H */
+

@@ -147,6 +147,16 @@ cstr *add_cstr(cstr *x, cstr *y) {
     return NULL;
 }
 
+// returns copy of src
+cstr *cstr_cpy(cstr *src) {
+	if (src != NULL) {
+		char *cpy = malloc(src->size);
+		strcpy(cpy, src->str);
+		return cstr_from_allocstr(cpy);
+	}
+	return NULL;
+}
+
 
 int str_sum(char *s) {
     size_t sum = 0;
