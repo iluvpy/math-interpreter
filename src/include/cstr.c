@@ -11,7 +11,8 @@
 void append_str(cstr *dest, char *src) {
     if (dest != NULL && src != NULL) {
         dest->size += strlen(src);
-        dest->str = realloc(dest->str, dest->size);
+        if (dest->free_str) {dest->str = realloc(dest->str, dest->size);}
+		else {dest->str = malloc(dest->size);}
         strcat(dest->str, src);
         dest->free_str = true;
     }
@@ -158,6 +159,7 @@ cstr *cstr_cpy(cstr *src) {
 }
 
 
+
 int str_sum(char *s) {
     size_t sum = 0;
     for (int i = 0; i < strlen(s); i++) {
@@ -173,9 +175,7 @@ int cstr_sum(cstr *s) {
 
 
 // other
-void stdout_cstr(cstr *s, bool endl) {
-    printf("%s%c", getstr(s), (endl) ? '\n' : '\0');
-}
+
 
 
 bool cstr_eq_str(cstr *cs, char *s) {
