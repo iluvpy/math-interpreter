@@ -51,7 +51,6 @@ cstr *get_cstr(char *src);
 cstr *allocate_cstr(char *src);
 // returns copy of src
 cstr *cstr_cpy(cstr *src);
-
 // adds 2 cstrings together creating a new one
 cstr *add_cstr(cstr *x, cstr *y);
 // returns the sum of ascii values 
@@ -60,7 +59,7 @@ int str_sum(char *s);
 int cstr_sum(cstr *s);
 
 // other
-void stdout_cstr(cstr *s, bool endl);
+
 
 bool cstr_eq_str(cstr *cs, char *s);
 
