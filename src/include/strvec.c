@@ -23,9 +23,22 @@ void svec_append(svector *vec, cstr *str) {
 		vec->length++;
 		if (vec->vector == NULL) { vec->vector = malloc(vec->length*CSTR_PTR_SIZE); }
 		else { vec->vector = realloc(vec->vector, vec->length*CSTR_PTR_SIZE); }
-		vec->vector[vec->length] = cstr_cpy(str);
+		vec->vector[vec->length-1] = cstr_cpy(str);
 	}
 }
+
+void svec_appendc_str(svector *vec, char *str) {
+	if (vec != NULL && str != NULL) {
+		vec->length++;
+		if (vec->vector == NULL) { vec->vector = malloc(vec->length*CSTR_PTR_SIZE); }
+		else { vec->vector = realloc(vec->vector, vec->length*CSTR_PTR_SIZE); }
+		char *str_cpy_ = malloc(strlen(str)+1);
+		str_cpy_[strlen(str)] = '\0';
+		strcpy(str_cpy_, str);
+		vec->vector[vec->length-1] = cstr_from_allocstr(str_cpy_);
+	}
+}
+
 
 
 // returns element if exists

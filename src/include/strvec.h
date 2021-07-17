@@ -14,6 +14,7 @@ typedef struct svector {
 svector *svec_from_cstr(cstr *str); // creates svector and initalizes index 0 with str
 svector *generate_svec(); // generates an svector initialized with length 0
 void svec_append(svector *vec, cstr *str);
+void svec_appendc_str(svector *vec, char *str);
 cstr *svec_get(svector *vec, size_t index); // returns element if exists
 
 // frees memory of vec
