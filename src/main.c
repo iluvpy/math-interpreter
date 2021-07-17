@@ -40,7 +40,7 @@ int main(int argc, char **argv)
     cstr *input;
     help();
     while (running) {
-        printf("math# ");
+        printf("mathc# ");
 		input = dynamic_input();
 		if (input == NULL) continue; // no input was given
 
@@ -53,7 +53,6 @@ int main(int argc, char **argv)
         // free memory for input
         del_cstr(input);
     }
-
 
     printcolor(FgCyan ,"exiting ):\n");
     return 0;
