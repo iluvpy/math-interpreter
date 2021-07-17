@@ -53,7 +53,5 @@ int main(int argc, char **argv)
         // free memory for input
         del_cstr(input);
     }
-
-    printcolor(FgCyan ,"exiting ):\n");
     return 0;
 }
