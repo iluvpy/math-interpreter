@@ -17,5 +17,5 @@ build obj/main.o : cc src/main.c
 # build test.c
 build obj/test.o : cc src/test.c
 
-build mathc: link obj/main.o lib/console.o lib/cstr.o lib/debug.o lib/utils.o lib/strvec.o lib/engine.o
-build test: link  obj/test.o lib/console.o lib/cstr.o lib/debug.o lib/utils.o lib/strvec.o lib/engine.o
+build mathc: link obj/main.o lib/lexer.o lib/console.o lib/cstr.o lib/debug.o lib/utils.o lib/strvec.o lib/engine.o
+build test: link  obj/test.o lib/lexer.o lib/console.o lib/cstr.o lib/debug.o lib/utils.o lib/strvec.o lib/engine.o
