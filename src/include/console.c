@@ -14,7 +14,7 @@ cstr *minput(size_t max) {
     str = fgets(str, max, stdin);
 	size_t size = strlen(str)+1;
 	str = realloc(str, size+1);
-	str[size] = '\0'; // overwrite endline char (last char)
+
     return cstr_from_allocstr(str);
 }
 
@@ -35,11 +35,13 @@ cstr *dynamic_input() {
 	}
 
 	// no input was given
-	if (i == 0) return NULL;
+	if (i == 0) {
+		free(input_);
+		return NULL;
+	}
 	// resize to correct size and set null char
 	input_ = realloc(input_, i+1);
-	input_[i] = '\0';
-
+	input_[i] = '\0'; // fixes memory error
 	return cstr_from_allocstr(input_); // create cstr from allocated char*
 }
 
