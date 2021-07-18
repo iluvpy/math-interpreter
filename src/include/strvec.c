@@ -12,9 +12,9 @@ svector *generate_svec() {
 // creates svector and initalizes index 0 with str
 svector *svec_from_cstr(cstr *str) {
 	svector *vec = generate_svec();
-	vec->length++;
+	vec->length = 0;
 	vec->vector = malloc(CSTR_PTR_SIZE);
-	vec->vector[0] = cstr_cpy(str);
+	vec->vector[vec->length] = cstr_cpy(str);
 	return vec;
 }
 
@@ -33,7 +33,6 @@ void svec_appendc_str(svector *vec, char *str) {
 		if (vec->vector == NULL) { vec->vector = malloc(vec->length*CSTR_PTR_SIZE); }
 		else { vec->vector = realloc(vec->vector, vec->length*CSTR_PTR_SIZE); }
 		char *str_cpy_ = malloc(strlen(str)+1);
-		str_cpy_[strlen(str)] = '\0';
 		strcpy(str_cpy_, str);
 		vec->vector[vec->length-1] = cstr_from_allocstr(str_cpy_);
 	}
