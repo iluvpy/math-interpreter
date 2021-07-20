@@ -12,6 +12,7 @@ build lib/debug.o : cc src/include/debug.c
 build lib/utils.o : cc src/include/utils.c 
 build lib/strvec.o : cc src/include/strvec.c 
 build lib/lexer.o : cc src/include/lexer.c
+build lib/number.o : cc src/include/number.c
 # build main.c
 build obj/main.o : cc src/main.c 
 # build test.c
