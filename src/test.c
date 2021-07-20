@@ -17,6 +17,7 @@ void print_section(char *name) {
 	printcolor(FgGreen, " -------\n");
 }
 
+
 int main(void) {
 
 	print_section("string vector test");
@@ -30,16 +31,22 @@ int main(void) {
 	svec_appendc_str(vec, "hi");
 	svec_append(vec, str);
 
-	printf("last %s\n", getstr(svec_get(vec, vec->length-1)));
+	printf("last element of string vector: %s\n", cstr_str(svec_get(vec, vec->length-1)));
+	del_svec(vec);
+	del_cstr(str);
+	
+	print_section("end of str vec test");
 
 	int n = 152566;
 	printf("there are %zu digits in %d\n", get_intlen(n), n);
 
-	printf("input: ");
-	cstr *input = minput(6);
-	printf("input was '%s'\n", getstr(input));
-	del_cstr(input);
-	del_svec(vec);
-	del_cstr(str);
+	cstr *itoken = get_int_token(52342);
+	printf("int token: %s\n", cstr_str(itoken));
+	del_cstr(itoken);
+
+	cstr *ftoken = get_float_token(125.6534f);
+	printf("float token: %s\n", cstr_str(ftoken));
+	del_cstr(ftoken);
+
 	return 0;
 }
