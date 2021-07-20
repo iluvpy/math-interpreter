@@ -6,6 +6,7 @@
 
 #define CSTR_SIZE_ sizeof(cstr)
 #define CSTR_PTR_SIZE sizeof(cstr*)
+
 typedef struct cstr 
 {
     size_t size; // characters
@@ -17,10 +18,10 @@ typedef struct cstr
 
 
 // appends src to dest
-void append_str(cstr *dest, char *src);
+void cstr_append(cstr *dest, char *src);
 // appends src to dest
-void append_cstr(cstr *dest, cstr *src);
-
+void cstr_appendcs(cstr *dest, cstr *src);
+void cstr_appendc(cstr *dest, char c);
 // removes char at index
 void cstr_remove(cstr *str, size_t index);
 // delets all occurencies of c in str
@@ -41,12 +42,13 @@ void free_cstr_str(cstr *s);
 cstr *cstr_from_allocstr(char *src);
 
 // returns the char * of s
-char *getstr(cstr *s);
-
+char *cstr_str(cstr *s);
+char cstr_getc(cstr *s, size_t index); // return char at index or null if index is invalid
+inline size_t cstr_len(cstr *s); // returns number of chars in cstr (without including null termination)
+inline size_t cstr_size(cstr *s); // return number of chars including null termination
 // change cstr value to new value
 // uses get_cstr to create new cstr
 cstr *getnew_cstr(cstr *cs, char *src);
-cstr *allocnew_cstr(cstr *cs, char *src);
 cstr *get_cstr(char *src);
 cstr *allocate_cstr(char *src);
 // returns copy of src
@@ -54,13 +56,16 @@ cstr *cstr_cpy(cstr *src);
 // adds 2 cstrings together creating a new one
 cstr *add_cstr(cstr *x, cstr *y);
 // returns the sum of ascii values 
+
+
 int str_sum(char *s);
 // returns the sum of ascii values 
 int cstr_sum(cstr *s);
 
-// other
 
-
+// returns true when cs == s
 bool cstr_eq_str(cstr *cs, char *s);
+int cstr_toi(cstr *str); // to int 
+float cstr_tof(cstr *str); // to float
 
 
