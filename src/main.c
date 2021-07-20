@@ -22,12 +22,12 @@ void help() {
 
 // checks for commands
 int commands(cstr *input) {
-    if (isalpha(getstr(input)[0])) {
+    if (isalpha(cstr_str(input)[0])) {
         if (cstr_eq_str(input, Q_CMD)) {return -1;}
         if (cstr_eq_str(input, H_CMD)) {help();}
         else if (cstr_eq_str(input, CLR_CMD)) {clear_console();}
         else {
-            printcolor(FgRed ,"Unknown command '%s'\n", getstr(input));
+            printcolor(FgRed ,"Unknown command '%s'\n", cstr_str(input));
         }
     } 
     return 0;
@@ -43,7 +43,6 @@ int main(int argc, char **argv)
         printf("mathc# ");
 		input = dynamic_input();
 		if (input == NULL) continue; // no input was given
-
         int res = commands(input); 
         if (res < 0) { // quit command
             del_cstr(input);
