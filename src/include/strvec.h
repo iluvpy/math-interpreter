@@ -16,6 +16,6 @@ svector *generate_svec(); // generates an svector initialized with length 0
 void svec_append(svector *vec, cstr *str);
 void svec_appendc_str(svector *vec, char *str);
 cstr *svec_get(svector *vec, size_t index); // returns element if exists
-
+size_t svec_len(svector *vec);
 // frees memory of vec
 void del_svec(svector *vec);

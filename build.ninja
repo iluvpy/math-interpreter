@@ -13,10 +13,14 @@ build lib/utils.o : cc src/include/utils.c
 build lib/strvec.o : cc src/include/strvec.c 
 build lib/lexer.o : cc src/include/lexer.c
 build lib/number.o : cc src/include/number.c
+build lib/point.o : cc src/include/point.c
+build lib/parser.o : cc src/include/parser.c
+build lib/compiler.o : cc src/include/compiler.c
+
 # build main.c
 build obj/main.o : cc src/main.c 
 # build test.c
 build obj/test.o : cc src/test.c
 
-build mathc: link obj/main.o lib/lexer.o lib/console.o lib/cstr.o lib/debug.o lib/utils.o lib/strvec.o lib/engine.o
-build test: link  obj/test.o lib/lexer.o lib/console.o lib/cstr.o lib/debug.o lib/utils.o lib/strvec.o lib/engine.o
+build mathc: link lib/parser.o lib/compiler.o lib/point.o lib/number.o lib/lexer.o lib/console.o lib/cstr.o lib/debug.o lib/utils.o lib/strvec.o lib/engine.o obj/main.o
+build test: link  lib/parser.o lib/compiler.o lib/point.o lib/number.o lib/lexer.o lib/console.o lib/cstr.o lib/debug.o lib/utils.o lib/strvec.o lib/engine.o obj/test.o

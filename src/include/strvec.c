@@ -38,6 +38,10 @@ void svec_appendc_str(svector *vec, char *str) {
 	}
 }
 
+// returns vector length 
+size_t svec_len(svector *vec) {
+	return vec->length;
+}
 
 
 // returns element if exists

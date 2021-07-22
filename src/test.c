@@ -31,7 +31,9 @@ int main(void) {
 	svec_appendc_str(vec, "hi");
 	svec_append(vec, str);
 
-	printf("last element of string vector: %s\n", cstr_str(svec_get(vec, vec->length-1)));
+	for (int i = 0; i < svec_len(vec); i++) {
+		printf("e%d is equal to '%s'\n", i, cstr_str(svec_get(vec, i)));
+	}
 	del_svec(vec);
 	del_cstr(str);
 	
@@ -48,5 +50,26 @@ int main(void) {
 	printf("float token: %s\n", cstr_str(ftoken));
 	del_cstr(ftoken);
 
-	return 0;
+	cstr *phrase = get_cstr("hello world.");
+	char c = '.';
+	printf("'%c' is in '%s': %s\n", c, cstr_str(phrase), bool_str(cstr_is_in(phrase, c)));
+	del_cstr(phrase);
+
+	cstr *text = get_cstr("");
+	for (int i = 0; i < 26; i++) {
+		cstr_appendc(text, i+97);
+	}
+	printf("result: ");
+	for (int i = 0; i < 26; i++) {
+		printf("%c", cstr_getc(text, i));
+	}
+	printf("\n");
+
+	char char_ = 97;
+	cstr_appendc(text, (int)char_);
+	printf("added '%c' to text variable\n", char_);
+	printf("text variable is now equal to '%s'\n", cstr_str(text));
+	del_cstr(text);
+
+ 	return 0;
 }

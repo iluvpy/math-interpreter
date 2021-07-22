@@ -26,31 +26,22 @@ void cstr_appendcs(cstr *dest, cstr *src) {
 }
 
 void cstr_appendc(cstr *dest, char c) {
-	char cpy[dest->size];
-	cpy[dest->size] = c;
-	strcpy(dest->str, cpy);
+	dest->size++;
+	if (dest->free_str) {
+		dest->str = realloc(dest->str, dest->size);
+	}
+	else {
+		dest->str = malloc(dest->size);
+	}
+
+	strncat(dest->str, &c, 1);
 }
 
 // removes char at index
 void cstr_remove(cstr *s, size_t index) {
     if (s != NULL) {
-        s->size--;
-		char *str = s->str;
-        char cpy[s->size+1];
-		int i = 0;
-		int j = 0;
-		while (i > s->size) {
-			if (i != index) {
-				cpy[i] = str[j];
-				i++;
-			} 
-			j++;
-		}
-		free_cstr_str(s);
-		s->str = malloc(s->size+1);
-		strcpy(s->str, cpy);
-		s->free_str = true;
-
+		memmove(&(s->str[index]), &(s->str[index+1]), s->size - index);
+		s->size--;
     }
 }
 
@@ -119,47 +110,27 @@ char cstr_getc(cstr *s, size_t index) {
 }
 
 // returns number of chars in cstr (without including null termination)
-inline size_t cstr_len(cstr *s) {
+size_t cstr_len(cstr *s) {
 	return s->size-1;
 }
 // return number of chars including null termination
-inline size_t cstr_size(cstr *s) {
+size_t cstr_size(cstr *s) {
 	return s->size;
 }
 
 // creates a cstr from an allocated char *
-// deallocates the used char * when needed
-// instead of just overwriting it
+// deallocates the used char * when needed instead of just overwriting it
 cstr *cstr_from_allocstr(char *src) {
     if (src == NULL) {return NULL;}
-    cstr *cs = get_cstr(src);
-    cs->free_str = true;
+    cstr *cs = malloc(CSTR_SIZE_);
+	cs->size = strlen(src)+1;
+	cs->str = src;
+	cs->free_str = true;
     return cs;
 }   
 
-// change cstr value to new value
-// uses get_cstr to create new cstr
-cstr *getnew_cstr(cstr *cs, char *src) {
-    if (cs != NULL) {
-        del_cstr(cs);
-        return get_cstr(src);
-    }
-	return NULL;
-}   
 
-// change cstr value to new value
-// uses allocate_cstr to create new cstr
-// i.e it allocates new memory for src
-// instead of just using that char *
-cstr *allocnew_cstr(cstr *cs, char *src) {
-    if (cs != NULL) {
-        del_cstr(cs);
-        return allocate_cstr(src);
-    }
-	return NULL;
-}
-
-// generates a new cstr
+// generates a new cstr from a char *
 cstr *get_cstr(char *src) {
     cstr *s = malloc(CSTR_SIZE_);
     s->size = strlen(src)+1;
@@ -176,7 +147,7 @@ cstr *add_cstr(cstr *x, cstr *y) {
         char res[x->size+x->size];
         strcpy(res, x->str);
         strcat(res, y->str);
-        return allocate_cstr(res); 
+        return get_cstr(res); 
     }
 
     return NULL;
@@ -207,10 +178,21 @@ int cstr_sum(cstr *s) {
     return str_sum(s->str);
 }
 
+size_t cstr_last(cstr *s) {
+	return s->size-1;
+}
+
 
 
 bool cstr_eq_str(cstr *cs, char *s) {
     return (cstr_sum(cs) - str_sum(s) == 0);
+}
+
+bool cstr_is_in(cstr *cs, char c) {
+	for (int i = 0; i < cs->size; i++) {
+		if (cstr_getc(cs, i) == c) {return true;}
+	}
+	return false;
 }
 
 // returns int of cstr if is int and 0 if not int
