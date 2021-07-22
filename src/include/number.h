@@ -6,10 +6,12 @@
 
 
 typedef struct number {
-	cstr *num;
-	point pos; // start-finish index of number in a cstr "+start....finish-" 
+	cstr *str_num;
+	point *pos; // start-finish index of number in a cstr "+start....finish-" 
 	num_type type; // type of number, float, int, etc
 } number;
 
-inline number *alloc_number();
-inline void free_number(number *num);
+number *alloc_number();
+cstr *number_str(number *num);
+
+void free_number(number *num);
