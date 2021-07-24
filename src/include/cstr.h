@@ -25,8 +25,7 @@ void cstr_appendc(cstr *dest, char c);
 // removes char at index
 void cstr_remove(cstr *str, size_t index);
 // delets all occurencies of c in str
-void cstr_delc(cstr *str, char c);
-
+cstr *cstr_delc(cstr *s, char c);
 // frees s
 void del_cstr(cstr *s); 
 

@@ -33,7 +33,6 @@ void cstr_appendc(cstr *dest, char c) {
 	else {
 		dest->str = malloc(dest->size);
 	}
-
 	strncat(dest->str, &c, 1);
 }
 
@@ -46,26 +45,24 @@ void cstr_remove(cstr *s, size_t index) {
 }
 
 // delets all occurencies of c in str
-void cstr_delc(cstr *s, char c) {
-	size_t occurencies = 0;
-	char *str = s->str;
-	size_t len = strlen(str);
-	for (int i = 0; i < len; i++) {
-		if (str[i] == c) occurencies++;
+cstr *cstr_delc(cstr *s, char c) {
+	size_t found = 0;
+	for (int i = 0; i < s->size; i++) {
+		if (cstr_getc(s, i) == c) {found++;} 
 	}
-	char *new_str = malloc(len-occurencies+1);
-	int i = 0;
-	int j = 0;
-	while (new_str[i] != '\0') {
-		if (str[j] != c) {
-			new_str[i] = c;
-			i++;
+	if (found > 0) {
+
+		cstr *new_str = get_cstr("");
+		for (int i = 0; i < s->size; i++) {
+			char cc = cstr_getc(s, i);
+			if (cc != c) {
+				cstr_appendc(new_str, cc);
+			}
 		}
-		j++;
+		del_cstr(s);
+		return new_str;
 	}
-	free_cstr_str(s);
-	s->str = new_str;
-	s->free_str = true;
+	return s;
 }
 
 // deletes whole cstring and not only the string pointer
@@ -87,11 +84,6 @@ void free_cstr_str(cstr *s) {
         }
     }
 }
-
-
-
-// getters
-
 
 // returns the char * of s
 char *cstr_str(cstr *s) {
