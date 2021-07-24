@@ -19,7 +19,7 @@
 
 // tells the parser to execute everything that came before first
 // e.g INT::1 * INT::76 INFO::FIRST
-#define TEXEC_FIRST "INFO::FIRST"
+#define T_EXEC_FIRST "INFO::FIRST"
 
 // types 
 #define INTEGER_TOKEN "INT::"

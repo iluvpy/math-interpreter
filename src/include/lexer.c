@@ -3,11 +3,10 @@
 
 const num_type types;
 
-// transforms a mathematical expression into a simple start - to finish string of 
-// tokens seperated by endlines
+// transforms a mathematical expression into a simple start to finish array of tokens that 
+// can then be executed by the parser
 svector *gen_tokens(cstr *m_expression) {
 	svector *tokens = generate_svec();
-
 	int i = 0; 
 	while (i < cstr_size(m_expression)) {
 		char c = cstr_getc(m_expression, i);
@@ -20,19 +19,14 @@ svector *gen_tokens(cstr *m_expression) {
 		else if (isdigit(c)){
 			// create number
 			number *num = get_number(i, m_expression);
-			printf("i is %d\n", i);
-			i = num->pos->y-1;
-
-			printf("i is now %d\n", i);
+			i = num->pos->y;
 			// get token
 			cstr *token = num_to_token(num);
-			printf("got new token: %s\n", cstr_str(token));
 			svec_append(tokens, token);
 			del_cstr(token);
 			free_number(num);
-			if (i > cstr_len(m_expression)) {break;}
+			if (i >= cstr_len(m_expression)) {break;} 
 		}
-		printf("i is at '%c'\n", cstr_getc(m_expression, i));
 		i++;
 	}
 	
@@ -47,8 +41,8 @@ cstr *get_int_token(int n) {
 }
 
 cstr *get_float_token(float f) {
-	char *s = malloc(get_floatlen(f)+1+FLOAT_T_LEN);
-	sprintf(s, "%s%0.6f", FLOAT_TOKEN, f);
+	char *s = malloc(get_floatlen(f)+2+FLOAT_T_LEN); // idk why +2 but ok (+1 causes invalid read of size 1)
+	sprintf(s, "%s%0.7f", FLOAT_TOKEN, f);
 	return cstr_from_allocstr(s);  
 }
 
@@ -73,7 +67,7 @@ number *get_number(size_t start_pos, cstr *expression) {
 	number *num = alloc_number();
 	cstr *str_num = get_cstr("");
 	num_type type_ = INT_T;
-	for (int i = 0; i < cstr_size(expression); i++) {
+	for (int i = start_pos; i < cstr_size(expression); i++) {
 		char c = cstr_getc(expression, i);
 		if (isdigit(c) || c == '.' || c == ',') {
 			if (c == '.' || c == ',') {type_ = FLOAT_T;}
