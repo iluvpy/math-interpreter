@@ -34,27 +34,26 @@ svector *gen_tokens(cstr *m_expression) {
 }
 
 
-cstr *get_int_token(int n) {
-	char *s = malloc(get_intlen(n)+1+INTEGER_T_LEN);
-	sprintf(s, "%s%d", INTEGER_TOKEN, n);
-	return cstr_from_allocstr(s);   
+cstr *get_int_token(cstr *sn) {
+	cstr *token = get_cstr(INTEGER_TOKEN);
+	cstr_appendcs(token, sn);
+	return token;  
 }
 
-cstr *get_float_token(float f) {
-	char *s = malloc(get_floatlen(f)+2+FLOAT_T_LEN); // idk why +2 but ok (+1 causes invalid read of size 1)
-	sprintf(s, "%s%0.7f", FLOAT_TOKEN, f);
-	return cstr_from_allocstr(s);  
+cstr *get_float_token(cstr *sf) {
+	cstr *token = get_cstr(FLOAT_TOKEN);
+	cstr_appendcs(token, sf);
+	return token;  
 }
-
 
 
 cstr *num_to_token(number *num) {
 	switch (num->type)
 	{
 		case INT_T:
-			return get_int_token(cstr_toi(num->str_num));
+			return get_int_token(num->str_num);
 		case FLOAT_T:
-			return get_float_token(cstr_tof(num->str_num));
+			return get_float_token(num->str_num);
 		case NAN_T:
 			return get_cstr(NAN_TOKEN);
 		default:

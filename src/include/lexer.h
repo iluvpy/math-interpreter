@@ -31,8 +31,8 @@
 // transforms a mathematical expression into a simple start - to finish string of 
 // tokens seperated by spaces
 svector *gen_tokens(cstr *m_expression);
-cstr *get_int_token(int n);
-cstr *get_float_token(float d);
+cstr *get_int_token(cstr *sn);
+cstr *get_float_token(cstr *f);
 
 number *get_number(size_t start_pos, cstr *expression);
 cstr *num_to_token(number *num);
