@@ -6,11 +6,48 @@
 #include "utils.h"
 #include "lexer.h"
 
-
+//defines
 #define tostr(s) getcstr(s)
 #define COMMAND_EXECUTED 0
 #define NO_COMMAND 1
 #define QUIT_COMMAND -1
+
+// forward declarations
+void help();
+int commands(cstr *input);
+
+int main(int argc, char **argv) 
+{
+    bool running = true;
+    cstr *input;
+    help();
+    while (running) {
+        printf("mathc# ");
+		input = dynamic_input();
+		if (input == NULL) continue; // no input was given
+        int res = commands(input); 
+        if (res < 0) { // quit command
+            del_cstr(input);
+            break;
+        }
+		else if (res == COMMAND_EXECUTED) {
+			del_cstr(input);
+			continue;
+		}
+
+		svector *tokens = gen_tokens(input);
+		printf("tokens: \n");
+		for (int i = 0; i < svec_len(tokens); i++) {
+			printf("%s\n", cstr_str(svec_get(tokens, i)));
+		}
+		del_svec(tokens);
+        // free memory for input
+        del_cstr(input);
+    }
+    return 0;
+}
+
+
 // prints out the help menu
 void help() {
     printcolor(FgMagenta, "\nmathc debug version \n");
@@ -34,36 +71,4 @@ int commands(cstr *input) {
 		return COMMAND_EXECUTED;
     } 
 	return NO_COMMAND;
-}
-
-
-int main(int argc, char **argv) 
-{
-    bool running = true;
-    cstr *input;
-    help();
-    while (running) {
-        printf("mathc# ");
-		input = dynamic_input();
-		if (input == NULL) continue; // no input was given
-        int res = commands(input); 
-        if (res < 0) { // quit command
-            del_cstr(input);
-            break;
-        }
-		else if (res == COMMAND_EXECUTED) {
-			del_cstr(input);
-			continue;
-		}
-
-
-		svector *tokens = gen_tokens(input);
-		for (int i = 0; i < svec_len(tokens); i++) {
-			printf("%s\n", cstr_str(svec_get(tokens, i)));
-		}
-		del_svec(tokens);
-        // free memory for input
-        del_cstr(input);
-    }
-    return 0;
 }
