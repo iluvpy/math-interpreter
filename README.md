@@ -3,8 +3,8 @@
 
 # State 
     in development; none of the current syntax is working <br>
-    ![Markdown Logo](https://img.shields.io/badge/state-development-red)
-    ![Markdown Logo](https://img.shields.io/badge/build-unstable-red)
+   ![Markdown Logo](https://img.shields.io/badge/state-development-red)
+   ![Markdown Logo](https://img.shields.io/badge/build-unstable-red)
 ## Usage
     type in `./math` when you have the binary in your directory
 
