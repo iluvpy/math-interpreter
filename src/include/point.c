@@ -3,6 +3,7 @@
 point *alloc_point() {
 	return malloc(sizeof(point));
 }
+
 point *get_point(int x, int y) {
 	point *p = alloc_point();
 	p->x = x;
@@ -10,4 +11,7 @@ point *get_point(int x, int y) {
 	return p;
 }
 
-void free_point(point *p) {free(p);}
+void free_point(point *p) {
+	if (p != NULL) free(p);
+	p = NULL;
+}

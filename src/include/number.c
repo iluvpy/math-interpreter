@@ -8,5 +8,6 @@ cstr *number_str(number *num) {
 void free_number(number *num) { 
 	free_point(num->pos);
 	del_cstr(num->str_num);
-	free(num); 
+	if (num != NULL) free(num); 
+	num = NULL;
 }
