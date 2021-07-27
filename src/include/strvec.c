@@ -18,6 +18,7 @@ svector *svec_from_cstr(cstr *str) {
 	return vec;
 }
 
+// copies str and appends it to vec
 void svec_append(svector *vec, cstr *str) {
 	if (vec != NULL && str != NULL) {
 		vec->length++;
