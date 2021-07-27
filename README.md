@@ -5,6 +5,7 @@
     in development; none of the current syntax is working 
    ![Markdown Logo](https://img.shields.io/badge/state-development-red)
    ![Markdown Logo](https://img.shields.io/badge/build-unstable-red)
+   ![Markdown Logo](https://tokei.rs/b1/github/iluvpy/mathc)
 ## Usage
     type in `./math` when you have the binary in your directory
 
