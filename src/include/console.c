@@ -24,7 +24,7 @@ cstr *dynamic_input() {
 	char *input_ = malloc(len);
 	int i = 0;
 	char c;
-	while ((c = fgetc(stdin)) && c != '\n' && c != EOF) {
+	while ((c = fgetc(stdin)) && c != '\n') {
 		input_[i] = c;
 
 		i++;
