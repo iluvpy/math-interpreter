@@ -195,3 +195,11 @@ int cstr_toi(cstr *str) {
 float cstr_tof(cstr *str) {
 	return atof(str->str);
 }
+
+char *bool_str(bool b) {
+    return b ? "True" : "False";
+}
+
+cstr *bool_cstr(bool b) {
+	return get_cstr(bool_str(b));
+}

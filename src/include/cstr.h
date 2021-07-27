@@ -65,5 +65,6 @@ bool cstr_eq_str(cstr *cs, char *s);
 bool cstr_is_in(cstr *cs, char c);
 int cstr_toi(cstr *str); // to int 
 float cstr_tof(cstr *str); // to float
-
+char *bool_str(bool b);
+cstr *bool_cstr(bool b);
 
