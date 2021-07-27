@@ -5,6 +5,7 @@ void compiler_compile(compiler *cmplr, cstr *input) {
 	compiler_input(cmplr, input);
 	compiler_lex(cmplr);
 	compiler_parse(cmplr);
+	compiler_clean(cmplr);
 }
 
 void compiler_input(compiler *cmplr, cstr *input) {
@@ -16,9 +17,16 @@ void compiler_lex(compiler *cmplr) {
 }
 
 void compiler_parse(compiler *cmplr) {
-
+	// XXX add parsing
 }
 
-cstr *compiler_output(compiler *cmplr) {
+// frees everything
+void compiler_clean(compiler *cmplr) {
+	del_cstr(cmplr->input);
+	del_svec(cmplr->tokens);
+	del_cstr(cmplr->result);
+}
+
+cstr *compiler_result(compiler *cmplr) {
 	return cmplr->result;
 }
