@@ -35,11 +35,8 @@ cstr *dynamic_input(); // gets input dynamically
 
 // prints text in color 
 void printcolor(char *color, char *format, ...);
-// print text in color and endlines
-void printlncolor(char *text, char *color);
+
 // other
-
-
 void clear_console();
 
 

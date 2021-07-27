@@ -73,10 +73,6 @@ void printcolor(char *color, char *format, ...) {
   	va_end(argp);
 }
 
-void printlncolor(char *text, char *color) {
-    printcolor(text, color);
-    putc(10, stdin);
-}
 
 
 // other
