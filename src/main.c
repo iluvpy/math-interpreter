@@ -4,6 +4,7 @@
 #include "cstr.h"
 #include "console.h"
 #include "lexer.h"
+#include "parser.h"
 
 //defines
 #define tostr(s) getcstr(s)
@@ -35,10 +36,12 @@ int main(int argc, char **argv)
 		}
 
 		svector *tokens = gen_tokens(input);
+		parser(tokens);
 		printf("tokens: \n");
 		for (int i = 0; i < svec_len(tokens); i++) {
 			printf("%s\n", cstr_str(svec_get(tokens, i)));
 		}
+
 		del_svec(tokens);
         // free memory for input
         del_cstr(input);
@@ -65,7 +68,7 @@ int commands(cstr *input) {
         if (cstr_eq_str(input, H_CMD)) {help();}
         else if (cstr_eq_str(input, CLR_CMD)) {clear_console();}
         else {
-            printcolor(FgRed ,"Unknown command '%s'. type in '%s' for help\n", cstr_str(input), H_CMD);
+            printcolor(FgRed ,"Unknown command '%s'. type '%s' for help\n", cstr_str(input), H_CMD);
         }
 		return COMMAND_EXECUTED;
     } 

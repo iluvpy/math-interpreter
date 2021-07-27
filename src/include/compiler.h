@@ -2,7 +2,7 @@
 
 #include "lexer.h"
 
-// its not a compiler but an interpreter
+// its not a compiler but an interpreter 
 // i know that but who cares?
 typedef struct compiler {
 	cstr *input;

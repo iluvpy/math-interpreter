@@ -5,7 +5,6 @@ void compiler_compile(compiler *cmplr, cstr *input) {
 	compiler_input(cmplr, input);
 	compiler_lex(cmplr);
 	compiler_parse(cmplr);
-	compiler_clean(cmplr);
 }
 
 void compiler_input(compiler *cmplr, cstr *input) {

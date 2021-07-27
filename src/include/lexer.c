@@ -10,11 +10,10 @@ svector *gen_tokens(cstr *m_expression) {
 	int i = 0; 
 	while (i < cstr_size(m_expression)) {
 		char current_char = cstr_getc(m_expression, i);
-		if (is_LBracket(current_char)) {
-			printf("hit a '('\n");
-		}
-		else if (is_RBracket(current_char)) {
-			printf("hit a ')'\n");
+		if (is_LBracket(current_char) || is_RBracket(current_char)) {
+			cstr *token = get_bracket_token(current_char);
+			svec_append(tokens, token);
+			del_cstr(token);
 		}
 		else if (is_operator(current_char)) {
 			cstr *operator_token = get_op_token(current_char);
@@ -55,6 +54,12 @@ cstr *get_op_token(char operator) {
 	cstr *op_token = get_cstr(OPERATOR_TOKEN);
 	cstr_appendc(op_token, operator);
 	return op_token;
+}
+
+cstr *get_bracket_token(char bracket) {
+	cstr *token = get_cstr(BRACKET_TOKEN);
+	cstr_appendc(token, bracket);
+	return token;
 }
 
 cstr *num_to_token(number *num) {
