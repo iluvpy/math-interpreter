@@ -2,7 +2,7 @@
     a math interpreter written in C
 
 # State 
-    in development; none of the current syntax is working <br>
+    in development; none of the current syntax is working 
    ![Markdown Logo](https://img.shields.io/badge/state-development-red)
    ![Markdown Logo](https://img.shields.io/badge/build-unstable-red)
 ## Usage
