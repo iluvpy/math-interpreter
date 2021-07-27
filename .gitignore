@@ -4,3 +4,5 @@
 mathc
 test
 *.ninja_log
+vgcore.*
+*.json
