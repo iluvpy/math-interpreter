@@ -21,5 +21,5 @@ build obj/main.o : cc src/main.c
 # build test.c
 build obj/test.o : cc src/test.c
 
-build mathc: link lib/parser.o lib/compiler.o lib/point.o lib/number.o lib/lexer.o lib/console.o lib/cstr.o lib/debug.o lib/strvec.o lib/engine.o obj/main.o
-build test: link  lib/parser.o lib/compiler.o lib/point.o lib/number.o lib/lexer.o lib/console.o lib/cstr.o lib/debug.o lib/strvec.o lib/engine.o obj/test.o
+build mathc: link lib/parser.o lib/compiler.o lib/point.o lib/number.o lib/lexer.o lib/console.o lib/cstr.o lib/debug.o lib/strvec.o obj/main.o
+build test: link  lib/parser.o lib/compiler.o lib/point.o lib/number.o lib/lexer.o lib/console.o lib/cstr.o lib/debug.o lib/strvec.o obj/test.o
