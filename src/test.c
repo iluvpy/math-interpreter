@@ -4,7 +4,6 @@
 
 #include "console.h"
 #include "strvec.h"
-#include "utils.h"
 #include "cstr.h"
 #include "lexer.h"
 #include "strvec.h"

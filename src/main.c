@@ -3,7 +3,6 @@
 
 #include "cstr.h"
 #include "console.h"
-#include "utils.h"
 #include "lexer.h"
 
 //defines
@@ -66,7 +65,7 @@ int commands(cstr *input) {
         if (cstr_eq_str(input, H_CMD)) {help();}
         else if (cstr_eq_str(input, CLR_CMD)) {clear_console();}
         else {
-            printcolor(FgRed ,"Unknown command '%s'\n", cstr_str(input));
+            printcolor(FgRed ,"Unknown command '%s'. type in '%s' for help\n", cstr_str(input), H_CMD);
         }
 		return COMMAND_EXECUTED;
     } 
