@@ -61,7 +61,7 @@ void help() {
 
 // checks for commands
 int commands(cstr *input) {
-    if (isalpha(cstr_str(input)[0])) {
+    if (isalpha(cstr_getc(input, 0))) {
         if (cstr_eq_str(input, Q_CMD)) {return QUIT_COMMAND;}
         if (cstr_eq_str(input, H_CMD)) {help();}
         else if (cstr_eq_str(input, CLR_CMD)) {clear_console();}
