@@ -3,20 +3,19 @@
 #include <stdio.h>
 #include <ctype.h>
 #include "cstr.h"
-#include "utils.h"
 #include "number.h"
 #include "strvec.h"
 
 // operators 
+#define USED_OPERATORS "+-/*^"
+#define OPERATOR_TOKEN "OP::"
 #define OP_PLUS "OP::+"
 #define OP_MINUS "OP::-"
 #define OP_DIVIDE "OP::/"
 #define OP_MULTIPLY "OP::*"
 #define OP_POW "OP::^"
 
-
 // parse info
-
 // tells the parser to execute everything that came before first
 // e.g INT::1 * INT::76 INFO::FIRST
 #define T_EXEC_FIRST "INFO::FIRST"
@@ -33,9 +32,12 @@
 svector *gen_tokens(cstr *m_expression);
 cstr *get_int_token(cstr *sn);
 cstr *get_float_token(cstr *f);
-
+cstr *get_op_token(char operator);
 number *get_number(size_t start_pos, cstr *expression);
 cstr *num_to_token(number *num);
 
+
+
+bool is_operator(char c);
 bool is_LBracket(char c);
 bool is_RBracket(char c);

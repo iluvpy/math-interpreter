@@ -9,14 +9,19 @@ svector *gen_tokens(cstr *m_expression) {
 	svector *tokens = generate_svec();
 	int i = 0; 
 	while (i < cstr_size(m_expression)) {
-		char c = cstr_getc(m_expression, i);
-		if (is_LBracket(c)) {
+		char current_char = cstr_getc(m_expression, i);
+		if (is_LBracket(current_char)) {
 			printf("hit a '('\n");
 		}
-		else if (is_RBracket(c)) {
+		else if (is_RBracket(current_char)) {
 			printf("hit a ')'\n");
 		}
-		else if (isdigit(c)){
+		else if (is_operator(current_char)) {
+			cstr *operator_token = get_op_token(current_char);
+			svec_append(tokens, operator_token);
+			del_cstr(operator_token);
+		}
+		else if (isdigit(current_char)){
 			// create number
 			number *num = get_number(i, m_expression);
 			i = num->pos->y;
@@ -46,6 +51,11 @@ cstr *get_float_token(cstr *sf) {
 	return token;  
 }
 
+cstr *get_op_token(char operator) {
+	cstr *op_token = get_cstr(OPERATOR_TOKEN);
+	cstr_appendc(op_token, operator);
+	return op_token;
+}
 
 cstr *num_to_token(number *num) {
 	switch (num->type)
@@ -77,11 +87,20 @@ number *get_number(size_t start_pos, cstr *expression) {
 		}
 	}
 	if (cstr_len(str_num) == 0) {type_ = NAN_T;}
-	num->pos = get_point(start_pos, start_pos+cstr_len(str_num));
+	num->pos = get_point(start_pos, start_pos+cstr_len(str_num)-1);
 	num->type = type_;
 	num->str_num = str_num;
 	return num;
 }	
+
+bool is_operator(char c) {
+	char operators[] = USED_OPERATORS;
+	for (int i = 0; i < strlen(operators); i++) {
+		if (operators[i] == c) return true;
+	}
+	return false;
+}
+
 
 //XXX: add more brackets later like [] {} etc
 bool is_LBracket(char c) {return c == '(';}
