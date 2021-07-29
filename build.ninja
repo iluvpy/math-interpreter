@@ -6,21 +6,21 @@ rule cc
 rule link
   command = $cc $in -o $out 
 
-build lib/console.o : cc src/console.c
-build lib/cstr.o : cc src/cstr.c
-build lib/debug.o : cc src/debug.c
-build lib/strvec.o : cc src/strvec.c 
-build lib/lexer.o : cc src/lexer.c
-build lib/number.o : cc src/number.c
-build lib/point.o : cc src/point.c
-build lib/parser.o : cc src/parser.c
-build lib/compiler.o : cc src/compiler.c
-build lib/ast.o : cc src/ast.c
+build obj/console.o : cc src/console.c
+build obj/cstr.o : cc src/cstr.c
+build obj/debug.o : cc src/debug.c
+build obj/strvec.o : cc src/strvec.c 
+build obj/lexer.o : cc src/lexer.c
+build obj/number.o : cc src/number.c
+build obj/point.o : cc src/point.c
+build obj/parser.o : cc src/parser.c
+build obj/compiler.o : cc src/compiler.c
+build obj/ast.o : cc src/ast.c
 
 # build main.c
 build obj/main.o : cc src/main.c 
 # build test.c
 build obj/test.o : cc src/test.c
 
-build mathc: link lib/parser.o lib/ast.o lib/compiler.o lib/point.o lib/number.o lib/lexer.o lib/console.o lib/cstr.o lib/debug.o lib/strvec.o obj/main.o
-build test: link  lib/parser.o lib/ast.o lib/compiler.o lib/point.o lib/number.o lib/lexer.o lib/console.o lib/cstr.o lib/debug.o lib/strvec.o obj/test.o
+build mathc: link obj/parser.o obj/ast.o obj/compiler.o obj/point.o obj/number.o obj/lexer.o obj/console.o obj/cstr.o obj/debug.o obj/strvec.o obj/main.o
+build test: link  obj/parser.o obj/ast.o obj/compiler.o obj/point.o obj/number.o obj/lexer.o obj/console.o obj/cstr.o obj/debug.o obj/strvec.o obj/test.o
