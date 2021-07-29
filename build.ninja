@@ -1,25 +1,26 @@
 cflags = -std=c11 -O0 -Wall -Werror -g -DDEBUG -I./src/include/
-
+cc = clang
 rule cc
-  command = clang -c $in -o $out $cflags
+  command = $cc -c $in -o $out $cflags
 
 rule link
-  command = clang $in -o $out 
+  command = $cc $in -o $out 
 
-build lib/console.o : cc src/include/console.c
-build lib/cstr.o : cc src/include/cstr.c
-build lib/debug.o : cc src/include/debug.c
-build lib/strvec.o : cc src/include/strvec.c 
-build lib/lexer.o : cc src/include/lexer.c
-build lib/number.o : cc src/include/number.c
-build lib/point.o : cc src/include/point.c
-build lib/parser.o : cc src/include/parser.c
-build lib/compiler.o : cc src/include/compiler.c
+build lib/console.o : cc src/console.c
+build lib/cstr.o : cc src/cstr.c
+build lib/debug.o : cc src/debug.c
+build lib/strvec.o : cc src/strvec.c 
+build lib/lexer.o : cc src/lexer.c
+build lib/number.o : cc src/number.c
+build lib/point.o : cc src/point.c
+build lib/parser.o : cc src/parser.c
+build lib/compiler.o : cc src/compiler.c
+build lib/ast.o : cc src/ast.c
 
 # build main.c
 build obj/main.o : cc src/main.c 
 # build test.c
 build obj/test.o : cc src/test.c
 
-build mathc: link lib/parser.o lib/compiler.o lib/point.o lib/number.o lib/lexer.o lib/console.o lib/cstr.o lib/debug.o lib/strvec.o obj/main.o
-build test: link  lib/parser.o lib/compiler.o lib/point.o lib/number.o lib/lexer.o lib/console.o lib/cstr.o lib/debug.o lib/strvec.o obj/test.o
+build mathc: link lib/parser.o lib/ast.o lib/compiler.o lib/point.o lib/number.o lib/lexer.o lib/console.o lib/cstr.o lib/debug.o lib/strvec.o obj/main.o
+build test: link  lib/parser.o lib/ast.o lib/compiler.o lib/point.o lib/number.o lib/lexer.o lib/console.o lib/cstr.o lib/debug.o lib/strvec.o obj/test.o

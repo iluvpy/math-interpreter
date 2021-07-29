@@ -7,7 +7,7 @@
 #include "strvec.h"
 
 
-#define TOKEN_SEPERATOR ":"
+#define TOKEN_SEPERATOR ':'
 // operators 
 #define USED_OPERATORS "+-/*^"
 #define OPERATOR_TOKEN "OP:"
@@ -43,5 +43,6 @@ cstr *num_to_token(number *num);
 
 
 bool is_operator(char c);
-bool is_LBracket(char c);
-bool is_RBracket(char c);
+bool is_bracket(char c);
+bool is_lbracket(char c);
+bool is_rbracket(char c);

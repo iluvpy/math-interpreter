@@ -10,7 +10,7 @@ cstr *parser(svector *tokens) {
 		for (int j = 0; j < cstr_size(str); j++) {
 			char current_char = cstr_getc(str, j);
 			cstr_appendc(token, current_char);
-			if (current_char == ':') {break;}
+			if (current_char == TOKEN_SEPERATOR) {break;}
 			token_len++;
 		}
 

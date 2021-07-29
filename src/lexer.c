@@ -1,8 +1,6 @@
 
 #include "lexer.h"
 
-const num_type types;
-
 // transforms a mathematical expression into a simple start to finish array of tokens that 
 // can then be executed by the parser
 svector *gen_tokens(cstr *m_expression) {
@@ -10,7 +8,7 @@ svector *gen_tokens(cstr *m_expression) {
 	int i = 0; 
 	while (i < cstr_size(m_expression)) {
 		char current_char = cstr_getc(m_expression, i);
-		if (is_LBracket(current_char) || is_RBracket(current_char)) {
+		if (is_bracket(current_char)) {
 			cstr *token = get_bracket_token(current_char);
 			svec_append(tokens, token);
 			del_cstr(token);
@@ -108,5 +106,6 @@ bool is_operator(char c) {
 
 
 //XXX: add more brackets later like [] {} etc
-bool is_LBracket(char c) {return c == '(';}
-bool is_RBracket(char c) {return c == ')';}
+bool is_bracket(char c) { return (is_rbracket(c) || is_lbracket(c)); }
+bool is_lbracket(char c) { return c == '('; }
+bool is_rbracket(char c) { return c == ')'; }

@@ -36,11 +36,11 @@ int main(int argc, char **argv)
 		}
 
 		svector *tokens = gen_tokens(input);
-		parser(tokens);
-		printf("tokens: \n");
+        printf("tokens: \n");
 		for (int i = 0; i < svec_len(tokens); i++) {
 			printf("%s\n", cstr_str(svec_get(tokens, i)));
 		}
+		parser(tokens);
 
 		del_svec(tokens);
         // free memory for input
