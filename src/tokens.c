@@ -39,11 +39,23 @@ cstr *token_typeof(cstr *_token) {
 	return type_;
 }	
 
-bool is_op_token(cstr *_token) {
-	cstr *type = token_typeof(_token);
-	bool b = cstr_eq_str(type, OPERATOR_TOKEN);
-	del_cstr(type);
+bool token_istype(cstr *token, char *type) {
+	cstr *str_type = token_typeof(token);
+	bool b = cstr_eq_str(str_type, type);
+	del_cstr(str_type);
 	return b;
+}
+
+bool is_op_token(cstr *token) {
+	return token_istype(token, OPERATOR_TOKEN);
+}
+
+bool is_int_token(cstr *token) {
+	return token_istype(token, INTEGER_TOKEN);
+}
+
+bool is_float_token(cstr *token) {
+	return token_istype(token, FLOAT_TOKEN);
 }
 
 char get_op_char(cstr *op_token) {
