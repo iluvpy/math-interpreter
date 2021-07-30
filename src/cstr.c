@@ -180,6 +180,10 @@ bool cstr_eq_str(cstr *cs, char *s) {
     return (cstr_sum(cs) - str_sum(s) == 0);
 }
 
+bool cstr_eq_cstr(cstr *str1, cstr *str2) {
+	return cstr_eq_str(str1, str2->str);
+}
+
 bool cstr_is_in(cstr *cs, char c) {
 	for (int i = 0; i < cs->size; i++) {
 		if (cstr_getc(cs, i) == c) {return true;}

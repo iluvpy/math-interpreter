@@ -62,6 +62,7 @@ size_t cstr_last(cstr *s);
 
 // returns true when cs == s
 bool cstr_eq_str(cstr *cs, char *s);
+bool cstr_eq_cstr(cstr *str1, cstr *str2);
 bool cstr_is_in(cstr *cs, char c);
 int cstr_toi(cstr *str); // to int 
 float cstr_tof(cstr *str); // to float
