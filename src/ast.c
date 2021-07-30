@@ -17,6 +17,7 @@ AstNode *ast_getNode(Ast *ast) {
 
 void del_ast(Ast *ast) {
     del_node(ast->first_node);
+    free(ast);
 }
 
 
@@ -41,12 +42,24 @@ void node_setValue(AstNode *node, cstr *value) {
     node->value = cstr_cpy(value);
 }
 
+cstr *node_getValue(AstNode *node) {
+    return node->value;
+}
+
 void node_setLeft(AstNode *node, AstNode *left) {
     node->left = left;
 }
 
 void node_setRight(AstNode *node, AstNode *right) {
     node->right = right;
+}
+
+AstNode *node_getLeft(AstNode *node) {
+    return node->left;
+}
+
+AstNode *node_getReft(AstNode *node) {
+    return node->right;
 }
 
 void del_node(AstNode *node) {

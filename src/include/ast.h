@@ -29,7 +29,10 @@ AstNode *alloc_astNode();
 AstNode *get_node(cstr *value);
 // copies value into node->value
 void node_setValue(AstNode *node, cstr *value); 
+cstr *node_getValue(AstNode *node);
 void node_setLeft(AstNode *node, AstNode *left);
 void node_setRight(AstNode *node, AstNode *right);
+AstNode *node_getLeft(AstNode *node);
+AstNode *node_getReft(AstNode *node);
 // frees itself and all the nodes below it
 void del_node(AstNode *node);
