@@ -40,7 +40,8 @@ int main(int argc, char **argv)
 		for (int i = 0; i < svec_len(tokens); i++) {
 			printf("%s\n", cstr_str(svec_get(tokens, i)));
 		}
-		parser(tokens);
+		Ast *ast = parser(tokens);
+        del_ast(ast);
 
 		del_svec(tokens);
         // free memory for input

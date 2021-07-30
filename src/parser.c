@@ -2,20 +2,29 @@
 
 
 // returns the result of the parsed tokens
-cstr *parser(svector *tokens) {
+Ast *parser(svector *tokens) {
+	Ast *ast = alloc_ast();
 	for (int i = 0; i < svec_len(tokens); i++) {
-		cstr *str = svec_get(tokens, i);
-		cstr *token = get_cstr("");
-		int token_len = 0;
-		for (int j = 0; j < cstr_size(str); j++) {
-			char current_char = cstr_getc(str, j);
-			cstr_appendc(token, current_char);
-			if (current_char == TOKEN_SEPERATOR) {break;}
-			token_len++;
+		cstr *token = svec_get(tokens, i);
+
+		if (is_op_token(token)) {
+			printf("found operator token\n");
+			switch (get_op_char(token))
+			{
+				case '*':
+					printf("wow youre multiplying somethin'");
+					break;
+				case '/':
+					break;
+				
+				default:
+					break;
+			}
 		}
 
-		printf("parser found token type of '%s'\n", cstr_str(token));
-		del_cstr(token);
+		cstr *type = token_typeof(token);
+		printf("parser found token type of '%s'\n", cstr_str(type));
+		del_cstr(type);
 	}
-	return NULL;
+	return ast;
 }
