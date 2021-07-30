@@ -7,6 +7,13 @@ Ast *parser(svector *tokens) {
 	AstNode *start_node = alloc_astNode();
 	ast_setNode(ast, start_node);
 
+	for (int i = 0;  i < svec_len(tokens); i++) {
+		cstr *token = svec_get(tokens, i);
+		if (is_int_token(token) || is_float_token(token)) {
+			node_setValue(start_node, token);
+			break;
+		}
+	}
 
 	return ast;
 }
