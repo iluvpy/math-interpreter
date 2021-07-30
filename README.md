@@ -1,16 +1,33 @@
 # math-interpreter
     a math interpreter written in C
 
+# dependencies
+- ninja
+- a C compiler (clang in my case but any would do)
+
+## compilation
+    install the used compiler see dependencies
+    and then just run `ninja` in the main dir
+    you can also change the $cc variable in the build file
+    to something you like (needs to support C11)
+
+
 # State 
     in development; none of the current syntax is working 
    ![Markdown Logo](https://img.shields.io/badge/state-development-red)
    ![Markdown Logo](https://img.shields.io/badge/build-unstable-red)
    ![Markdown Logo](https://tokei.rs/b1/github/iluvpy/mathc)
-## Usage
-    type in `./math` when you have the binary in your directory
 
-    then something looking like a console should popup
-    where you can start typing your math expressions
+## Usage
+    type in `./mathc` in the console after compiling 
+
+    then something looking like a console should pop up
+    where you can start typing your math expressions and commands
+
+## Commands
+    cls - to clear the console
+    h - to open up the help menu
+    q - to quit
 
 ## Syntax
 
