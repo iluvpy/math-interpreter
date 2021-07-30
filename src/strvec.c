@@ -53,6 +53,15 @@ cstr *svec_get(svector *vec, size_t index) {
 	return NULL;
 }
 
+// if c is in any element of vec
+int svec_find(svector *vec, char c) {
+	for (int i = 0; i < svec_len(vec); i++) {
+		if (cstr_is_in(svec_get(vec, i), c)) return i;
+	}
+	return -1;
+}
+
+
 // frees memory of vec
 void del_svec(svector *vec) {
 	if (vec != NULL) {
