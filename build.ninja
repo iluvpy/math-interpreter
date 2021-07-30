@@ -1,4 +1,4 @@
-cflags = -std=c11 -O0 -Wall -Werror -g -DDEBUG -I./src/include/
+cflags = -std=c17 -O0 -Wall -Werror -g -DDEBUG -I./src/include/
 cc = clang
 rule cc
   command = $cc -c $in -o $out $cflags
