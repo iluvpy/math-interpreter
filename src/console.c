@@ -41,7 +41,8 @@ cstr *dynamic_input() {
 	}
 	// resize to correct size and set null char
 	input_ = realloc(input_, i+1);
-	input_[i] = '\0'; // fixes memory error
+	//fixes memory error ( Conditional jump or move depends on uninitialised value )
+	input_[i] = '\0'; 
 	return cstr_from_allocstr(input_); // create cstr from allocated char*
 }
 
