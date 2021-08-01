@@ -7,16 +7,6 @@
 
 // input 
 
-// max input
-// set max bytes
-cstr *minput(size_t max) {
-    char *str = malloc(max);
-    str = fgets(str, max, stdin);
-	size_t size = strlen(str)+1;
-	str = realloc(str, size+1);
-
-    return cstr_from_allocstr(str);
-}
 
 // gets input dynamically
 cstr *dynamic_input() {

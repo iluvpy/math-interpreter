@@ -30,10 +30,9 @@ bool is_command(cstr *input);
 
 int main(int argc, char **argv) 
 {
-    bool running = true;
     cstr *input;
     print_help_menu();
-    while (running) {
+    while (true) {
         printf("mathc# ");
 		input = dynamic_input();
 		if (input == NULL) continue; // no input was given
@@ -47,7 +46,7 @@ int main(int argc, char **argv)
 			continue;
 		}
 
-		svector *tokens = gen_tokens(input);
+		svector *tokens = generate_tokens(input);
         printf("tokens: \n");
 		for (int i = 0; i < svec_len(tokens); i++) {
 			printf("%s\n", cstr_str(svec_get(tokens, i)));

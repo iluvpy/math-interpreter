@@ -7,4 +7,4 @@ typedef struct point {
 
 point *alloc_point();
 point *get_point(int x, int y);
-void free_point(point *p);
+void del_point(point *p);

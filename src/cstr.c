@@ -8,7 +8,7 @@
 // manipulators
 
 // appends src to dest
-void cstr_append(cstr *dest, char *src) {
+void cstr_appendstr(cstr *dest, char *src) {
     if (dest != NULL && src != NULL) {
         dest->size += strlen(src);
         if (dest->free_str) {dest->str = realloc(dest->str, dest->size);}
@@ -19,9 +19,9 @@ void cstr_append(cstr *dest, char *src) {
 }
 
 // appends src to dest
-void cstr_appendcs(cstr *dest, cstr *src) {
+void cstr_appendcstr(cstr *dest, cstr *src) {
     if (dest != NULL && src != NULL) {
-        cstr_append(dest, src->str);
+        cstr_appendstr(dest, src->str);
     }
 }
 
@@ -68,14 +68,14 @@ cstr *cstr_delc(cstr *s, char c) {
 // deletes whole cstring and not only the string pointer
 void del_cstr(cstr *s) {
     if (s != NULL) {
-        free_cstr_str(s);
+        del_cstr_str(s);
         free(s); 
     }
 }
 
 // frees the underlying char * of s
 // when free_str is true
-void free_cstr_str(cstr *s) {
+void del_cstr_str(cstr *s) {
     if (s != NULL) {
        if (s->free_str && s->str != NULL) {
             free(s->str);
@@ -136,18 +136,6 @@ cstr *get_newcstr(cstr *old, char *new) {
 	return get_cstr(new);
 } 
 
-
-// adds 2 cstrings together creating a new one
-cstr *add_cstr(cstr *x, cstr *y) {
-    if (x != NULL && y != NULL) {
-        char res[x->size+x->size];
-        strcpy(res, x->str);
-        strcat(res, y->str);
-        return get_cstr(res); 
-    }
-
-    return NULL;
-}
 
 // returns copy of src
 cstr *cstr_cpy(cstr *src) {

@@ -4,13 +4,13 @@
 
 cstr *get_int_token(cstr *sn) {
 	cstr *token = get_cstr(INTEGER_TOKEN);
-	cstr_appendcs(token, sn);
+	cstr_appendcstr(token, sn);
 	return token;  
 }
 
 cstr *get_float_token(cstr *sf) {
 	cstr *token = get_cstr(FLOAT_TOKEN);
-	cstr_appendcs(token, sf);
+	cstr_appendcstr(token, sf);
 	return token;  
 }
 

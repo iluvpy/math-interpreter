@@ -9,7 +9,7 @@
 
 typedef struct cstr 
 {
-    size_t size; // characters
+    size_t size; // number of characters including 
     char *str;
     bool free_str; // if string needs to be freed on deletion of cstr
 } cstr;
@@ -18,9 +18,9 @@ typedef struct cstr
 
 
 // appends src to dest
-void cstr_append(cstr *dest, char *src);
+void cstr_appendstr(cstr *dest, char *src);
 // appends src to dest
-void cstr_appendcs(cstr *dest, cstr *src);
+void cstr_appendcstr(cstr *dest, cstr *src);
 void cstr_appendc(cstr *dest, char c);
 // removes char at index
 void cstr_remove(cstr *str, size_t index);
@@ -31,7 +31,7 @@ void del_cstr(cstr *s);
 
 // frees the underlying char * of s
 // when free_str is true
-void free_cstr_str(cstr *s);
+void del_cstr_str(cstr *s);
 
 // getters
 
@@ -50,11 +50,8 @@ cstr *get_newcstr(cstr *cs, char *src);
 cstr *get_cstr(char *src);
 // returns copy of src
 cstr *cstr_cpy(cstr *src);
-// adds 2 cstrings together creating a new one
-cstr *add_cstr(cstr *x, cstr *y);
+
 // returns the sum of ascii values 
-
-
 int str_sum(char *s);
 // returns the sum of ascii values 
 int cstr_sum(cstr *s);

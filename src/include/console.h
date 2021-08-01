@@ -26,7 +26,6 @@
 
 // max input
 // set max bytes
-cstr *minput(size_t max);
 cstr *dynamic_input(); // gets input dynamically
 
 // output

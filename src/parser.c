@@ -8,13 +8,10 @@ Ast *parser(svector *tokens) {
 	node_setValue(start_node, get_cstr("None"));
 	ast_setNode(ast, start_node);
 
-	for (int i = 0;  i < svec_len(tokens); i++) {
-		cstr *token = svec_get(tokens, i);
-		if (is_int_token(token) || is_float_token(token)) {
-			node_setValue(start_node, token);
-			break;
-		}
-	}
+	// int mlt_pos = svec_find(tokens, '*');
+	// int divide_pos = svec_find(tokens, '/');
+	// int plus_pos = svec_find(tokens, '+');
+	// int minus_pos = svec_find(tokens, '-');
 
 	return ast;
 }

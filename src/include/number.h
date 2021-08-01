@@ -14,4 +14,4 @@ typedef struct number {
 number *alloc_number();
 cstr *number_str(number *num);
 
-void free_number(number *num);
+void del_number(number *num);

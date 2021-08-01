@@ -11,7 +11,7 @@
 
 // transforms a mathematical expression into a simple start - to finish string of 
 // tokens seperated by spaces
-svector *gen_tokens(cstr *m_expression);
+svector *generate_tokens(cstr *m_expression);
 number *get_number(size_t start_pos, cstr *expression);
 cstr *num_to_token(number *num);
 

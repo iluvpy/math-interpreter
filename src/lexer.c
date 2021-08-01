@@ -3,7 +3,7 @@
 
 // transforms a mathematical expression into a simple start to finish array of tokens that 
 // can then be executed by the parser
-svector *gen_tokens(cstr *m_expression) {
+svector *generate_tokens(cstr *m_expression) {
 	svector *tokens = generate_svec();
 	int i = 0; 
 	while (i < cstr_len(m_expression)) {
@@ -26,7 +26,7 @@ svector *gen_tokens(cstr *m_expression) {
 			cstr *token = num_to_token(num);
 			svec_append(tokens, token);
 			del_cstr(token);
-			free_number(num);
+			del_number(num);
 			if (i >= cstr_len(m_expression)) {break;} 
 		}
 		i++;
