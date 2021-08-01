@@ -46,7 +46,7 @@ size_t cstr_len(cstr *s); // returns number of chars in cstr (without including 
 size_t cstr_size(cstr *s); // return number of chars including null termination
 // change cstr value to new value
 // generates a new cstr from a char *
-cstr *getnew_cstr(cstr *cs, char *src);
+cstr *get_newcstr(cstr *cs, char *src);
 cstr *get_cstr(char *src);
 // returns copy of src
 cstr *cstr_cpy(cstr *src);
@@ -63,6 +63,7 @@ size_t cstr_last(cstr *s);
 // returns true when cs == s
 bool cstr_eq_str(cstr *cs, char *s);
 bool cstr_eq_cstr(cstr *str1, cstr *str2);
+bool str_eq_str(char *s1, char *s2);
 bool cstr_is_in(cstr *cs, char c);
 int cstr_toi(cstr *str); // to int 
 float cstr_tof(cstr *str); // to float
