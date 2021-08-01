@@ -2,8 +2,8 @@
 #include "lexer.h"
 
 #define TOKEN_SEPERATOR ':'
-// operators 
-#define USED_OPERATORS "+-/*^"
+// operators in order 
+#define USED_OPERATORS "^*/+-" 
 #define OPERATOR_TOKEN "OP:"
 #define OP_PLUS "OP:+"
 #define OP_MINUS "OP:-"
