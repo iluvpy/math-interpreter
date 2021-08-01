@@ -21,9 +21,10 @@
 
 
 // forward declarations
+
+// prints help menu
 void print_help_menu();
-// does nothing
-void void_func() {return;} 
+// this function does nothing
 int commands(cstr *input);
 bool is_command(cstr *input);
 
@@ -86,6 +87,9 @@ void print_help_menu() {
             return COMMAND_EXECUTED;\
         } \
     } \
+
+
+void void_func() { return; } 
 
 // checks for commands
 int commands(cstr *input) {
