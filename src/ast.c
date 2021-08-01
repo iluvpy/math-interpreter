@@ -39,6 +39,7 @@ AstNode *get_node(cstr *value) {
 
 // copies value into node->value
 void node_setValue(AstNode *node, cstr *value) {
+    if (node->value != NULL) del_cstr(node->value);
     node->value = cstr_cpy(value);
 }
 
@@ -74,6 +75,5 @@ void del_node(AstNode *node) {
             node->right = NULL; 
         }
         free(node);
-        node = NULL;
     }
 } 
