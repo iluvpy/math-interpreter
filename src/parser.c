@@ -5,10 +5,20 @@
 Ast *parser(svector *tokens) {
 	Ast *ast = alloc_ast();
 	AstNode *start_node = alloc_astNode();
-	node_setValue(start_node, get_cstr("None"));
+	// i need to make a new variable as it copies 'none' into it and wont free it 
+	// when del_ast is called i.e none is not deleted so i need to delete it myself
+	cstr *none = get_cstr("None");
+	node_setValue(start_node, none); 
+	del_cstr(none);
 	ast_setNode(ast, start_node);
 
-	// int mlt_pos = svec_find(tokens, '*');
+	for (int i = 0; i < strlen(USED_OPERATORS); i++) {
+		int operator_pos = svec_find(tokens, USED_OPERATORS[i]);
+		if (operator_pos >= 0) {
+			node_setValue(start_node, svec_get(tokens, operator_pos));
+			break;
+		}
+	}
 	// int divide_pos = svec_find(tokens, '/');
 	// int plus_pos = svec_find(tokens, '+');
 	// int minus_pos = svec_find(tokens, '-');
