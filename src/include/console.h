@@ -4,9 +4,7 @@
 #include "cstr.h"
 
 
-#define CLR_CMD "cls"
-#define H_CMD "h"
-#define Q_CMD "q"
+
 #define INPUT_LENGTH 128
 
 // colors

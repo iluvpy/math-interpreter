@@ -7,20 +7,31 @@
 #include "parser.h"
 
 //defines
-#define tostr(s) getcstr(s)
 #define COMMAND_EXECUTED 0
 #define NO_COMMAND 1
 #define QUIT_COMMAND -1
 
+
+#define CLR_CMD "cls"
+#define CLR2_CMD "clear"
+#define H_CMD "h"
+#define H2_CMD "help"
+#define Q_CMD "q"
+#define Q2_CMD "quit"
+
+
 // forward declarations
-void help();
+void print_help_menu();
+// does nothing
+void void_func() {return;} 
 int commands(cstr *input);
+bool is_command(cstr *input);
 
 int main(int argc, char **argv) 
 {
     bool running = true;
     cstr *input;
-    help();
+    print_help_menu();
     while (running) {
         printf("mathc# ");
 		input = dynamic_input();
@@ -40,7 +51,9 @@ int main(int argc, char **argv)
 		for (int i = 0; i < svec_len(tokens); i++) {
 			printf("%s\n", cstr_str(svec_get(tokens, i)));
 		}
+        printf("parsing:\n");
 		Ast *ast = parser(tokens);
+        printf("ast first node: '%s'\n", cstr_str(node_getValue(ast_getNode(ast))));
         del_ast(ast);
 
 		del_svec(tokens);
@@ -52,7 +65,7 @@ int main(int argc, char **argv)
 
 
 // prints out the help menu
-void help() {
+void print_help_menu() {
     printcolor(FgMagenta, "\nmathc debug version \n");
     printcolor(FgGreen ,"------- Comannds -------\n");
     printcolor(FgBlue, "'%s' to show this menu again\n", H_CMD);
@@ -61,17 +74,30 @@ void help() {
 	
 }
 
+// only used and should only be used in commands() function
+#define CMD_EXEC(inp, CMD, func, _return) \
+    if (inp[0] == CMD[0]) { \
+        if (str_eq_str(inp, CMD)) { \
+            func;\
+            return _return; \
+        }\
+        if (strlen(inp) == strlen(CMD)) { \
+            printcolor(FgRed, "'%s' does not exist, did you mean '%s'?\n", inp, CMD); \
+            return COMMAND_EXECUTED;\
+        } \
+    } \
 
 // checks for commands
 int commands(cstr *input) {
-    if (isalpha(cstr_getc(input, 0))) {
-        if (cstr_eq_str(input, Q_CMD)) {return QUIT_COMMAND;}
-        if (cstr_eq_str(input, H_CMD)) {help();}
-        else if (cstr_eq_str(input, CLR_CMD)) {clear_console();}
-        else {
-            printcolor(FgRed ,"Unknown command '%s'. type '%s' for help\n", cstr_str(input), H_CMD);
-        }
-		return COMMAND_EXECUTED;
-    } 
+
+    char *str = cstr_str(input);
+    CMD_EXEC(str, Q_CMD, void_func(), QUIT_COMMAND);
+    CMD_EXEC(str, Q2_CMD, void_func(), QUIT_COMMAND);
+    CMD_EXEC(str, H_CMD, print_help_menu(), COMMAND_EXECUTED);
+    CMD_EXEC(str, H2_CMD, print_help_menu(), COMMAND_EXECUTED);
+    CMD_EXEC(str, CLR_CMD, clear_console(), COMMAND_EXECUTED);
+    CMD_EXEC(str, CLR2_CMD, clear_console(), COMMAND_EXECUTED);
+
 	return NO_COMMAND;
 }
+
