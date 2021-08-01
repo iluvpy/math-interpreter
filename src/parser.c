@@ -5,6 +5,7 @@
 Ast *parser(svector *tokens) {
 	Ast *ast = alloc_ast();
 	AstNode *start_node = alloc_astNode();
+	node_setValue(start_node, get_cstr("None"));
 	ast_setNode(ast, start_node);
 
 	for (int i = 0;  i < svec_len(tokens); i++) {

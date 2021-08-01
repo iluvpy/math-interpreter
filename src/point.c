@@ -13,5 +13,4 @@ point *get_point(int x, int y) {
 
 void free_point(point *p) {
 	if (p != NULL) free(p);
-	p = NULL;
 }
