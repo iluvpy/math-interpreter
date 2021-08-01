@@ -53,7 +53,7 @@ cstr *svec_get(svector *vec, size_t index) {
 	return NULL;
 }
 
-// if c is in any element of vec
+// returns index of c in vec or -1 if c is not in vec
 int svec_find(svector *vec, char c) {
 	for (int i = 0; i < svec_len(vec); i++) {
 		if (cstr_is_in(svec_get(vec, i), c)) return i;
