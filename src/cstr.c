@@ -70,7 +70,6 @@ void del_cstr(cstr *s) {
     if (s != NULL) {
         free_cstr_str(s);
         free(s); 
-        s = NULL;
     }
 }
 
@@ -132,6 +131,11 @@ cstr *get_cstr(char *src) {
     return s;  
 }
 
+cstr *get_newcstr(cstr *old, char *new) {
+	del_cstr(old);
+	return get_cstr(new);
+} 
+
 
 // adds 2 cstrings together creating a new one
 cstr *add_cstr(cstr *x, cstr *y) {
@@ -182,6 +186,10 @@ bool cstr_eq_str(cstr *cs, char *s) {
 
 bool cstr_eq_cstr(cstr *str1, cstr *str2) {
 	return cstr_eq_str(str1, str2->str);
+}
+
+bool str_eq_str(char *s1, char *s2) {
+	return (str_sum(s1)-str_sum(s2) == 0);
 }
 
 bool cstr_is_in(cstr *cs, char c) {
