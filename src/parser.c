@@ -5,23 +5,28 @@
 Ast *parser(svector *tokens) {
 	Ast *ast = alloc_ast();
 	AstNode *start_node = alloc_astNode();
-	// i need to make a new variable as it copies 'none' into it and wont free it 
+	// i need to make a new variable as it copies 'none' into it and wont free the original variable but only the copy 
 	// when del_ast is called i.e none is not deleted so i need to delete it myself
 	cstr *none = get_cstr("None");
 	node_setValue(start_node, none); 
 	del_cstr(none);
 	ast_setNode(ast, start_node);
 
-	for (int i = 0; i < strlen(USED_OPERATORS); i++) {
-		int operator_pos = svec_find(tokens, USED_OPERATORS[i]);
-		if (operator_pos >= 0) {
-			node_setValue(start_node, svec_get(tokens, operator_pos));
+	// find first operator
+	for (int i = 0; i < svec_len(tokens); i++) {
+		if (is_op_token(svec_get(tokens, i))) {
+
+			node_setValue(start_node, svec_get(tokens, i));
+			cstr *num_token = svec_get(tokens, i-1);
+			if (is_number_token(num_token)) {
+				AstNode *node = alloc_astNode();
+				node_setValue(node, num_token);
+				start_node->right = node;
+			}
 			break;
 		}
 	}
-	// int divide_pos = svec_find(tokens, '/');
-	// int plus_pos = svec_find(tokens, '+');
-	// int minus_pos = svec_find(tokens, '-');
+
 
 	return ast;
 }

@@ -28,4 +28,5 @@ bool token_istype(cstr *_token, char *type);
 bool is_op_token(cstr *_token);
 bool is_int_token(cstr *token);
 bool is_float_token(cstr *token);
+bool is_number_token(cstr *token);
 char get_op_char(cstr *op_token);

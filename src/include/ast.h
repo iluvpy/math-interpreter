@@ -33,6 +33,6 @@ cstr *node_getValue(AstNode *node);
 void node_setLeft(AstNode *node, AstNode *left);
 void node_setRight(AstNode *node, AstNode *right);
 AstNode *node_getLeft(AstNode *node);
-AstNode *node_getReft(AstNode *node);
+AstNode *node_getRight(AstNode *node);
 // frees itself and all the nodes below it
 void del_node(AstNode *node);

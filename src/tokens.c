@@ -58,6 +58,10 @@ bool is_float_token(cstr *token) {
 	return token_istype(token, FLOAT_TOKEN);
 }
 
+bool is_number_token(cstr *token) {
+	return (is_int_token(token) || is_float_token(token));
+}
+
 char get_op_char(cstr *op_token) {
 	return cstr_getc(op_token, cstr_len(op_token)-1);
 }

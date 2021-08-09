@@ -59,7 +59,7 @@ AstNode *node_getLeft(AstNode *node) {
     return node->left;
 }
 
-AstNode *node_getReft(AstNode *node) {
+AstNode *node_getRight(AstNode *node) {
     return node->right;
 }
 

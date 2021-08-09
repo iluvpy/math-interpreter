@@ -45,7 +45,7 @@ size_t svec_len(svector *vec) {
 }
 
 
-// returns element if exists
+// returns element if it exists
 cstr *svec_get(svector *vec, size_t index) {
 	if (index >= 0 && index < vec->length) {
 		return vec->vector[index];

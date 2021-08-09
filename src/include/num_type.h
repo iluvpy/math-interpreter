@@ -1,11 +1,7 @@
 #pragma once
 
 typedef enum num_type{
-	float_t,
-	int_t,
-	nan_t
+	float_t=1,
+	int_t=2,
+	nan_t=3
 } num_type;
-
-#define FLOAT_T 0
-#define INT_T 1
-#define NAN_T 2

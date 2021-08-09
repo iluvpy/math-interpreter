@@ -53,7 +53,8 @@ int main(int argc, char **argv)
 		}
         printf("parsing:\n");
 		Ast *ast = parser(tokens);
-        printf("ast first node: '%s'\n", cstr_str(node_getValue(ast_getNode(ast))));
+        printf("ast first node value: '%s'\n", cstr_str(node_getValue(ast_getNode(ast))));
+        printf("ast right node value: '%s'\n", cstr_str(node_getValue(node_getRight(ast_getNode(ast)))));
         del_ast(ast);
 
 		del_svec(tokens);
