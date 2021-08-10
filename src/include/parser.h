@@ -7,3 +7,4 @@
 #include "console.h"
 
 Ast *parser(svector *tokens);
+void parse_(int i, svector *tokens,  AstNode *node);
