@@ -1,27 +1,28 @@
 #include "ast.h"
 
-// ast
+// allocates memory for ast and initializes values
 Ast *alloc_ast() {
     Ast *ast = malloc(AST_SIZE);
     ast->first_node = NULL;
     return ast;
 }
-
-void ast_setNode(Ast* ast, AstNode *node) {
+// sets first node to node
+void ast_set_node(Ast* ast, AstNode *node) {
     ast->first_node = node;
 }
 
-AstNode *ast_getNode(Ast *ast) {
+// returns first node of ast
+AstNode *ast_get_node(Ast *ast) {
     return ast->first_node;
 }
 
+// frees the memory of the underlying nodes of the ast and the ast itself
 void del_ast(Ast *ast) {
     del_node(ast->first_node);
     free(ast);
 }
 
-
-// ast node
+// allocates the memory for the astnode and initalized the values
 AstNode *alloc_astNode() {
     AstNode *node = malloc(ASTNODE_SIZE);
     node->value = NULL;
@@ -29,7 +30,7 @@ AstNode *alloc_astNode() {
     node->right = NULL; 
     return node;
 }
-
+// creates an astnode from a cstr
 AstNode *get_node(cstr *value) {
     AstNode *node = alloc_astNode();
     node->value = value;
@@ -38,33 +39,39 @@ AstNode *get_node(cstr *value) {
 
 
 // copies value into node->value
-void node_setValue(AstNode *node, cstr *value) {
+void node_set_value(AstNode *node, cstr *value) {
     if (node->value != NULL) del_cstr(node->value);
     node->value = cstr_cpy(value);
 }
-
-cstr *node_getValue(AstNode *node) {
-    return node->value;
+// returns value of node if node not NULL, NULL if otherwise
+cstr *node_get_value(AstNode *node) {
+    if (node) return node->value;
+    return NULL;
 }
 
-void node_setLeft(AstNode *node, AstNode *left) {
+void node_set_left(AstNode *node, AstNode *left) {
     node->left = left;
 }
 
-void node_setRight(AstNode *node, AstNode *right) {
+void node_set_right(AstNode *node, AstNode *right) {
     node->right = right;
 }
 
-AstNode *node_getLeft(AstNode *node) {
-    return node->left;
+// returns the left node of node if node not NULL, NULL if otherwise 
+AstNode *node_get_left(AstNode *node) {
+    if (node) return node->left;
+    return NULL;
 }
 
-AstNode *node_getRight(AstNode *node) {
-    return node->right;
+// returns the right node of node if node not NULL, NULL if otherwise 
+AstNode *node_get_right(AstNode *node) {
+    if (node) return node->right;
+    return NULL;
 }
 
+// deletes node and all the underlying nodes
 void del_node(AstNode *node) {
-    if (node != NULL) {
+    if (node) {
         del_cstr(node->value);
         if (node->left != NULL) {
             del_node(node->left);

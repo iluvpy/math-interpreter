@@ -1,5 +1,9 @@
 #pragma once
 
+/**
+ * @brief functions for lexing
+ */
+
 #include <stdio.h>
 #include <ctype.h>
 #include "cstr.h"

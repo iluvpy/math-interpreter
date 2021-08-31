@@ -1,15 +1,17 @@
 #include <stdlib.h>
+#include <ctype.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
 
 #include "cstr.h"
+#include "numbers.h"
 
 // manipulators
 
 // appends src to dest
 void cstr_appendstr(cstr *dest, char *src) {
-    if (dest != NULL && src != NULL) {
+    if (dest && src ) {
         dest->size += strlen(src);
         if (dest->free_str) {dest->str = realloc(dest->str, dest->size);}
 		else {dest->str = malloc(dest->size);}
@@ -20,7 +22,7 @@ void cstr_appendstr(cstr *dest, char *src) {
 
 // appends src to dest
 void cstr_appendcstr(cstr *dest, cstr *src) {
-    if (dest != NULL && src != NULL) {
+    if (dest && src ) {
         cstr_appendstr(dest, src->str);
     }
 }
@@ -36,9 +38,24 @@ void cstr_appendc(cstr *dest, char c) {
 	strncat(dest->str, &c, 1);
 }
 
+void cstr_insert(cstr *dest, cstr *other, int index) {
+	char new_str[dest->size+cstr_len(other)]; 
+	char str_rest[dest->size-index]; // the rest of the dest string
+	for (int i = 0; i < index+1; i++) {
+		new_str[i] = cstr_getc(dest, i);
+	}
+	for (int i = index; i < cstr_len(dest); i++) str_rest[i] = cstr_getc(dest, i);
+	strcat(new_str, other->str);
+	strcat(new_str, str_rest);
+	dest->size += cstr_len(other);
+	if (dest->free_str) dest->str = realloc(dest->str, dest->size);
+	else dest->str = malloc(dest->size);
+	strcpy(dest->str, new_str);
+}
+
 // removes char at index
 void cstr_remove(cstr *s, size_t index) {
-    if (s != NULL) {
+    if (s ) {
 		memmove(&(s->str[index]), &(s->str[index+1]), s->size - index);
 		s->size--;
     }
@@ -48,16 +65,14 @@ void cstr_remove(cstr *s, size_t index) {
 cstr *cstr_delc(cstr *s, char c) {
 	size_t found = 0;
 	for (int i = 0; i < s->size; i++) {
-		if (cstr_getc(s, i) == c) {found++;} 
+		if (cstr_getc(s, i) == c) found++;
 	}
 	if (found > 0) {
 
 		cstr *new_str = get_cstr("");
 		for (int i = 0; i < s->size; i++) {
 			char cc = cstr_getc(s, i);
-			if (cc != c) {
-				cstr_appendc(new_str, cc);
-			}
+			if (cc != c) cstr_appendc(new_str, cc);
 		}
 		del_cstr(s);
 		return new_str;
@@ -67,7 +82,7 @@ cstr *cstr_delc(cstr *s, char c) {
 
 // deletes whole cstring and not only the string pointer
 void del_cstr(cstr *s) {
-    if (s != NULL) {
+    if (s) {
         del_cstr_str(s);
         free(s); 
     }
@@ -76,8 +91,8 @@ void del_cstr(cstr *s) {
 // frees the underlying char * of s
 // when free_str is true
 void del_cstr_str(cstr *s) {
-    if (s != NULL) {
-       if (s->free_str && s->str != NULL) {
+    if (s) {
+       if (s->free_str && s->str) {
             free(s->str);
             s->free_str = false;
         }
@@ -86,15 +101,15 @@ void del_cstr_str(cstr *s) {
 
 // returns the char * of s
 char *cstr_str(cstr *s) {
-    if (s != NULL) {
-        return (s->str != NULL) ? s->str : NULL;
+    if (s) {
+        return (s->str) ? s->str : NULL;
     }
 	return NULL;
 }
 
 // returns char at index or null if index is invalid 
 char cstr_getc(cstr *s, size_t index) {
-	if (index >= 0 && index < s->size && s != NULL) {
+	if (index >= 0 && index < s->size && s) {
 		return s->str[index];
 	}
 	return '\0';
@@ -121,7 +136,7 @@ cstr *cstr_from_allocstr(char *src) {
 }   
 
 
-// generates a new cstr from a char *
+// generates a new cstr from a char * 
 cstr *get_cstr(char *src) {
     cstr *s = malloc(CSTR_SIZE_);
     s->size = strlen(src)+1;
@@ -137,9 +152,15 @@ cstr *get_newcstr(cstr *old, char *new) {
 } 
 
 
+cstr *cstr_from_long(long n) {
+	char str[geti_digits(n)];
+	sprintf(str, "%ld", n);
+	return get_cstr(str);
+}
+
 // returns copy of src
 cstr *cstr_cpy(cstr *src) {
-	if (src != NULL) {
+	if (src) {
 		char *cpy = malloc(src->size+1);
 		strcpy(cpy, src->str);
 		return cstr_from_allocstr(cpy);
@@ -186,6 +207,18 @@ bool cstr_is_in(cstr *cs, char c) {
 	}
 	return false;
 }
+
+bool cstr_is_float(cstr *str) {
+	return (cstr_is_int(str) && (cstr_is_in(str, '.') || cstr_is_in(str, ',')));
+}
+
+bool cstr_is_int(cstr *str) {
+	for (int i = 0; i < cstr_len(str); i++) {
+		if (isdigit(cstr_getc(str, i))) return true;
+	}
+	return false;
+}
+
 
 // returns int of cstr if is int and 0 if not int
 int cstr_toi(cstr *str) {

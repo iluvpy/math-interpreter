@@ -1,5 +1,10 @@
 #pragma once
 
+
+/*
+    a string struct with helper functions
+*/
+
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
@@ -22,6 +27,7 @@ void cstr_appendstr(cstr *dest, char *src);
 // appends src to dest
 void cstr_appendcstr(cstr *dest, cstr *src);
 void cstr_appendc(cstr *dest, char c);
+void cstr_insert(cstr *dest, cstr *other, int index);
 // removes char at index
 void cstr_remove(cstr *str, size_t index);
 // delets all occurencies of c in str
@@ -48,6 +54,7 @@ size_t cstr_size(cstr *s); // return number of chars including null termination
 // generates a new cstr from a char *
 cstr *get_newcstr(cstr *cs, char *src);
 cstr *get_cstr(char *src);
+cstr *cstr_from_long(long n);
 // returns copy of src
 cstr *cstr_cpy(cstr *src);
 
@@ -62,6 +69,8 @@ bool cstr_eq_str(cstr *cs, char *s);
 bool cstr_eq_cstr(cstr *str1, cstr *str2);
 bool str_eq_str(char *s1, char *s2);
 bool cstr_is_in(cstr *cs, char c);
+bool cstr_is_float(cstr *str);
+bool cstr_is_int(cstr *str);
 int cstr_toi(cstr *str); // to int 
 float cstr_tof(cstr *str); // to float
 char *bool_str(bool b);

@@ -1,4 +1,9 @@
 #pragma once 
+
+/**
+ * 	@brief point struct with helper functions
+ */
+
 #include <stdlib.h>
 
 typedef struct point {

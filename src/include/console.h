@@ -1,9 +1,11 @@
 #pragma once
 
+/**
+ * @brief functions for stdin, stdout, stderr
+ */
+
 #include <stdarg.h>
 #include "cstr.h"
-
-
 
 #define INPUT_LENGTH 128
 

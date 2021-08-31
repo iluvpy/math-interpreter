@@ -47,15 +47,15 @@ int main(int argc, char **argv)
 		}
 
 		svector *tokens = generate_tokens(input);
-        printf("tokens: \n");
+        printf("tokenizing... \n");
 		for (int i = 0; i < svec_len(tokens); i++) {
 			printf("%s\n", cstr_str(svec_get(tokens, i)));
 		}
-        printf("parsing:\n");
+        printf("parsing...\n");
 		Ast *ast = parser(tokens);
-        printf("ast first node value: '%s'\n", cstr_str(node_getValue(ast_getNode(ast))));
-        printf("ast right node value: '%s'\n", cstr_str(node_getValue(node_getRight(ast_getNode(ast)))));
-        printf("ast left node value: '%s'\n", cstr_str(node_getValue(node_getLeft(ast_getNode(ast)))));
+        printf("ast first node value: '%s'\n", cstr_str(node_get_value(ast_get_node(ast))));
+        printf("ast right node value: '%s'\n", cstr_str(node_get_value(node_get_right(ast_get_node(ast)))));
+        printf("ast left node value: '%s'\n", cstr_str(node_get_value(node_get_left(ast_get_node(ast)))));
         del_ast(ast);
 
 		del_svec(tokens);
@@ -78,16 +78,14 @@ void print_help_menu() {
 
 // only used and should only be used in commands() function
 #define CMD_EXEC(inp, CMD, func, _return) \
-    if (inp[0] == CMD[0]) { \
+    if (strlen(inp) == strlen(CMD) && isalpha(inp[0])) { \
         if (str_eq_str(inp, CMD)) { \
             func;\
             return _return; \
         }\
-        if (strlen(inp) == strlen(CMD)) { \
-            printcolor(FgRed, "'%s' does not exist, did you mean '%s'?\n", inp, CMD); \
-            return COMMAND_EXECUTED;\
-        } \
-    } \
+        printcolor(FgRed, "'%s' does not exist, did you mean '%s'?\n", inp, CMD); \
+        return COMMAND_EXECUTED;\
+    }  \
 
 
 void void_func() { return; } 

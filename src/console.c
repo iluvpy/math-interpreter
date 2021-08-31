@@ -39,6 +39,7 @@ cstr *dynamic_input() {
 
 // output 
 
+// acts like printf but you can specify a color 
 void printcolor(char *color, char *format, ...) {
 	va_list argp;
   	va_start(argp, format);
@@ -68,6 +69,7 @@ void printcolor(char *color, char *format, ...) {
 
 // other
 
+// clears the console
 void clear_console() {
 #ifdef WIN32_
     system("cls");

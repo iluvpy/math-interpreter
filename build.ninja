@@ -16,11 +16,15 @@ build obj/parser.o : cc src/parser.c
 build obj/ast.o : cc src/ast.c
 build obj/tokens.o : cc src/tokens.c
 build obj/ivec.o : cc src/ivec.c
+build obj/numbers.o: cc src/numbers.c
+build obj/executor.o: cc src/executor.c
+build obj/cstrmath.o: cc src/cstr_math.c 
+
 
 # build main.c
 build obj/main.o : cc src/main.c 
 # build test.c
 build obj/test.o : cc src/test.c
 
-build mathc: link obj/parser.o obj/ivec.o obj/tokens.o obj/ast.o obj/point.o obj/number.o obj/lexer.o obj/console.o obj/cstr.o obj/strvec.o obj/main.o
-build test: link  obj/parser.o obj/ivec.o obj/tokens.o obj/ast.o obj/point.o obj/number.o obj/lexer.o obj/console.o obj/cstr.o obj/strvec.o obj/test.o
+build mathc: link obj/parser.o obj/cstrmath.o obj/executor.o obj/numbers.o obj/ivec.o obj/tokens.o obj/ast.o obj/point.o obj/number.o obj/lexer.o obj/console.o obj/cstr.o obj/strvec.o obj/main.o
+build test: link  obj/parser.o obj/cstrmath.o obj/executor.o obj/numbers.o obj/ivec.o obj/tokens.o obj/ast.o obj/point.o obj/number.o obj/lexer.o obj/console.o obj/cstr.o obj/strvec.o obj/test.o

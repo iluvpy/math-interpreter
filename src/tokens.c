@@ -39,6 +39,19 @@ cstr *token_typeof(cstr *_token) {
 	return type_;
 }	
 
+cstr *get_token_value(cstr *token) {
+	cstr *new_str = get_cstr("");
+	int start = 0;
+	for (int i = 0; i < cstr_size(token); i++) {
+		if (cstr_getc(token, i) == TOKEN_SEPERATOR) {
+			start = i; 
+			break;
+		}
+	}
+	
+	return new_str;
+}
+
 bool token_istype(cstr *token, char *type) {
 	cstr *str_type = token_typeof(token);
 	bool b = cstr_eq_str(str_type, type);

@@ -1,5 +1,9 @@
 #pragma once
 
+/**
+ *  @brief number struct and helper functions
+ */
+
 #include "cstr.h"
 #include "point.h"
 #include "num_type.h"

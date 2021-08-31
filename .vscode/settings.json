@@ -44,6 +44,17 @@
         "sstream": "cpp",
         "stdexcept": "cpp",
         "streambuf": "cpp",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "ast.h": "c",
+        "tokens.h": "c",
+        "lexer.h": "c",
+        "stop_token": "c",
+        "thread": "c",
+        "parser.h": "c",
+        "console.h": "c",
+        "executor.h": "c",
+        "cstr_math.h": "c",
+        "numbers.h": "c",
+        "cstr.h": "c"
     }
 }

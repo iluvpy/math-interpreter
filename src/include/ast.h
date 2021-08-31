@@ -1,5 +1,9 @@
 #pragma once
 
+/**
+ * @brief  abstract syntax treee library
+ */
+
 #include "cstr.h"
 
 #define AST_SIZE sizeof(Ast)
@@ -19,8 +23,8 @@ typedef struct Ast {
 
 // ast
 Ast *alloc_ast();
-void ast_setNode(Ast* ast, AstNode *node);
-AstNode *ast_getNode(Ast *ast);
+void ast_set_node(Ast* ast, AstNode *node);
+AstNode *ast_get_node(Ast *ast);
 // frees all the memory in the ast
 void del_ast(Ast *ast);
 
@@ -28,11 +32,11 @@ void del_ast(Ast *ast);
 AstNode *alloc_astNode();
 AstNode *get_node(cstr *value);
 // copies value into node->value
-void node_setValue(AstNode *node, cstr *value); 
-cstr *node_getValue(AstNode *node);
-void node_setLeft(AstNode *node, AstNode *left);
-void node_setRight(AstNode *node, AstNode *right);
-AstNode *node_getLeft(AstNode *node);
-AstNode *node_getRight(AstNode *node);
+void node_set_value(AstNode *node, cstr *value); 
+cstr *node_get_value(AstNode *node);
+void node_set_left(AstNode *node, AstNode *left);
+void node_set_right(AstNode *node, AstNode *right);
+AstNode *node_get_left(AstNode *node);
+AstNode *node_get_right(AstNode *node);
 // frees itself and all the nodes below it
 void del_node(AstNode *node);
