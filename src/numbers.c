@@ -15,6 +15,6 @@ size_t geti_digits(long n) {
 /**
  * @brief returns the number of digits in a number
  */
-size_t getf_digits(float f, int decimals) {
+size_t getf_digits(double f, int decimals) {
     return geti_digits((int)(f)) + decimals;
 }

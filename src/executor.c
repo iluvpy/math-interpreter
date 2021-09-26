@@ -13,7 +13,16 @@ cstr *execute_ast(AstNode *node) {
             case '*':
                 
                 break;
-            
+            case '/':
+                
+                break;
+			case '+':
+                
+        		break;
+			case '-':
+                
+            	break;
+				
             default:
                 break;
         }

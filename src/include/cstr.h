@@ -55,6 +55,7 @@ size_t cstr_size(cstr *s); // return number of chars including null termination
 cstr *get_newcstr(cstr *cs, char *src);
 cstr *get_cstr(char *src);
 cstr *cstr_from_long(long n);
+cstr *cstr_from_float(double f);
 // returns copy of src
 cstr *cstr_cpy(cstr *src);
 
@@ -72,7 +73,7 @@ bool cstr_is_in(cstr *cs, char c);
 bool cstr_is_float(cstr *str);
 bool cstr_is_int(cstr *str);
 int cstr_toi(cstr *str); // to int 
-float cstr_tof(cstr *str); // to float
+double cstr_tof(cstr *str); // to float
 char *bool_str(bool b);
 cstr *bool_cstr(bool b);
 

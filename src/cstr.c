@@ -225,7 +225,7 @@ int cstr_toi(cstr *str) {
 	return atoi(str->str);
 }
 
-float cstr_tof(cstr *str) {
+double cstr_tof(cstr *str) {
 	return atof(str->str);
 }
 
