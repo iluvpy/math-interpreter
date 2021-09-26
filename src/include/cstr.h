@@ -11,6 +11,7 @@
 
 #define CSTR_SIZE_ sizeof(cstr)
 #define CSTR_PTR_SIZE sizeof(cstr*)
+#define CSTR_FLOATING_POINT_PRECISION 8
 
 typedef struct cstr 
 {
@@ -55,7 +56,7 @@ size_t cstr_size(cstr *s); // return number of chars including null termination
 cstr *get_newcstr(cstr *cs, char *src);
 cstr *get_cstr(char *src);
 cstr *cstr_from_long(long n);
-cstr *cstr_from_float(double f);
+cstr *cstr_from_float(double f, int precision);
 // returns copy of src
 cstr *cstr_cpy(cstr *src);
 

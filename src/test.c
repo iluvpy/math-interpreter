@@ -9,7 +9,7 @@
 #include "strvec.h"
 #include "tokens.h"
 #include "cstr_math.h"
-
+#include "numbers.h"
 
 void print_section(char *name);
 
@@ -17,9 +17,9 @@ void print_section(char *name);
 
 int main(void) {
 
-	cstr *s1 = get_cstr("523");
-	cstr *s2 = get_cstr("52753");
-	free(math_cstr_add(s1, s2));
+	int n;
+	scanf("%d", &n);
+	printf("%d is %zu characters long.\n", n, geti_digits(n));
  	return 0;
 }
 

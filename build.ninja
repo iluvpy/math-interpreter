@@ -4,7 +4,7 @@ rule cc
   command = $cc -c $in -o $out $cflags
 
 rule link
-  command = $cc $in -o $out 
+  command = $cc $in -o $out -lm
 
 build obj/console.o : cc src/console.c
 build obj/cstr.o : cc src/cstr.c

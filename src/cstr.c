@@ -158,6 +158,20 @@ cstr *cstr_from_long(long n) {
 	return get_cstr(str);
 }
 
+cstr *cstr_from_float(double f, int precision) {
+	char str[geti_digits((int)f)+precision];
+	cstr *fmt = get_cstr("");
+	cstr *precision_str = cstr_from_long(precision);
+	cstr_appendstr(fmt, "%.");
+	cstr_appendcstr(fmt, precision_str);
+	cstr_appendc(fmt, 'f');
+	sprintf(str, cstr_str(fmt), f);
+
+	del_cstr(fmt);
+	del_cstr(precision_str);
+	return get_cstr(str);
+}
+
 // returns copy of src
 cstr *cstr_cpy(cstr *src) {
 	if (src) {
