@@ -70,37 +70,33 @@ int main(int argc, char **argv)
 void print_help_menu() {
     printcolor(FgMagenta, "\nmathc debug version \n");
     printcolor(FgGreen ,"------- Comannds -------\n");
-    printcolor(FgBlue, "'%s' to show this menu again\n", H_CMD);
-    printcolor(FgBlue, "'%s' to clear the console\n", CLR_CMD);
-    printcolor(FgBlue, "'%s' to exit\n\n", Q_CMD);
+    printcolor(FgBlue, "'%s' or '%s' to show this menu again\n", H_CMD, H2_CMD);
+    printcolor(FgBlue, "'%s' or '%s' to clear the console\n", CLR_CMD, CLR2_CMD);
+    printcolor(FgBlue, "'%s' or '%s' to exit\n\n", Q_CMD, Q2_CMD);
 	
 }
-
-// only used and should only be used in commands() function
-#define CMD_EXEC(inp, CMD, func, _return) \
-    if (strlen(inp) == strlen(CMD) && isalpha(inp[0])) { \
-        if (str_eq_str(inp, CMD)) { \
-            func;\
-            return _return; \
-        }\
-        printcolor(FgRed, "'%s' does not exist, did you mean '%s'?\n", inp, CMD); \
-        return COMMAND_EXECUTED;\
-    }  \
-
-
-void void_func() { return; } 
 
 // checks for commands
 int commands(cstr *input) {
 
     char *str = cstr_str(input);
-    CMD_EXEC(str, Q_CMD, void_func(), QUIT_COMMAND);
-    CMD_EXEC(str, Q2_CMD, void_func(), QUIT_COMMAND);
-    CMD_EXEC(str, H_CMD, print_help_menu(), COMMAND_EXECUTED);
-    CMD_EXEC(str, H2_CMD, print_help_menu(), COMMAND_EXECUTED);
-    CMD_EXEC(str, CLR_CMD, clear_console(), COMMAND_EXECUTED);
-    CMD_EXEC(str, CLR2_CMD, clear_console(), COMMAND_EXECUTED);
 
+	if (str_eq_str(str, Q_CMD) || str_eq_str(str, Q2_CMD)) {
+		return QUIT_COMMAND;
+	}
+	else if (str_eq_str(str, H_CMD) || str_eq_str(str, H2_CMD)) {
+		print_help_menu();
+		return COMMAND_EXECUTED;
+	}
+	else if (str_eq_str(str, CLR_CMD) || str_eq_str(str, CLR2_CMD)) {
+		clear_console();
+		return COMMAND_EXECUTED;
+	}
+    else if (isalpha(str[0])) { // if the first letter of the input isnt a number 
+		printcolor(FgRed, "Uknown command '%s', please type '%s' or '%s' for help.\n", str, H_CMD, H2_CMD);
+		return COMMAND_EXECUTED;
+	}
+	
 	return NO_COMMAND;
 }
 

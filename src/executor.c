@@ -28,7 +28,7 @@ cstr *execute_ast(AstNode *node) {
         }
     }
     else { // probably a number token
-        // if the right node is null then its the end if the ast
+        // if the right node is null then its the end if the AST
         if (!node_get_right(node)) return node_get_value(node);
  
     }
