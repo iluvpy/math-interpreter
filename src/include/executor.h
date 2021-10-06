@@ -7,5 +7,6 @@
 #include "cstr.h"
 #include "ast.h"
 #include "tokens.h"
+#include "token_math.h"
 
 cstr *execute_ast(AstNode *ast);

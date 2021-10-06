@@ -5,7 +5,7 @@
  */
 
 typedef enum num_type{
-	float_t=1,
-	int_t,
-	nan_t
+	Float_t=1,
+	Int_t,
+	Nan_t
 } num_type;

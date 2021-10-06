@@ -8,7 +8,6 @@
 #include "lexer.h"
 #include "strvec.h"
 #include "tokens.h"
-#include "cstr_math.h"
 #include "numbers.h"
 
 void print_section(char *name);

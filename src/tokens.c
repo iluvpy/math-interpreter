@@ -48,7 +48,9 @@ cstr *get_token_value(cstr *token) {
 			break;
 		}
 	}
-	
+	for (int i = start+1; i < cstr_size(token); i++) {
+		cstr_appendc(new_str, cstr_getc(token, i));
+	}
 	return new_str;
 }
 

@@ -38,11 +38,11 @@ svector *generate_tokens(cstr *m_expression) {
 
 cstr *num_to_token(number *num) {
 	switch (num->type) {
-		case int_t:
+		case Int_t:
 			return get_int_token(num->str_num);
-		case float_t:
+		case Float_t:
 			return get_float_token(num->str_num);
-		case nan_t:
+		case Nan_t:
 			return get_cstr(NAN_TOKEN);
 		default:
 			return NULL;
@@ -53,18 +53,18 @@ cstr *num_to_token(number *num) {
 number *get_number(size_t start_pos, cstr *expression) {
 	number *num = alloc_number();
 	cstr *str_num = get_cstr("");
-	num_type type_ = int_t;
+	num_type type_ = Int_t;
 	for (int i = start_pos; i < cstr_len(expression); i++) {
 		char c = cstr_getc(expression, i);
 		if (isdigit(c) || c == '.' || c == ',') {
-			if (c == '.' || c == ',') {type_ = float_t;}
+			if (c == '.' || c == ',') {type_ = Float_t;}
 			cstr_appendc(str_num, c);
 		}
 		else {
 			break;
 		}
 	}
-	if (cstr_len(str_num) == 0) {type_ = nan_t;}
+	if (cstr_len(str_num) == 0) {type_ = Nan_t;}
 	num->pos = get_point(start_pos, start_pos+cstr_len(str_num)-1);
 	num->type = type_;
 	num->str_num = str_num;

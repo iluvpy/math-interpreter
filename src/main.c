@@ -5,6 +5,7 @@
 #include "console.h"
 #include "lexer.h"
 #include "parser.h"
+#include "executor.h"
 
 //defines
 #define COMMAND_EXECUTED 0
@@ -56,6 +57,7 @@ int main(int argc, char **argv)
         printf("ast first node value: '%s'\n", cstr_str(node_get_value(ast_get_node(ast))));
         printf("ast right node value: '%s'\n", cstr_str(node_get_value(node_get_right(ast_get_node(ast)))));
         printf("ast left node value: '%s'\n", cstr_str(node_get_value(node_get_left(ast_get_node(ast)))));
+		printf("reuslt: '%s'\n", cstr_str(execute_ast(ast_get_node(ast))));
         del_ast(ast);
 
 		del_svec(tokens);
@@ -92,11 +94,11 @@ int commands(cstr *input) {
 		clear_console();
 		return COMMAND_EXECUTED;
 	}
-    else if (isalpha(str[0])) { // if the first letter of the input isnt a number 
+    else if (!isdigit(str[0])) { // if the first letter of the input isnt a number 
 		printcolor(FgRed, "Uknown command '%s', please type '%s' or '%s' for help.\n", str, H_CMD, H2_CMD);
 		return COMMAND_EXECUTED;
 	}
-	
+
 	return NO_COMMAND;
 }
 
