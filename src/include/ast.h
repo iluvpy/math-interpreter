@@ -5,6 +5,7 @@
  */
 
 #include "cstr.h"
+#include "stdio.h"
 
 #define AST_SIZE sizeof(Ast)
 #define ASTNODE_SIZE sizeof(AstNode)
@@ -25,6 +26,9 @@ typedef struct Ast {
 Ast *alloc_ast();
 void ast_set_node(Ast* ast, AstNode *node);
 AstNode *ast_get_node(Ast *ast);
+
+// to print an ast you need to set node to NULL
+void print_ast(Ast *ast, AstNode *node);
 // frees all the memory in the ast
 void del_ast(Ast *ast);
 

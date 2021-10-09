@@ -9,4 +9,4 @@
 #include "tokens.h"
 #include "token_math.h"
 
-cstr *execute_ast(AstNode *ast);
+cstr *interpret_ast(AstNode *ast);

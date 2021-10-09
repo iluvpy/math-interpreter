@@ -9,6 +9,7 @@
 #include "strvec.h"
 #include "tokens.h"
 #include "numbers.h"
+#include "ast.h"
 
 void print_section(char *name);
 

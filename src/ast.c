@@ -69,6 +69,33 @@ AstNode *node_get_right(AstNode *node) {
     return NULL;
 }
 
+
+void print_ast(Ast *ast, AstNode *node) {
+	static int left;
+	static int right;
+	if (ast && !node) {
+		AstNode *first_node = ast_get_node(ast);
+		left = 0;
+		right = 0;
+		print_ast(NULL, first_node);
+		return;
+	}
+
+	AstNode *left_node = node_get_left(node);
+	AstNode *right_node = node_get_right(node);
+	printf("left: %d  right: %d\nvalue: %s\n", left, right, cstr_str(node_get_value(node)));
+	left++;
+	if (left_node)
+		print_ast(NULL, left_node);
+	else	
+		printf("last node left: %d\n", left);
+	right++;
+	if (right_node)
+		print_ast(NULL, right_node);
+	else
+		printf("last node right: %d\n", right);
+}
+
 // deletes node and all the underlying nodes
 void del_node(AstNode *node) {
     if (node) {

@@ -28,7 +28,7 @@ cstr *get_bracket_token(char bracket) {
 
 cstr *token_typeof(cstr *_token) {
 	cstr *type_ = get_cstr("");
-	for(int i = 0;;i++) {
+	for (int i = 0;;i++) {
 		char current_c = cstr_getc(_token, i);
 		if (current_c == TOKEN_SEPERATOR) {
 			cstr_appendc(type_, current_c);

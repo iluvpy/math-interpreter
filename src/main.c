@@ -5,7 +5,7 @@
 #include "console.h"
 #include "lexer.h"
 #include "parser.h"
-#include "executor.h"
+#include "interpreter.h"
 
 //defines
 #define COMMAND_EXECUTED 0
@@ -54,11 +54,19 @@ int main(int argc, char **argv)
 		}
         printf("parsing...\n");
 		Ast *ast = parser(tokens);
-        printf("ast first node value: '%s'\n", cstr_str(node_get_value(ast_get_node(ast))));
-        printf("ast right node value: '%s'\n", cstr_str(node_get_value(node_get_right(ast_get_node(ast)))));
-        printf("ast left node value: '%s'\n", cstr_str(node_get_value(node_get_left(ast_get_node(ast)))));
-		printf("reuslt: '%s'\n", cstr_str(execute_ast(ast_get_node(ast))));
-        del_ast(ast);
+		if (ast) {
+        // printf("ast first node value: '%s'\n", cstr_str(node_get_value(ast_get_node(ast))));
+        // printf("ast right node value: '%s'\n", cstr_str(node_get_value(node_get_right(ast_get_node(ast)))));
+        // printf("ast left node value: '%s'\n", cstr_str(node_get_value(node_get_left(ast_get_node(ast)))));
+			print_ast(ast, NULL);
+			printf("interpreting...\n");
+			cstr *result = interpret_ast(ast_get_node(ast));
+			printf("result: '%s'\n", cstr_str(result));
+        	del_ast(ast);
+		}
+		else {
+			printcolor(FgRed, "parsing error occured! please check your writing!\n");
+		}
 
 		del_svec(tokens);
         // free memory for input
