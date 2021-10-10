@@ -7,7 +7,7 @@
 
 typedef struct svector {
 	cstr **vector;
-	size_t length;
+	int length;
 } svector;
 
 
@@ -17,7 +17,7 @@ void svec_append(svector *vec, cstr *str);
 void svec_appendc_str(svector *vec, char *str);
 // returns position of c in vec or -1 if c is not in vec
 int svec_find(svector *vec, char c);
-cstr *svec_get(svector *vec, size_t index); // returns element if exists
-size_t svec_len(svector *vec);
+cstr *svec_get(svector *vec, int index); // returns element if exists
+int svec_len(svector *vec);
 // frees memory of vec
 void del_svec(svector *vec);

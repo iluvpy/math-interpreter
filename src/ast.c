@@ -84,14 +84,14 @@ void print_ast(Ast *ast, AstNode *node) {
 	AstNode *left_node = node_get_left(node);
 	AstNode *right_node = node_get_right(node);
 	printf("left: %d  right: %d\nvalue: %s\n", left, right, cstr_str(node_get_value(node)));
-	left++;
-	if (left_node)
+	if (left_node) {
+		left++;
 		print_ast(NULL, left_node);
-	else	
-		printf("last node left: %d\n", left);
-	right++;
-	if (right_node)
+	}
+	if (right_node) {
+		right++;
 		print_ast(NULL, right_node);
+	}
 	else
 		printf("last node right: %d\n", right);
 }

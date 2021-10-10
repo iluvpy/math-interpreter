@@ -15,7 +15,7 @@
 
 typedef struct cstr 
 {
-    size_t size; // number of characters including 
+    int size; // number of characters including 
     char *str;
     bool free_str; // if string needs to be freed on deletion of cstr
 } cstr;
@@ -30,7 +30,8 @@ void cstr_appendcstr(cstr *dest, cstr *src);
 void cstr_appendc(cstr *dest, char c);
 void cstr_insert(cstr *dest, cstr *other, int index);
 // removes char at index
-void cstr_remove(cstr *str, size_t index);
+void cstr_remove(cstr *str, int index);
+void cstr_strip(cstr *str, int start, int end);
 // delets all occurencies of c in str
 cstr *cstr_delc(cstr *s, char c);
 // frees s
@@ -48,9 +49,9 @@ cstr *cstr_from_allocstr(char *src);
 
 // returns the char * of s
 char *cstr_str(cstr *s);
-char cstr_getc(cstr *s, size_t index); // return char at index or null if index is invalid
-size_t cstr_len(cstr *s); // returns number of chars in cstr (without including null termination)
-size_t cstr_size(cstr *s); // return number of chars including null termination
+char cstr_getc(cstr *s, int index); // return char at index or null if index is invalid
+int cstr_len(cstr *s); // returns number of chars in cstr (without including null termination)
+int cstr_size(cstr *s); // return number of chars including null termination
 // change cstr value to new value
 // generates a new cstr from a char *
 cstr *get_newcstr(cstr *cs, char *src);
@@ -64,13 +65,15 @@ cstr *cstr_cpy(cstr *src);
 int str_sum(char *s);
 // returns the sum of ascii values 
 int cstr_sum(cstr *s);
-size_t cstr_last(cstr *s);
+int cstr_last(cstr *s);
+// returns index of char inside cstr or -1 if it doesnt contain it
+int cstr_find(cstr *s, char c);
 
 // returns true when cs == s
 bool cstr_eq_str(cstr *cs, char *s);
 bool cstr_eq_cstr(cstr *str1, cstr *str2);
 bool str_eq_str(char *s1, char *s2);
-bool cstr_is_in(cstr *cs, char c);
+bool cstr_contains(cstr *cs, char c);
 bool cstr_is_float(cstr *str);
 bool cstr_is_int(cstr *str);
 int cstr_toi(cstr *str); // to int 

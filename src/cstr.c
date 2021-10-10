@@ -44,7 +44,7 @@ void cstr_insert(cstr *dest, cstr *other, int index) {
 	for (int i = 0; i < index+1; i++) {
 		new_str[i] = cstr_getc(dest, i);
 	}
-	for (int i = index; i < cstr_len(dest); i++) str_rest[i] = cstr_getc(dest, i);
+	for (int i = index; i < cstr_size(dest); i++) str_rest[i] = cstr_getc(dest, i);
 	strcat(new_str, other->str);
 	strcat(new_str, str_rest);
 	dest->size += cstr_len(other);
@@ -54,16 +54,26 @@ void cstr_insert(cstr *dest, cstr *other, int index) {
 }
 
 // removes char at index
-void cstr_remove(cstr *s, size_t index) {
-    if (s ) {
+void cstr_remove(cstr *s, int index) {
+    if (s) {
 		memmove(&(s->str[index]), &(s->str[index+1]), s->size - index);
 		s->size--;
     }
 }
 
+void cstr_strip(cstr *cs, int start, int end) {
+	char str[cstr_size(cs)+start-end];
+	for (int i = start; i < end; i++) {
+		str[i] = cstr_getc(cs, i);
+	}
+	cstr *cstr_str_ = get_cstr(str);
+	cstr_insert(cs, cstr_str_, start);
+	del_cstr(cstr_str_);
+}
+
 // delets all occurencies of c in str
 cstr *cstr_delc(cstr *s, char c) {
-	size_t found = 0;
+	int found = 0;
 	for (int i = 0; i < s->size; i++) {
 		if (cstr_getc(s, i) == c) found++;
 	}
@@ -108,7 +118,7 @@ char *cstr_str(cstr *s) {
 }
 
 // returns char at index or null if index is invalid 
-char cstr_getc(cstr *s, size_t index) {
+char cstr_getc(cstr *s, int index) {
 	if (index >= 0 && index < s->size && s) {
 		return s->str[index];
 	}
@@ -116,11 +126,11 @@ char cstr_getc(cstr *s, size_t index) {
 }
 
 // returns number of chars in cstr (without including null termination)
-size_t cstr_len(cstr *s) {
+int cstr_len(cstr *s) {
 	return s->size-1;
 }
 // return number of chars including null termination
-size_t cstr_size(cstr *s) {
+int cstr_size(cstr *s) {
 	return s->size;
 }
 
@@ -185,7 +195,7 @@ cstr *cstr_cpy(cstr *src) {
 
 
 int str_sum(char *s) {
-    size_t sum = 0;
+    int sum = 0;
     for (int i = 0; i < strlen(s); i++) {
         sum += s[i];
     }
@@ -197,7 +207,7 @@ int cstr_sum(cstr *s) {
     return str_sum(s->str);
 }
 
-size_t cstr_last(cstr *s) {
+int cstr_last(cstr *s) {
 	return s->size-1;
 }
 
@@ -215,19 +225,23 @@ bool str_eq_str(char *s1, char *s2) {
 	return (str_sum(s1)-str_sum(s2) == 0);
 }
 
-bool cstr_is_in(cstr *cs, char c) {
+int cstr_find(cstr *cs, char c) {
 	for (int i = 0; i < cs->size; i++) {
-		if (cstr_getc(cs, i) == c) {return true;}
+		if (cstr_getc(cs, i) == c) {return i;}
 	}
-	return false;
+	return -1;
+}
+
+bool cstr_contains(cstr *cs, char c) {
+	return cstr_find(cs, c) > -1;
 }
 
 bool cstr_is_float(cstr *str) {
-	return (cstr_is_int(str) && (cstr_is_in(str, '.') || cstr_is_in(str, ',')));
+	return (cstr_is_int(str) && (cstr_contains(str, '.') || cstr_contains(str, ',')));
 }
 
 bool cstr_is_int(cstr *str) {
-	for (int i = 0; i < cstr_len(str); i++) {
+	for (int i = 0; i < cstr_size(str); i++) {
 		if (isdigit(cstr_getc(str, i))) return true;
 	}
 	return false;

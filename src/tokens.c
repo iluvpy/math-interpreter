@@ -54,6 +54,36 @@ cstr *get_token_value(cstr *token) {
 	return new_str;
 }
 
+cstr *to_token(cstr *number) {
+	cstr *res = get_cstr("");
+	// find position of '.' or ','
+	int pos1 = cstr_find(number, '.');
+	int pos = pos1 > -1 ? pos1 : cstr_find(number, ',');
+	if (pos > -1) {
+		cstr_appendstr(res, INTEGER_TOKEN);
+		cstr_appendcstr(res, number);
+		return res;
+	}
+	else {
+		int non_zeroes = 0;
+		for (int i = pos; i < cstr_size(number); i++) {
+			non_zeroes += cstr_getc(number, i) != '0' ? 1 : 0;	
+		}
+		if (non_zeroes) {
+			cstr_appendstr(res, FLOAT_TOKEN);
+			cstr_appendcstr(res, number);
+			return res;
+		}
+		else {
+			cstr_appendstr(res, INTEGER_TOKEN);
+			cstr_strip(res, pos, cstr_len(res));
+			cstr_appendcstr(res, number);
+			return res;
+		}
+	}
+	
+}
+
 bool token_istype(cstr *token, char *type) {
 	cstr *str_type = token_typeof(token);
 	bool b = cstr_eq_str(str_type, type);

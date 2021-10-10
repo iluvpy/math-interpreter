@@ -40,13 +40,13 @@ void svec_appendc_str(svector *vec, char *str) {
 }
 
 // returns vector length 
-size_t svec_len(svector *vec) {
+int svec_len(svector *vec) {
 	return vec->length;
 }
 
 
 // returns element if it exists
-cstr *svec_get(svector *vec, size_t index) {
+cstr *svec_get(svector *vec, int index) {
 	if (index >= 0 && index < vec->length) {
 		return vec->vector[index];
 	}
@@ -56,7 +56,7 @@ cstr *svec_get(svector *vec, size_t index) {
 // returns index of c in vec or -1 if c is not in vec
 int svec_find(svector *vec, char c) {
 	for (int i = 0; i < svec_len(vec); i++) {
-		if (cstr_is_in(svec_get(vec, i), c)) return i;
+		if (cstr_contains(svec_get(vec, i), c)) return i;
 	}
 	return -1;
 }

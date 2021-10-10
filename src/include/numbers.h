@@ -9,8 +9,8 @@
 /**
  * @brief returns the number of digits in a number
  */
-size_t geti_digits(long n);
+int geti_digits(long n);
 /**
  * @brief returns the number of digits in a number
  */
-size_t getf_digits(double f, int decimals);
+int getf_digits(double f, int decimals);

@@ -4,7 +4,7 @@
 
 // typedef struct ivec {
 // 	int **vec;
-// 	size_t length;
+// 	int length;
 // } ivec;
 
 // #define IVEC_SIZE sizeof(ivec)
@@ -12,5 +12,5 @@
 
 // ivec *generate_ivec();
 // void ivec_append(ivec *vec, int n);
-// int ived_get(ivec *vec, size_t index);
+// int ived_get(ivec *vec, int index);
 // void del_ivec(ivec *vec);

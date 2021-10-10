@@ -48,18 +48,18 @@ int main(int argc, char **argv)
 		}
 
 		svector *tokens = generate_tokens(input);
-        printf("tokenizing... \n");
+        printf("\n\n\n\ntokenizing...\n");
 		for (int i = 0; i < svec_len(tokens); i++) {
 			printf("%s\n", cstr_str(svec_get(tokens, i)));
 		}
-        printf("parsing...\n");
+        printf("\n\n\n\nparsing...\n");
 		Ast *ast = parser(tokens);
 		if (ast) {
         // printf("ast first node value: '%s'\n", cstr_str(node_get_value(ast_get_node(ast))));
         // printf("ast right node value: '%s'\n", cstr_str(node_get_value(node_get_right(ast_get_node(ast)))));
         // printf("ast left node value: '%s'\n", cstr_str(node_get_value(node_get_left(ast_get_node(ast)))));
 			print_ast(ast, NULL);
-			printf("interpreting...\n");
+			printf("\n\n\n\ninterpreting...\n");
 			cstr *result = interpret_ast(ast_get_node(ast));
 			printf("result: '%s'\n", cstr_str(result));
         	del_ast(ast);

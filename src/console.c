@@ -10,7 +10,7 @@
 
 // gets input dynamically
 cstr *dynamic_input() {
-	size_t len = INPUT_LENGTH;
+	int len = INPUT_LENGTH;
 	char *input_ = malloc(len);
 	int i = 0;
 	char c;

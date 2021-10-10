@@ -6,7 +6,7 @@
 svector *generate_tokens(cstr *m_expression) {
 	svector *tokens = generate_svec();
 	int i = 0; 
-	while (i < cstr_len(m_expression)) {
+	while (i < cstr_size(m_expression)) {
 		char current_char = cstr_getc(m_expression, i);
 		if (is_bracket(current_char)) {
 			cstr *token = get_bracket_token(current_char);
@@ -50,11 +50,11 @@ cstr *num_to_token(number *num) {
 	}
 }
 
-number *get_number(size_t start_pos, cstr *expression) {
+number *get_number(int start_pos, cstr *expression) {
 	number *num = alloc_number();
 	cstr *str_num = get_cstr("");
 	num_type type_ = Int_t;
-	for (int i = start_pos; i < cstr_len(expression); i++) {
+	for (int i = start_pos; i < cstr_size(expression); i++) {
 		char c = cstr_getc(expression, i);
 		if (isdigit(c) || c == '.' || c == ',') {
 			if (c == '.' || c == ',') {type_ = Float_t;}
