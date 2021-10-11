@@ -22,7 +22,6 @@ Ast *parser(svector *tokens) {
 }
 
 void parse_(int _i, svector *tokens, AstNode *_node) {
-	printf("parse_ was called\n");
 	for (int i = _i; i < svec_len(tokens); i++) {
 		if (is_op_token(svec_get(tokens, i)) && i) {
 

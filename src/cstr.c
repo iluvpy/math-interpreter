@@ -7,14 +7,14 @@
 #include "cstr.h"
 #include "numbers.h"
 
+// XXX remove string->free_str as its unnessesary (its always true)
+
 // manipulators
 
 // appends src to dest
 void cstr_appendstr(cstr *dest, char *src) {
     if (dest && src ) {
-        dest->size += strlen(src);
-        if (dest->free_str) {dest->str = realloc(dest->str, dest->size);}
-		else {dest->str = malloc(dest->size);}
+		cstr_resize(dest, dest->size + strlen(src));
         strcat(dest->str, src);
         dest->free_str = true;
     }
@@ -28,13 +28,7 @@ void cstr_appendcstr(cstr *dest, cstr *src) {
 }
 
 void cstr_appendc(cstr *dest, char c) {
-	dest->size++;
-	if (dest->free_str) {
-		dest->str = realloc(dest->str, dest->size);
-	}
-	else {
-		dest->str = malloc(dest->size);
-	}
+	cstr_resize(dest, dest->size + 1);
 	strncat(dest->str, &c, 1);
 }
 
@@ -47,9 +41,7 @@ void cstr_insert(cstr *dest, cstr *other, int index) {
 	for (int i = index; i < cstr_size(dest); i++) str_rest[i] = cstr_getc(dest, i);
 	strcat(new_str, other->str);
 	strcat(new_str, str_rest);
-	dest->size += cstr_len(other);
-	if (dest->free_str) dest->str = realloc(dest->str, dest->size);
-	else dest->str = malloc(dest->size);
+	cstr_resize(dest, dest->size + cstr_len(other));
 	strcpy(dest->str, new_str);
 }
 
@@ -61,14 +53,14 @@ void cstr_remove(cstr *s, int index) {
     }
 }
 
-void cstr_strip(cstr *cs, int start, int end) {
-	char str[cstr_size(cs)+start-end];
-	for (int i = start; i < end; i++) {
+void cstr_strip(cstr *cs, int end) {
+	int size = end + 1; // is the full size and includes null termination
+	char *str = malloc(size);
+	for (int i = 0; i < end; i++) {
 		str[i] = cstr_getc(cs, i);
 	}
-	cstr *cstr_str_ = get_cstr(str);
-	cstr_insert(cs, cstr_str_, start);
-	del_cstr(cstr_str_);
+	cstr_resize(cs, size);
+	strcpy(cs->str, str);
 }
 
 // delets all occurencies of c in str
@@ -88,6 +80,13 @@ cstr *cstr_delc(cstr *s, char c) {
 		return new_str;
 	}
 	return s;
+}
+
+void cstr_resize(cstr *cs, size_t size) {
+	if (cs->free_str) cs->str = realloc(cs->str, size);
+	else cs->str = malloc(size);
+	cs->size = size;
+	cs->free_str = true;
 }
 
 // deletes whole cstring and not only the string pointer
@@ -137,7 +136,8 @@ int cstr_size(cstr *s) {
 // creates a cstr from an allocated char *
 // deallocates the used char * when needed instead of just overwriting it
 cstr *cstr_from_allocstr(char *src) {
-    if (src == NULL) {return NULL;}
+    if (!src) 
+		return NULL;
     cstr *cs = malloc(CSTR_SIZE_);
 	cs->size = strlen(src)+1;
 	cs->str = src;

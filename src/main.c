@@ -55,13 +55,11 @@ int main(int argc, char **argv)
         printf("\n\n\n\nparsing...\n");
 		Ast *ast = parser(tokens);
 		if (ast) {
-        // printf("ast first node value: '%s'\n", cstr_str(node_get_value(ast_get_node(ast))));
-        // printf("ast right node value: '%s'\n", cstr_str(node_get_value(node_get_right(ast_get_node(ast)))));
-        // printf("ast left node value: '%s'\n", cstr_str(node_get_value(node_get_left(ast_get_node(ast)))));
-			print_ast(ast, NULL);
 			printf("\n\n\n\ninterpreting...\n");
 			cstr *result = interpret_ast(ast_get_node(ast));
-			printf("result: '%s'\n", cstr_str(result));
+			cstr *number_result = get_token_value(result);
+			del_cstr(result);
+			printf("result: %s\n", cstr_str(number_result));
         	del_ast(ast);
 		}
 		else {

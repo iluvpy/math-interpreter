@@ -31,9 +31,12 @@ void cstr_appendc(cstr *dest, char c);
 void cstr_insert(cstr *dest, cstr *other, int index);
 // removes char at index
 void cstr_remove(cstr *str, int index);
-void cstr_strip(cstr *str, int start, int end);
+// removes everything that would come after end index
+void cstr_strip(cstr *str, int end);
 // delets all occurencies of c in str
 cstr *cstr_delc(cstr *s, char c);
+// rezises memory occupied by the inner char *
+void cstr_resize(cstr *s, size_t size);
 // frees s
 void del_cstr(cstr *s); 
 
