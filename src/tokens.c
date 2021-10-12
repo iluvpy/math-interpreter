@@ -42,13 +42,13 @@ cstr *token_typeof(cstr *_token) {
 cstr *get_token_value(cstr *token) {
 	cstr *new_str = get_cstr("");
 	int start = 0;
-	for (int i = 0; i < cstr_size(token); i++) {
+	for (int i = 0; i < cstr_len(token); i++) {
 		if (cstr_getc(token, i) == TOKEN_SEPERATOR) {
 			start = i; 
 			break;
 		}
 	}
-	for (int i = start+1; i < cstr_size(token); i++) {
+	for (int i = start+1; i < cstr_len(token); i++) {
 		cstr_appendc(new_str, cstr_getc(token, i));
 	}
 	return new_str;

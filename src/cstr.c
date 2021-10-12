@@ -38,7 +38,7 @@ void cstr_insert(cstr *dest, cstr *other, int index) {
 	for (int i = 0; i < index+1; i++) {
 		new_str[i] = cstr_getc(dest, i);
 	}
-	for (int i = index; i < cstr_size(dest); i++) str_rest[i] = cstr_getc(dest, i);
+	for (int i = index; i < cstr_len(dest); i++) str_rest[i] = cstr_getc(dest, i);
 	strcat(new_str, other->str);
 	strcat(new_str, str_rest);
 	cstr_resize(dest, dest->size + cstr_len(other));
@@ -55,7 +55,7 @@ void cstr_remove(cstr *s, int index) {
 
 void cstr_strip(cstr *cs, int end) {
 	int size = end + 1; // is the full size and includes null termination
-	char *str = malloc(size);
+	char *str = calloc(size, 1);
 	for (int i = 0; i < end; i++) {
 		str[i] = cstr_getc(cs, i);
 	}
@@ -86,6 +86,7 @@ void cstr_resize(cstr *cs, size_t size) {
 	if (cs->free_str) cs->str = realloc(cs->str, size);
 	else cs->str = malloc(size);
 	cs->size = size;
+	cs->str[cs->size] = '\0'; // add null termination
 	cs->free_str = true;
 }
 
@@ -110,10 +111,7 @@ void del_cstr_str(cstr *s) {
 
 // returns the char * of s
 char *cstr_str(cstr *s) {
-    if (s) {
-        return (s->str) ? s->str : NULL;
-    }
-	return NULL;
+    return s ? s->str : NULL;
 }
 
 // returns char at index or null if index is invalid 
@@ -241,7 +239,7 @@ bool cstr_is_float(cstr *str) {
 }
 
 bool cstr_is_int(cstr *str) {
-	for (int i = 0; i < cstr_size(str); i++) {
+	for (int i = 0; i < cstr_len(str); i++) {
 		if (isdigit(cstr_getc(str, i))) return true;
 	}
 	return false;

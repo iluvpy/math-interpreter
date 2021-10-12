@@ -21,14 +21,6 @@ void print_section(char *name);
 
 
 int main(void) {
-	printf("say something: ");
-	cstr *str = dynamic_input();
-	printf("ok i understood; you said \n'%s'\n", cstr_str(str));
-	printf("now im gonna remove everying from the middle and after! \n");
-	cstr_strip(str, 3);
-	printf("much better!; \n'%s'\n", cstr_str(str));
-
-	del_cstr(str);
  	return 0;
 }
 
