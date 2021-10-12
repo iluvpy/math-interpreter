@@ -55,7 +55,7 @@ void cstr_remove(cstr *s, int index) {
 
 void cstr_strip(cstr *cs, int end) {
 	int size = end + 1; // is the full size and includes null termination
-	char *str = calloc(size, 1);
+	char *str = calloc(size, 1); 
 	for (int i = 0; i < end; i++) {
 		str[i] = cstr_getc(cs, i);
 	}
@@ -148,7 +148,7 @@ cstr *cstr_from_allocstr(char *src) {
 cstr *get_cstr(char *src) {
     cstr *s = malloc(CSTR_SIZE_);
     s->size = strlen(src)+1;
-    s->str = malloc(s->size);
+    s->str = calloc(s->size, 1);
     strcpy(s->str, src);
     s->free_str = true;
     return s;  
@@ -183,7 +183,7 @@ cstr *cstr_from_float(double f, int precision) {
 // returns copy of src
 cstr *cstr_cpy(cstr *src) {
 	if (src) {
-		char *cpy = malloc(src->size+1);
+		char *cpy = calloc(src->size, 1);
 		strcpy(cpy, src->str);
 		return cstr_from_allocstr(cpy);
 	}
