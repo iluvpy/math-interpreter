@@ -16,7 +16,6 @@ void cstr_appendstr(cstr *dest, char *src) {
     if (dest && src ) {
 		cstr_resize(dest, dest->size + strlen(src));
         strcat(dest->str, src);
-        dest->free_str = true;
     }
 }
 
@@ -83,11 +82,9 @@ cstr *cstr_delc(cstr *s, char c) {
 }
 
 void cstr_resize(cstr *cs, size_t size) {
-	if (cs->free_str) cs->str = realloc(cs->str, size);
-	else cs->str = malloc(size);
 	cs->size = size;
-	cs->str[cs->size] = '\0'; // add null termination
-	cs->free_str = true;
+	cs->str = realloc(cs->str, cs->size);
+	cs->str[cs->size-1] = '\0'; // add null termination
 }
 
 // deletes whole cstring and not only the string pointer
@@ -102,10 +99,7 @@ void del_cstr(cstr *s) {
 // when free_str is true
 void del_cstr_str(cstr *s) {
     if (s) {
-       if (s->free_str && s->str) {
-            free(s->str);
-            s->free_str = false;
-        }
+       free(s->str); 
     }
 }
 
@@ -139,7 +133,6 @@ cstr *cstr_from_allocstr(char *src) {
     cstr *cs = malloc(CSTR_SIZE_);
 	cs->size = strlen(src)+1;
 	cs->str = src;
-	cs->free_str = true;
     return cs;
 }   
 
@@ -150,7 +143,6 @@ cstr *get_cstr(char *src) {
     s->size = strlen(src)+1;
     s->str = calloc(s->size, 1);
     strcpy(s->str, src);
-    s->free_str = true;
     return s;  
 }
 

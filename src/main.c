@@ -56,6 +56,7 @@ int main(int argc, char **argv)
 		Ast *ast = parser(tokens);
 		if (ast) {
 			printf("\n\n\n\ninterpreting...\n");
+			print_ast(ast, NULL);
 			cstr *result = interpret_ast(ast_get_node(ast));
 			cstr *number_result = get_token_value(result);
 			del_cstr(result);

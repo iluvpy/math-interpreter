@@ -15,9 +15,8 @@
 
 typedef struct cstr 
 {
-    int size; // number of characters including 
+    size_t size; // number of characters including 
     char *str;
-    bool free_str; // if string needs to be freed on deletion of cstr
 } cstr;
 
 // manipulators

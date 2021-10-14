@@ -12,7 +12,10 @@ Ast *parser(svector *tokens) {
 	del_cstr(none);
 	ast_set_node(ast, start_node);
 
-	parse_(0, tokens, start_node);
+	int pos1 = svec_find(tokens, '+');
+	int pos = pos1 > -1 ? pos1 : svec_find(tokens, '-');
+
+	parse_(pos > -1 ? pos : 0, tokens, start_node);
 
 	if (cstr_eq_str(start_node->value, "null")) {
 		del_ast(ast);
