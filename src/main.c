@@ -36,7 +36,8 @@ int main(int argc, char **argv)
     while (true) {
         printf("mathc# ");
 		input = dynamic_input();
-		if (input == NULL) continue; // no input was given
+		if (!input) // no input was given
+			continue; 
         int res = commands(input); 
         if (res < 0) { // quit command
             del_cstr(input);

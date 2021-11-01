@@ -40,7 +40,7 @@ AstNode *get_node(cstr *value) {
 
 // copies value into node->value
 void node_set_value(AstNode *node, cstr *value) {
-    if (node->value != NULL) del_cstr(node->value);
+    if (node->value) del_cstr(node->value);
     node->value = cstr_cpy(value);
 }
 // returns value of node if node not NULL, NULL if otherwise
@@ -100,11 +100,11 @@ void print_ast(Ast *ast, AstNode *node) {
 void del_node(AstNode *node) {
     if (node) {
         del_cstr(node->value);
-        if (node->left != NULL) {
+        if (node->left) {
             del_node(node->left);
             node->left = NULL;
         }
-        if (node->right != NULL) {
+        if (node->right) {
             del_node(node->right);
             node->right = NULL; 
         }

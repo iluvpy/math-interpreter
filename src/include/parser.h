@@ -11,4 +11,4 @@
 #include "console.h"
 
 Ast *parser(svector *tokens);
-void parse_(int i, svector *tokens,  AstNode *node);
+void parse_(svector *tokens,  AstNode *node);

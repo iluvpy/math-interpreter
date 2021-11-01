@@ -12,5 +12,5 @@ point *get_point(int x, int y) {
 }
 
 void del_point(point *p) {
-	if (p != NULL) free(p);
+	if (p) free(p);
 }

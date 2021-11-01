@@ -216,8 +216,10 @@ bool str_eq_str(char *s1, char *s2) {
 }
 
 int cstr_find(cstr *cs, char c) {
-	for (int i = 0; i < cs->size; i++) {
-		if (cstr_getc(cs, i) == c) {return i;}
+	if (cs) { 
+		for (int i = 0; i < cs->size; i++) {
+			if (cstr_getc(cs, i) == c) {return i;}
+		}
 	}
 	return -1;
 }

@@ -15,7 +15,7 @@
 
 typedef struct cstr 
 {
-    size_t size; // number of characters including 
+    size_t size; // number of characters including null termination
     char *str;
 } cstr;
 

@@ -57,6 +57,9 @@
 		"numbers.h": "c",
 		"cstr.h": "c",
 		"interpreter.h": "c",
-		"strvec.h": "c"
+		"strvec.h": "c",
+		"list": "c",
+		"valarray": "c",
+		"stdlib.h": "c"
 	}
 }
