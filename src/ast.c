@@ -33,7 +33,7 @@ AstNode *alloc_astNode() {
 // creates an astnode from a cstr
 AstNode *get_node(cstr *value) {
     AstNode *node = alloc_astNode();
-    node->value = value;
+    node_set_value(node, value);
     return node;
 }
 

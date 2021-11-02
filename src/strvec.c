@@ -62,7 +62,6 @@ cstr *svec_get(svector *vec, int index) {
 void svec_set(svector *vec, int index, cstr *str) {
 	if (vec) {
 		if (svec_get(vec, index)) { // if element exists
-			del_cstr(vec->vector[index]);
 			vec->vector[index] = str;
 		}
 	}
@@ -71,7 +70,6 @@ void svec_set(svector *vec, int index, cstr *str) {
 // returns index of c in vec or -1 if c is not in vec
 int svec_find(svector *vec, char c) {
 	for (int i = 0; i < svec_len(vec); i++) {
-		printf("parser! \n");
 		if (cstr_contains(svec_get(vec, i), c)) return i;
 	}
 	return -1;
@@ -80,7 +78,7 @@ int svec_find(svector *vec, char c) {
 // deletes the index if its valid
 void svec_pop(svector *vec, int index) {
 	if (svec_get(vec, index)) {
-		for (int i = index; i < svec_len(vec) - 1; i++) {
+		for (int i = index; i < svec_len(vec); i++) {
 			svec_set(vec, i, svec_get(vec, i+1));
 		}
 		vec->length--;

@@ -175,9 +175,7 @@ cstr *cstr_from_float(double f, int precision) {
 // returns copy of src
 cstr *cstr_cpy(cstr *src) {
 	if (src) {
-		char *cpy = calloc(src->size, 1);
-		strcpy(cpy, src->str);
-		return cstr_from_allocstr(cpy);
+		return get_cstr(src->str);
 	}
 	return NULL;
 }
