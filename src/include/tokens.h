@@ -22,6 +22,7 @@
 #define FLOAT_TOKEN "FLOAT:"
 #define BRACKET_TOKEN "BRACKET:"
 #define NAN_TOKEN "NAN:"
+#define NULL_TOKEN get_cstr("INT:0")
 #define INTEGER_T_LEN strlen(INTEGER_TOKEN)
 #define FLOAT_T_LEN strlen(FLOAT_TOKEN)
 

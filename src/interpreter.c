@@ -1,6 +1,9 @@
 #include "interpreter.h"
 
 cstr *interpret_ast(AstNode *node) {
+	if (!node) {
+		return NULL_TOKEN;
+	}
     cstr *node_value = node_get_value(node);
     if (is_op_token(node_value)) {
         cstr *left_node_value = node_get_value(node_get_left(node));

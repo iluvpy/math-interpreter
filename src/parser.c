@@ -18,26 +18,50 @@ Ast *parser(svector *tokens) {
 	return ast;
 }
 
+bool tokens_are_valid(svector *tokens) {
+	int op_tokens = 0;
+	int number_tokens = 0;
+	for (int i = 0; i < svec_len(tokens); i++) {
+		cstr *token = svec_get(tokens, i);
+		if (is_number_token(token)) 
+			number_tokens++;
+		else if (is_op_token(token))
+			op_tokens++;
+	}
+
+	return (number_tokens > op_tokens) || (number_tokens == 1 && op_tokens == 0); 
+}
+
 void parse_(svector *tokens, AstNode *_node) {
 	printf("parser!\n");
+
+	if (!tokens_are_valid(tokens)) {
+		error_occured = true;
+		return;
+	}
+
 	int len = svec_len(tokens);
 	if (len > 0) { // if len > 0
-		int pos1 = svec_find(tokens, '+');
-		int pos2 = pos1 != -1 ? pos1 : svec_find(tokens, '-');
+		int pos1 = svec_findc(tokens, '+');
+		int pos2 = pos1 != -1 ? pos1 : svec_findc(tokens, '-');
 		if (pos2 != -1) {
 			node_set_value(_node, svec_get(tokens, pos2));
 			svec_pop(tokens, pos2);
 			pos1 = pos2;
 		}
-		else if ((pos1 = svec_find(tokens, '*')) != -1) {
+		else if ((pos1 = svec_findc(tokens, '*')) != -1) {
 			node_set_value(_node, svec_get(tokens, pos1));
 			svec_pop(tokens, pos1);
 		}
-		else if ((pos1 = svec_find(tokens, '/')) != -1) {
+		else if ((pos1 = svec_findc(tokens, '/')) != -1) {
 			node_set_value(_node, svec_get(tokens, pos1));
 			svec_pop(tokens, pos1);
 		}
 		else {
+			if (len > 1) {
+				error_occured = true;
+				return;
+			}
 			node_set_value(_node, svec_get(tokens, len-1));
 			return;
 		}

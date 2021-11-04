@@ -37,5 +37,15 @@ you can use `() [] {}`
 you can use `+ - * / ^`
 
 - functions
-for now you can use `log(base=10, n) pow(x, y) mod(x, y)`
+you will be able to use `log(base=10, n) pow(x, y) mod(x, y) and much more`
 
+
+## TODO
+fix the memory leaks created by the recursive calling of the interpreter
+
+need to "attach" the minus operator to the number in the lexing step,
+example:
+`432 - 53 - 3 - 53 * 2 - 2 * 7 - 2 = 254`
+but the interpreter thinks its 175. Why? Because - (52 * 2) - (2 * 7) is interpreted as 104 - 14 instead of -104 - 14 because the minus is interpreted as a unique token and not as part of the number.
+So, to solve that i need to make the minus become a OP:* INT:-1 OP:* so that 104 would multiply by -1 to become -104, or timply just make the 
+number directly -104 and add OP:+ before it instead of OP:- in the lexing step 

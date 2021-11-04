@@ -18,7 +18,8 @@ void svec_resize(svector *vec, size_t size);
 void svec_append(svector *vec, cstr *str);
 void svec_appendc_str(svector *vec, char *str);
 // returns position of c in vec or -1 if c is not in vec
-int svec_find(svector *vec, char c);
+int svec_findc(svector *vec, char c);
+int svec_countc(svector *vec, char c);
 cstr *svec_get(svector *vec, int index); // returns element if exists
 void svec_set(svector *vec, int index, cstr *str); // sets element at index if it exists
 void svec_pop(svector *vec, int index);  // deletes element if exists
