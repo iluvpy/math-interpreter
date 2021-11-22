@@ -64,8 +64,6 @@ number *get_number(int start_pos, cstr *expression) {
 	number *num = alloc_number();
 	cstr *str_num = get_cstr("");
 	num_type type_ = Int_t;
-	printf("start pos: %d\n", start_pos);
-	printf("start pos value: %c\n", cstr_getc(expression, start_pos));
 	for (int i = start_pos; i < cstr_len(expression); i++) {
 		char c = cstr_getc(expression, i);
 		if (isdigit(c) || c == '.' || c == ',' || (i == start_pos)) {
