@@ -1,5 +1,5 @@
 # math-interpreter
-a math interpreter written in C
+a math tool for interpretation and compilation of math expression
 
 # dependencies
 - ninja
