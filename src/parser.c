@@ -44,6 +44,8 @@ void parse_(svector *tokens, AstNode *_node) {
 	if (len > 0) { // if len > 0
 		int pos1 = svec_findc(tokens, '+');
 		int pos2 = pos1 != -1 ? pos1 : svec_findc(tokens, '-');
+		// a number can also be INT:-1 so i need to see if it contains an 'O' inside 'OP:-' 
+		pos2 = pos2 == svec_findc(tokens, 'O') ? pos2 : -1;
 		if (pos2 != -1) {
 			node_set_value(_node, svec_get(tokens, pos2));
 			svec_pop(tokens, pos2);

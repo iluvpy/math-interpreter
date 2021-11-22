@@ -14,11 +14,22 @@ svector *generate_tokens(cstr *m_expression) {
 			del_cstr(token);
 		}
 		else if (is_operator(current_char)) {
-			cstr *operator_token = get_op_token(current_char);
-			svec_append(tokens, operator_token);
-			del_cstr(operator_token);
+			// '-' is a special case as it can be both an operator and both part of a number
+			// which can cause compilcations in long expressions
+			
+			if (current_char != '-') {
+				cstr *operator_token = get_op_token(current_char);
+				svec_append(tokens, operator_token);
+				del_cstr(operator_token);
+			}
+			else {
+				cstr *operator_token = get_op_token('+'); // replace - with + and make the next number be negative
+				svec_append(tokens, operator_token);
+				del_cstr(operator_token);
+			}
+			
 		}
-		else if (isdigit(current_char)){
+		if (isdigit(current_char) || current_char == '-'){
 			// create number
 			number *num = get_number(i, m_expression);
 			i = num->pos->y;
@@ -31,7 +42,6 @@ svector *generate_tokens(cstr *m_expression) {
 		}
 		i++;
 	}
-	
 	return tokens;
 }
 
@@ -54,10 +64,14 @@ number *get_number(int start_pos, cstr *expression) {
 	number *num = alloc_number();
 	cstr *str_num = get_cstr("");
 	num_type type_ = Int_t;
+	printf("start pos: %d\n", start_pos);
+	printf("start pos value: %c\n", cstr_getc(expression, start_pos));
 	for (int i = start_pos; i < cstr_len(expression); i++) {
 		char c = cstr_getc(expression, i);
-		if (isdigit(c) || c == '.' || c == ',') {
-			if (c == '.' || c == ',') {type_ = Float_t;}
+		if (isdigit(c) || c == '.' || c == ',' || (i == start_pos)) {
+			if (c == '.' || c == ',') {
+				type_ = Float_t;
+			}
 			cstr_appendc(str_num, c);
 		}
 		else {
