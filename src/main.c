@@ -62,6 +62,7 @@ int main(int argc, char **argv)
 			cstr *number_result = get_token_value(result);
 			del_cstr(result);
 			printf("result: %s\n", cstr_str(number_result));
+			del_cstr(number_result);
         	del_ast(ast);
 		}
 		else {
