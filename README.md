@@ -1,3 +1,8 @@
+# PROJECT INFO
+the project broken :( <br>
+ill refactor it if i get enough motivation one day or week
+
+
 # math-interpreter
 a math tool for interpretation and compilation of math expression
 
