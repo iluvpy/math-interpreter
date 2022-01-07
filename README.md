@@ -1,5 +1,5 @@
 # PROJECT INFO
-the project broken :( <br>
+the project is broken :( <br>
 ill refactor it if i get enough motivation one day or week
 
 
