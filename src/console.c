@@ -18,7 +18,7 @@ cstr *dynamic_input() {
 		input_[i] = c;
 
 		i++;
-		if (i > len) {
+		if (i >= len) {
 			len += INPUT_LENGTH;
 			input_ = realloc(input_, len);
 		}	
