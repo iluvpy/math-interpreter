@@ -15,20 +15,14 @@
 #include "tokens.h"
 #include "numbers.h"
 #include "ast.h"
+#include "debug.h"
 
 void print_section(char *name);
 
 
 
 int main(void) {
-
-	print_section("TEST");
-	cstr *input = dynamic_input();
-	FILE *test_file = fopen("./test.out.txt", "w+");
-	fprintf(test_file, "%s", cstr_str(input));
-	fclose(test_file);
-	del_cstr(input);
-
+	DEBUG_CALL(main, "%s\nnew msg: %d", "hello", 4);
  	return 0;
 }
 

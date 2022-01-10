@@ -60,6 +60,8 @@
 		"strvec.h": "c",
 		"list": "c",
 		"valarray": "c",
-		"stdlib.h": "c"
-	}
+		"stdlib.h": "c",
+		"debug.h": "c"
+	},
+	"C_Cpp.errorSquiggles": "Disabled"
 }

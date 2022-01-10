@@ -8,7 +8,7 @@
 // input 
 
 
-// gets input dynamically
+// gets input dynamically (breaks for some reason at 4095 bytes)
 cstr *dynamic_input() {
 	int len = INPUT_LENGTH;
 	char *input_ = malloc(len);
@@ -20,7 +20,7 @@ cstr *dynamic_input() {
 		i++;
 		if (i >= len) {
 			len += INPUT_LENGTH;
-			input_ = realloc(input_, len);
+			input_ = realloc(input_, len * sizeof(char));
 		}	
 	}
 
