@@ -22,7 +22,7 @@ void print_section(char *name);
 
 
 int main(void) {
-	DEBUG_CALL(main, "%s\nnew msg: %d", "hello", 4);
+	DEBUG_MESSAGE_VAR("hello: %d", 4);
  	return 0;
 }
 

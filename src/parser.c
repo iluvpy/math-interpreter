@@ -44,19 +44,23 @@ void parse_(svector *tokens, AstNode *_node) {
 	int len = svec_len(tokens);
 	if (len > 0) { // if len > 0
 		int pos1 = svec_findc(tokens, '+');
-		int pos2 = pos1 != -1 ? pos1 : svec_findc(tokens, '-');
+		int pos2 = pos1 != SVEC_NOT_FOUND ? pos1 : svec_findc(tokens, '-');
 		// a number can also be INT:-1 so i need to see if it contains an 'O' for 'OP:-' 
-		pos2 = pos2 == svec_findc(tokens, 'O') ? pos2 : -1;
-		if (pos2 != -1) {
+		pos2 = pos2 == svec_findc(tokens, 'O') ? pos2 : SVEC_NOT_FOUND;
+		if (pos2 != SVEC_NOT_FOUND) {
 			node_set_value(_node, svec_get(tokens, pos2));
 			svec_pop(tokens, pos2);
 			pos1 = pos2;
 		}
-		else if ((pos1 = svec_findc(tokens, '*')) != -1) {
+		else if ((pos1 = svec_findc(tokens, '*')) != SVEC_NOT_FOUND) {
 			node_set_value(_node, svec_get(tokens, pos1));
 			svec_pop(tokens, pos1);
 		}
-		else if ((pos1 = svec_findc(tokens, '/')) != -1) {
+		else if ((pos1 = svec_findc(tokens, '/')) != SVEC_NOT_FOUND) {
+			node_set_value(_node, svec_get(tokens, pos1));
+			svec_pop(tokens, pos1);
+		} 
+		else if ((pos1 = svec_findc(tokens, '^')) != SVEC_NOT_FOUND) {
 			node_set_value(_node, svec_get(tokens, pos1));
 			svec_pop(tokens, pos1);
 		}

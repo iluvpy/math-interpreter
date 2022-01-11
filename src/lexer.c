@@ -1,5 +1,6 @@
 
 #include "lexer.h"
+#include "debug.h"
 
 // transforms a mathematical expression into a simple start to finish array of tokens that 
 // can then be executed by the parser
@@ -42,6 +43,15 @@ svector *generate_tokens(cstr *m_expression) {
 		}
 		i++;
 	}
+	return optimize_tokens(tokens);
+}
+
+svector *optimize_tokens(svector *tokens) {
+	DEBUG_MESSAGE("started optimize tokens function\n");
+	for (int i = 0; i < svec_len(tokens); i++) {
+		
+	}
+	// remove double operators (++, **, //, etc)
 	return tokens;
 }
 

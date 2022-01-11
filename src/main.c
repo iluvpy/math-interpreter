@@ -6,6 +6,7 @@
 #include "lexer.h"
 #include "parser.h"
 #include "interpreter.h"
+#include "debug.h"
 
 //defines
 #define COMMAND_EXECUTED 0
@@ -49,7 +50,7 @@ int main(int argc, char **argv)
 		}
 
 		svector *tokens = generate_tokens(input);
-        printf("\n\n\n\ntokenizing...\n");
+        DEBUG_MESSAGE("\n\n\n\ntokenizing...\n");
 		for (int i = 0; i < svec_len(tokens); i++) {
 			printf("%s\n", cstr_str(svec_get(tokens, i)));
 		}

@@ -16,6 +16,7 @@
 // transforms a mathematical expression into a simple start - to finish string of 
 // tokens seperated by spaces
 svector *generate_tokens(cstr *m_expression);
+svector *optimize_tokens(svector *tokens);
 number *get_number(int start_pos, cstr *expression);
 cstr *num_to_token(number *num);
 

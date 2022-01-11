@@ -4,6 +4,7 @@
 #include "cstr.h"
 
 #define SVEC_SIZE sizeof(svector)
+#define SVEC_NOT_FOUND -1
 
 typedef struct svector {
 	cstr **vector; // the vector

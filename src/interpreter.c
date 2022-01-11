@@ -23,6 +23,9 @@ cstr *interpret_ast(AstNode *node) {
 			case '-':
                 return token_sub(left_node_value, interpret_ast(right_node));
             	break;
+            case '^':
+                return token_pow(left_node_value, interpret_ast(right_node));
+                break;
             default:
                 break;
         }
