@@ -22,8 +22,19 @@ void print_section(char *name);
 
 
 int main(void) {
-	DEBUG_MESSAGE_VAR("hello: %d", 4);
- 	return 0;
+	print_section("test");
+	// write testing code here
+	svector *vec = generate_svec(); 	
+	svec_append_str(vec, "INT:2");
+	svec_append_str(vec, "OP:*");
+	svec_append_str(vec, "INT:2");
+	svec_append_str(vec, "OP:+");
+	svec_append_str(vec, "INT:1");
+
+	DEBUG_MESSAGE_VAR("%d\n", svec_findc(vec, '+'));
+	del_svec(vec);
+	print_section("finished test");
+	return 0;
 }
 
 // prints ------- name -------

@@ -40,12 +40,12 @@ AstNode *get_node(cstr *value) {
 
 // copies value into node->value
 void node_set_value(AstNode *node, cstr *value) {
-    if (node->value) del_cstr(node->value);
+    if (node->value) { del_cstr(node->value); }
     node->value = cstr_cpy(value);
 }
 // returns value of node if node not NULL, NULL if otherwise
 cstr *node_get_value(AstNode *node) {
-    if (node) return node->value;
+    if (node) { return node->value; }
     return NULL;
 }
 
@@ -59,13 +59,13 @@ void node_set_right(AstNode *node, AstNode *right) {
 
 // returns the left node of node if node not NULL, NULL if otherwise 
 AstNode *node_get_left(AstNode *node) {
-    if (node) return node->left;
+    if (node) { return node->left; }
     return NULL;
 }
 
 // returns the right node of node if node not NULL, NULL if otherwise 
 AstNode *node_get_right(AstNode *node) {
-    if (node) return node->right;
+    if (node) { return node->right; }
     return NULL;
 }
 
@@ -92,8 +92,9 @@ void print_ast(Ast *ast, AstNode *node) {
 		right++;
 		print_ast(NULL, right_node);
 	}
-	else
+	else {
 		printf("last node right: %d\n", right);
+    }
 }
 
 // deletes node and all the underlying nodes

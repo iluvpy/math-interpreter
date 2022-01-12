@@ -17,7 +17,7 @@ svector *svec_from_cstr(cstr *str); // creates svector and initalizes index 0 wi
 svector *generate_svec(); // generates an svector initialized with length 0
 void svec_resize(svector *vec, size_t size);
 void svec_append(svector *vec, cstr *str);
-void svec_appendc_str(svector *vec, char *str);
+void svec_append_str(svector *vec, char *str);
 // returns position of c in vec or -1 if c is not in vec
 int svec_findc(svector *vec, char c);
 int svec_countc(svector *vec, char c);

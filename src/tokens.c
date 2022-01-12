@@ -64,8 +64,9 @@ cstr *to_token(cstr *number) {
 		}
 		cstr_appendstr(type, INTEGER_TOKEN);
 	}
-	else 
+	else {
 		cstr_appendstr(type, FLOAT_TOKEN);
+	}
 	cstr_appendcstr(type, number);
 	return type;
 }

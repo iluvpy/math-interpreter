@@ -33,7 +33,7 @@ void svec_append(svector *vec, cstr *str) {
 	}
 }
 
-void svec_appendc_str(svector *vec, char *str) {
+void svec_append_str(svector *vec, char *str) {
 	if (vec && str) {
 		vec->length++;
 		svec_resize(vec, vec->length);
@@ -70,7 +70,7 @@ void svec_set(svector *vec, int index, cstr *str) {
 // returns index of c in vec or -1 if c is not in vec
 int svec_findc(svector *vec, char c) {
 	for (int i = 0; i < svec_len(vec); i++) {
-		if (cstr_contains(svec_get(vec, i), c)) return i;
+		if (cstr_contains(svec_get(vec, i), c)) { return i; }
 	}
 	return -1;
 }
@@ -78,8 +78,9 @@ int svec_findc(svector *vec, char c) {
 int svec_countc(svector *vec, char c) {
 	int count = 0;
 	for (int i = 0; i < svec_len(vec); i++) {
-		if (cstr_contains(svec_get(vec, i), c))
+		if (cstr_contains(svec_get(vec, i), c)) {
 			count++;
+		}
 	}
 	return count;
 }

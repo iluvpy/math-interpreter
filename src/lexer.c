@@ -96,7 +96,7 @@ number *get_number(int start_pos, cstr *expression) {
 bool is_operator(char c) {
 	char operators[] = USED_OPERATORS;
 	for (int i = 0; i < strlen(operators); i++) {
-		if (operators[i] == c) return true;
+		if (operators[i] == c) { return true; }
 	}
 	return false;
 }

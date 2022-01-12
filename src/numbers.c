@@ -8,7 +8,7 @@ int geti_digits(long n) { // TODO: ADD A WAY TO CALCULATE THE NUMBER OF DIGITS O
     if (n >= 0) {
 		int length = 1;
 		for (;;) {
-			if (n2 > n) return length;
+			if (n2 > n) { return length; }
 			n2 *= 10;
 			length++;
 		}

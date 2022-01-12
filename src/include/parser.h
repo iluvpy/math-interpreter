@@ -9,6 +9,7 @@
 #include "lexer.h"
 #include "ast.h"
 #include "console.h"
+#include "debug.h"
 
 Ast *parser(svector *tokens);
 void parse_(svector *tokens,  AstNode *node);

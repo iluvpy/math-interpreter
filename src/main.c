@@ -37,8 +37,9 @@ int main(int argc, char **argv)
     while (true) {
         printf("mathc# ");
 		input = dynamic_input();
-		if (!input) // no input was given
-			continue; 
+		if (!input) {// no input was given
+			continue;
+		} 
         int res = commands(input); 
         if (res < 0) { // quit command
             del_cstr(input);
@@ -50,14 +51,14 @@ int main(int argc, char **argv)
 		}
 
 		svector *tokens = generate_tokens(input);
-        DEBUG_MESSAGE("\n\n\n\ntokenizing...\n");
+        DEBUG_MESSAGE("tokenizing...\n");
 		for (int i = 0; i < svec_len(tokens); i++) {
 			printf("%s\n", cstr_str(svec_get(tokens, i)));
 		}
-        printf("\n\n\n\nparsing...\n");
+        DEBUG_MESSAGE("parsing...\n");
 		Ast *ast = parser(tokens);
 		if (ast) {
-			printf("\n\n\n\ninterpreting...\n");
+			DEBUG_MESSAGE("interpreting...\n");
 			print_ast(ast, NULL);
 			cstr *result = cstr_cpy(interpret_ast(ast_get_node(ast)));
 			cstr *number_result = get_token_value(result);

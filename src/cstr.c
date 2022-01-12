@@ -73,7 +73,7 @@ cstr *cstr_delc(cstr *s, char c) {
 		cstr *new_str = get_cstr("");
 		for (int i = 0; i < s->size; i++) {
 			char cc = cstr_getc(s, i);
-			if (cc != c) cstr_appendc(new_str, cc);
+			if (cc != c) { cstr_appendc(new_str, cc); }
 		}
 		del_cstr(s);
 		return new_str;
@@ -128,8 +128,7 @@ int cstr_size(cstr *s) {
 // creates a cstr from an allocated char *
 // deallocates the used char * when needed instead of just overwriting it
 cstr *cstr_from_allocstr(char *src) {
-    if (!src) 
-		return NULL;
+    if (!src) { return NULL; }
     cstr *cs = malloc(CSTR_SIZE_);
 	cs->size = strlen(src)+1;
 	cs->str = src;
@@ -232,7 +231,7 @@ bool cstr_is_float(cstr *str) {
 
 bool cstr_is_int(cstr *str) {
 	for (int i = 0; i < cstr_len(str); i++) {
-		if (isdigit(cstr_getc(str, i))) return true;
+		if (isdigit(cstr_getc(str, i))) { return true; }
 	}
 	return false;
 }
