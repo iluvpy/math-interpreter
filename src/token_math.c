@@ -6,7 +6,7 @@
 #define ASCII_9 57
 
 double get_token_number(cstr *string) {
-	cstr *value = get_token_value(s1);
+	cstr *value = get_token_value(string);
 	double string_f = cstr_tof(value);
 	del_cstr(value);
 	return string_f;
