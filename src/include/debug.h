@@ -11,12 +11,12 @@
 
 #ifdef DEBUG
     #define DEBUG_MESSAGE_VAR(fmt, var, ...) \
-        printcolor(FgGreen, "DEBUG:\n");\
+        print_color(FgGreen, "DEBUG:\n");\
         printf("\t%s line: %d,\n\tvar name: %s,\n\tmessage: ", __FILE__, __LINE__, #var);\
         printf(fmt, var, ##__VA_ARGS__);
     
     #define DEBUG_MESSAGE(string) \
-        printcolor(FgGreen, "DEBUG:\n");\
+        print_color(FgGreen, "DEBUG:\n");\
         printf("%s line: %d,\n\tmessage: %s", __FILE__, __LINE__, string);
 #else
     #define DEBUG_MESSAGE(string)

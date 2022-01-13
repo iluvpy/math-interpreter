@@ -3,7 +3,7 @@
 /**
  * @brief returns the number of digits in a number
  */
-int geti_digits(long n) { // TODO: ADD A WAY TO CALCULATE THE NUMBER OF DIGITS OF A NEGATIVE NUMBER
+int get_int_digits(long n) { // TODO: ADD A WAY TO CALCULATE THE NUMBER OF DIGITS OF A NEGATIVE NUMBER
     long n2 = 10;
     if (n >= 0) {
 		int length = 1;
@@ -21,5 +21,5 @@ int geti_digits(long n) { // TODO: ADD A WAY TO CALCULATE THE NUMBER OF DIGITS O
  * @brief returns the number of digits in a number
  */
 int getf_digits(double f, int decimals) {
-    return geti_digits((int)(f)) + decimals;
+    return get_int_digits((int)(f)) + decimals;
 }

@@ -39,7 +39,7 @@ int main(void) {
 
 // prints ------- name -------
 void print_section(char *name) {
-	printcolor(FgGreen, "------- ");
-	printcolor(FgGreen, "%s", name);
-	printcolor(FgGreen, " -------\n");
+	print_color(FgGreen, "------- ");
+	print_color(FgGreen, "%s", name);
+	print_color(FgGreen, " -------\n");
 }

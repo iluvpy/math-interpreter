@@ -61,7 +61,8 @@
 		"list": "c",
 		"valarray": "c",
 		"stdlib.h": "c",
-		"debug.h": "c"
+		"debug.h": "c",
+		"*.rh": "c"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }

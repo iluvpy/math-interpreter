@@ -152,13 +152,13 @@ cstr *get_newcstr(cstr *old, char *new) {
 
 
 cstr *cstr_from_long(long n) {
-	char str[geti_digits(n)];
+	char str[get_int_digits(n)];
 	sprintf(str, "%ld", n);
 	return get_cstr(str);
 }
 
 cstr *cstr_from_float(double f, int precision) {
-	char str[geti_digits((int)f)+precision];
+	char str[get_int_digits((int)f)+precision];
 	cstr *fmt = get_cstr("");
 	cstr *precision_str = cstr_from_long(precision);
 	cstr_appendstr(fmt, "%.");

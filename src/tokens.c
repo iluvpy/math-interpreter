@@ -54,7 +54,7 @@ cstr *get_token_value(cstr *token) {
 	return new_str;
 }
 
-cstr *to_token(cstr *number) {
+cstr *to_token(cstr *number, bool free_number) {
 	cstr *type = get_cstr("");
 	if (cstr_tof(number) == cstr_toi(number)) {
 		int pos1 = cstr_find(number, '.');
@@ -68,6 +68,7 @@ cstr *to_token(cstr *number) {
 		cstr_appendstr(type, FLOAT_TOKEN);
 	}
 	cstr_appendcstr(type, number);
+	if (free_number) { del_cstr(number); }
 	return type;
 }
 

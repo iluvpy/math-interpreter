@@ -5,7 +5,17 @@
  */
 
 #include <stdarg.h>
+#include <ctype.h>
 #include "cstr.h"
+
+#define UPPERCASE_A_ASCII 65
+#define UPPERCASE_Z_ASCII 90
+#define LOWERCASE_A_ASCII 97
+#define LOWERCASE_Z_ASCII 122
+#define SPACE_ASCII 32
+#define ENDLINE_ASCII 10
+#define IS_UPPERCASE_CHAR(char_) (char_ >= UPPERCASE_A_ASCII && char_ <= UPPERCASE_Z_ASCII)
+#define IS_LOWERCASE_CHAR(char_) (char_ >= LOWERCASE_A_ASCII && char_ <= LOWERCASE_Z_ASCII)
 
 #define INPUT_LENGTH 128
 
@@ -23,6 +33,18 @@
 #define FgCyan "\x1b[36m"
 #define FgWhite "\x1b[37m"
 
+// commands
+#define CLR_CMD "cls"
+#define CLR2_CMD "clear"
+#define H_CMD "h"
+#define H2_CMD "help"
+#define Q_CMD "q"
+#define Q2_CMD "quit"
+
+#define COMMAND_EXECUTED 0
+#define NO_COMMAND 1
+#define QUIT_COMMAND -1
+
 
 // input
 
@@ -33,10 +55,10 @@ cstr *dynamic_input(); // gets input dynamically
 // output
 
 // prints text in color 
-void printcolor(char *color, char *format, ...);
-
+void print_color(char *color, char *format, ...);
+void print_help_menu();
 // other
 void clear_console();
-
-
-
+bool valid_math_expression(cstr *input);
+int check_commands(cstr *input);
+int handle_input(cstr *input);

@@ -32,7 +32,7 @@ cstr *get_op_token(char operator);
 cstr *get_bracket_token(char bracket);
 cstr *token_typeof(cstr *_token);
 cstr *get_token_value(cstr *token);
-cstr *to_token(cstr *number); // param number needs to be a number in the form of a cstr ex: "512.532" or "152"
+cstr *to_token(cstr *number, bool free_number); // param number needs to be a number in the form of a cstr ex: "512.532" or "152"
 bool token_istype(cstr *_token, char *type);
 bool is_op_token(cstr *_token);
 bool is_int_token(cstr *token);

@@ -9,7 +9,7 @@
 /**
  * @brief returns the number of digits in a number
  */
-int geti_digits(long n);
+int get_int_digits(long n);
 /**
  * @brief returns the number of digits in a number
  */
