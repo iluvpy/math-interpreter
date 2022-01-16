@@ -46,6 +46,7 @@ svector *generate_tokens(cstr *m_expression) {
 	return optimize_tokens(tokens);
 }
 
+// XXX move this step to the lexer later maybe
 // remove unessesary tokens, and other redundent stuff to keep the parser simple
 svector *optimize_tokens(svector *tokens) {
 	DEBUG_MESSAGE("started optimize tokens function\n");
