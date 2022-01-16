@@ -4,8 +4,9 @@
  * @brief  abstract syntax treee library
  */
 
+#include <stdio.h>
 #include "cstr.h"
-#include "stdio.h"
+#include "debug.h"
 
 #define AST_SIZE sizeof(Ast)
 #define ASTNODE_SIZE sizeof(AstNode)

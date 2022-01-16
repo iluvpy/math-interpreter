@@ -39,3 +39,4 @@ bool is_int_token(cstr *token);
 bool is_float_token(cstr *token);
 bool is_number_token(cstr *token);
 char get_op_char(cstr *op_token);
+void op_token_set_op(cstr *op_token, char operator);

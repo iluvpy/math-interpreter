@@ -98,3 +98,7 @@ bool is_number_token(cstr *token) {
 char get_op_char(cstr *op_token) {
 	return cstr_getc(op_token, cstr_len(op_token)-1);
 }
+
+void op_token_set_op(cstr *op_token, char operator) {
+	cstr_set_last(op_token, operator);
+} 

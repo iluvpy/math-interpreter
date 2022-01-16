@@ -3,6 +3,7 @@
 #include <string.h>
 #include "cstr.h"
 #include "console.h"
+#include "tokens.h"
 
 // input
 // gets input dynamically (breaks for some reason at 4095 bytes)
@@ -89,7 +90,7 @@ void clear_console() {
 bool valid_math_expression(cstr *input) {
 	for (int i = 0; i < cstr_len(input); i++) {
 		char char_ = cstr_getc(input, i);
-		if ((IS_LOWERCASE_CHAR(char_) || IS_UPPERCASE_CHAR(char_))) {
+		if ((IS_LOWERCASE_CHAR(char_) || IS_UPPERCASE_CHAR(char_)) && (char_ != SPACE_ASCII)) {
 			return false;
 		}
 	}

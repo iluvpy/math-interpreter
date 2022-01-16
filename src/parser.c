@@ -36,7 +36,6 @@ bool tokens_are_valid(svector *tokens) {
 }
 
 void parse_(svector *tokens, AstNode *_node) {
-	printf("parser!\n");
 
 	if (!tokens_are_valid(tokens)) {
 		error_occured = true;
@@ -82,7 +81,7 @@ void parse_(svector *tokens, AstNode *_node) {
 		pos1--;
 		if (pos1 >= 0 && pos1 <= len) { // if pos1 exists (in our cirucmstances)
 			AstNode *left = get_node(svec_get(tokens, pos1)); // the left number
-			printf("left number: %s\n", cstr_str(svec_get(tokens, pos1)));
+			DEBUG_MESSAGE_VAR("left number: %s\n", cstr_str(svec_get(tokens, pos1)));
 			svec_pop(tokens, pos1);
 			AstNode *right = alloc_astNode();
 			node_set_left(_node, left);

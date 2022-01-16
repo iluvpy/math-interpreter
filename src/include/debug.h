@@ -10,10 +10,10 @@
 
 
 #ifdef DEBUG
-    #define DEBUG_MESSAGE_VAR(fmt, var, ...) \
+    #define DEBUG_MESSAGE_VAR(fmt, ...) \
         print_color(FgGreen, "DEBUG:\n");\
-        printf("\t%s line: %d,\n\tvar name: %s,\n\tmessage: ", __FILE__, __LINE__, #var);\
-        printf(fmt, var, ##__VA_ARGS__);
+        printf("\t%s line: %d\n\tmessage: ", __FILE__, __LINE__);\
+        printf(fmt, ##__VA_ARGS__);
     
     #define DEBUG_MESSAGE(string) \
         print_color(FgGreen, "DEBUG:\n");\

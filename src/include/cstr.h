@@ -20,8 +20,6 @@ typedef struct cstr
 } cstr;
 
 // manipulators
-
-
 // appends src to dest
 void cstr_appendstr(cstr *dest, char *src);
 // appends src to dest
@@ -42,6 +40,7 @@ void del_cstr(cstr *s);
 // frees the underlying char * of s
 // when free_str is true
 void del_cstr_str(cstr *s);
+void cstr_set_last(cstr *string, char new_last_char);
 
 // getters
 

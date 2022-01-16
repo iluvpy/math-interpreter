@@ -46,10 +46,38 @@ svector *generate_tokens(cstr *m_expression) {
 	return optimize_tokens(tokens);
 }
 
+// remove unessesary tokens, and other redundent stuff to keep the parser simple
 svector *optimize_tokens(svector *tokens) {
 	DEBUG_MESSAGE("started optimize tokens function\n");
+
 	for (int i = 0; i < svec_len(tokens); i++) {
-		
+		cstr *token = svec_get(tokens, i);
+		DEBUG_MESSAGE_VAR("token: %s\n", cstr_str(token));
+		cstr *next_token = NULL;
+		if (i < svec_len(tokens)-1) { next_token = svec_get(tokens, i+1); }
+		if (is_op_token(token) && next_token) {
+			char op_char = get_op_char(token);
+			char next_op_char = get_op_char(next_token);
+			if (op_char == next_op_char) {
+				switch (op_char)
+				{
+					case '*':
+						print_color(FgRed, "replaced '**' with '*'\n");
+						svec_pop(tokens, i); // you can't have ** in your code
+						break;
+					
+					case '/':
+						print_color(FgRed, "replaced '//' with '/'\n");
+						svec_pop(tokens, i); // you can't have ** in your code
+						break;
+
+					
+					default:
+						break;
+				}
+			}
+			
+		}
 	}
 	// remove double operators (++, **, //, etc)
 	return tokens;

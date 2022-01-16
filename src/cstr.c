@@ -103,6 +103,12 @@ void del_cstr_str(cstr *s) {
     }
 }
 
+void cstr_set_last(cstr *string, char new_last_char) {
+	if (string) {
+		string->str[cstr_len(string)-1] = new_last_char;
+	}
+}
+
 // returns the char * of s
 char *cstr_str(cstr *s) {
     return s ? s->str : NULL;

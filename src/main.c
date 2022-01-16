@@ -27,11 +27,11 @@ int main(int argc, char **argv)
 			del_cstr(input);
 			continue; // go back to start
 		}
-
-		svector *tokens = generate_tokens(input);
+		
         DEBUG_MESSAGE("tokenizing...\n");
+		svector *tokens = generate_tokens(input);
 		for (int i = 0; i < svec_len(tokens); i++) {
-			printf("%s\n", cstr_str(svec_get(tokens, i)));
+			DEBUG_MESSAGE_VAR("%s\n", cstr_str(svec_get(tokens, i)));
 		}
         DEBUG_MESSAGE("parsing...\n");
 		Ast *ast = parser(tokens);
