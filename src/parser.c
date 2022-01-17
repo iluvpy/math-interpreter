@@ -32,7 +32,9 @@ void parse_(svector *tokens, AstNode *_node) {
 	if (len > 0) { // if len > 0
 		int pos1 = svec_findc(tokens, '+');
 		DEBUG_MESSAGE_VAR("value of pos1: %d\n", pos1);
-		int pos2 = pos1 != SVEC_NOT_FOUND ? pos1 : svec_findc(tokens, '-');
+		// int pos2 = pos1 != SVEC_NOT_FOUND ? pos1 : svec_findc(tokens, '-');
+		// the minus token doesnt exist so theres no need to look for it
+		int pos2 = pos1; 
 		// a number can also be INT:-1 so i need to see if it contains an 'O' for 'OP:-' 
 		bool contains = false;
 		if (pos2 != SVEC_NOT_FOUND) { contains = cstr_contains(svec_get(tokens, pos2), 'O'); }
