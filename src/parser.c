@@ -67,7 +67,9 @@ void parse_(svector *tokens, AstNode *_node) {
 		}
 		// pos1 was the operator, which was deleted so now pos1 is the index of the right number
 		// that means that pos1-- is the index of the left number 
-		pos1--;
+		if (pos1 == len-2 || ) {
+			pos1--;
+		}
 		if (pos1 >= 0 && pos1 <= len) { // if pos1 exists (in our cirucmstances)
 			AstNode *left = get_node(svec_get(tokens, pos1)); // the left number
 			if (!left) {
@@ -97,4 +99,19 @@ void parse_(svector *tokens, AstNode *_node) {
 
 	}
 	
+}
+
+
+
+/*  returns the char of the operator before the pointer, ie: in case the input was '1*2+1' and the pointer
+    was at '+' it would return '*' as the operator used before the pointer is '*'
+*/
+char get_before_operator(svector *tokens, int index) {
+	return '\0';
+}
+/*  returns the char of the operator after the pointer, ie: in case the input was '1+1*2' and the pointer
+    was at '+' it would return '*' as the operator used after the pointer is '*'
+*/
+char get_after_operator(svector *tokens, int index) {
+	return '\0';
 }
