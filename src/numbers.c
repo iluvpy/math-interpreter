@@ -3,7 +3,7 @@
 /**
  * @brief returns the number of digits in a number
  */
-int get_int_digits(long n) { // TODO: ADD A WAY TO CALCULATE THE NUMBER OF DIGITS OF A NEGATIVE NUMBER
+int get_int_digits(long n) {
     long n2 = 10;
     if (n >= 0) {
 		int length = 1;

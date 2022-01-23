@@ -23,19 +23,7 @@ void print_section(char *name);
 
 int main(void) {
 	print_section("test");
-	// write testing code here
-	svector *vec = generate_svec(); 	
-	svec_append_str(vec, "INT:2");
-	svec_append_str(vec, "OP:*");
-	svec_append_str(vec, "INT:2");
-	svec_append_str(vec, "OP:+");
-	svec_append_str(vec, "INT:1");
-
-	int index = svec_findc(vec, '+');
-	DEBUG_MESSAGE_VAR("str at 0: '%s', before removal index: %d, len: %d\n", cstr_str(svec_get(vec, 1)), index, svec_len(vec));
-	svec_pop(vec, 1);
-	DEBUG_MESSAGE_VAR("str at 0: '%s', after removal index: %d, len: %d\n", cstr_str(svec_get(vec, 1)), index, svec_len(vec));
-	del_svec(vec);
+	
 	print_section("finished test");
 	return 0;
 }

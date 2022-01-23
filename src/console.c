@@ -90,7 +90,7 @@ void clear_console() {
 bool valid_math_expression(cstr *input) {
 	for (int i = 0; i < cstr_len(input); i++) {
 		char char_ = cstr_getc(input, i);
-		if ((IS_LOWERCASE_CHAR(char_) || IS_UPPERCASE_CHAR(char_)) && (char_ != SPACE_ASCII)) {
+		if ((IS_LOWERCASE_CHAR(char_) || IS_UPPERCASE_CHAR(char_))) {
 			return false;
 		}
 	}

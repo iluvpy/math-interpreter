@@ -30,9 +30,12 @@ int main(int argc, char **argv)
 		
         DEBUG_MESSAGE("tokenizing...\n");
 		svector *tokens = generate_tokens(input);
-		for (int i = 0; i < svec_len(tokens); i++) {
-			DEBUG_MESSAGE_VAR("%s\n", cstr_str(svec_get(tokens, i)));
-		}
+		DEBUG_MESSAGE("all tokens:\n");
+		ON_DEBUG(
+			for (int i = 0; i < svec_len(tokens); i++) {
+				printf("\t%s\n", cstr_str(svec_get(tokens, i)));
+			}
+		)
         DEBUG_MESSAGE("parsing...\n");
 		Ast *ast = parser(tokens);
 		if (ast) {
@@ -48,10 +51,12 @@ int main(int argc, char **argv)
 		else {
 			print_color(FgRed, "parsing error occured! please check your writing!\n");
 		}
-
+	
 		del_svec(tokens);
         // free memory for input
         del_cstr(input);
     }
     return 0;
 }
+
+

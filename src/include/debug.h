@@ -18,8 +18,13 @@
     #define DEBUG_MESSAGE(string) \
         print_color(FgGreen, "DEBUG:\n");\
         printf("%s line: %d,\n\tmessage: %s", __FILE__, __LINE__, string);
+    
+    #define ON_DEBUG(code)  \
+        code\
+    
 #else
     #define DEBUG_MESSAGE(string)
     #define DEBUG_MESSAGE_VAR(...)
+    #define ON_DEBUG(code)
 #endif
 
