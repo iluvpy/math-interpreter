@@ -51,10 +51,12 @@ int main(int argc, char **argv)
 		else {
 			print_color(FgRed, "parsing error occured! please check your writing!\n");
 		}
-
+	
 		del_svec(tokens);
         // free memory for input
         del_cstr(input);
     }
     return 0;
 }
+
+

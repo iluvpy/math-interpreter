@@ -109,6 +109,20 @@ void cstr_set_last(cstr *string, char new_last_char) {
 	}
 }
 
+char cstr_get_last(cstr *s) {
+	if (s) {
+		return s->str[cstr_len(s)-1];
+	}
+	return '\0';
+}
+
+int string_find(char *string, char c) {
+	for (int i = 0; *string != '\0'; string++) {
+		if (*string == c) { return i; }
+	}
+	return STRING_NOT_FOUND;
+}
+
 // returns the char * of s
 char *cstr_str(cstr *s) {
     return s ? s->str : NULL;

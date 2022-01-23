@@ -65,14 +65,14 @@ void parse_(svector *tokens, AstNode *_node) {
 			node_set_value(_node, svec_get(tokens, len-1));
 			return;
 		}
-		// pos1 was the operator, which was deleted so now pos1 is the index of the right number
-		// that means that pos1-- is the index of the left number 
-		if (pos1 == len-2 || ) {
-			pos1--;
-		}
-		if (pos1 >= 0 && pos1 <= len) { // if pos1 exists (in our cirucmstances)
+		// get direction analyzes the order of operation and chooses if 
+		// pos1 needs to index the left or right number 
+		// NOTE: pos1 IS currently indexing the right number as the operator that it was indexing before was deleted
+		pos1 += get_direction(tokens, pos1);
+
+		if (pos1 >= 0 && pos1 < len) { // if pos1 exists (in our cirucmstances)
 			AstNode *left = get_node(svec_get(tokens, pos1)); // the left number
-			if (!left) {
+			if (!node_get_value(left)) {
 				error_occured = true;
 				return;
 			}
@@ -107,11 +107,32 @@ void parse_(svector *tokens, AstNode *_node) {
     was at '+' it would return '*' as the operator used before the pointer is '*'
 */
 char get_before_operator(svector *tokens, int index) {
-	return '\0';
+	return cstr_get_last(svec_get(tokens, index-2));
 }
 /*  returns the char of the operator after the pointer, ie: in case the input was '1+1*2' and the pointer
     was at '+' it would return '*' as the operator used after the pointer is '*'
 */
 char get_after_operator(svector *tokens, int index) {
-	return '\0';
+	return cstr_get_last(svec_get(tokens, index+1));
+}
+
+
+/*
+	get direction return -1 or 0.
+	it returns -1 if the order of operation needs me to use the left number and
+	0 for the right number, as the index is already pointing to the right number 0 wouldnt change
+	it and thus we would point at the right number, while index-1 would be pointing at the left number
+*/
+int get_direction(svector *tokens, int index) {
+	char before = get_before_operator(tokens, index);
+	char after = get_after_operator(tokens, index);
+	int before_index = string_find(USED_OPERATORS, before);
+	int after_index = string_find(USED_OPERATORS, after);
+	
+	if (before_index == STRING_NOT_FOUND) { return -1; }
+	if (after_index == STRING_NOT_FOUND) { return 0; }
+	
+	if (before_index == after_index) { return -1; }
+ 	if (before_index < after_index) { return -1; }
+	else { return 0; }
 }

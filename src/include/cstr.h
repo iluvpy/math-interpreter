@@ -12,6 +12,7 @@
 #define CSTR_SIZE_ sizeof(cstr)
 #define CSTR_PTR_SIZE sizeof(cstr*)
 #define CSTR_FLOATING_POINT_PRECISION 8
+#define STRING_NOT_FOUND -1
 
 typedef struct cstr 
 {
@@ -41,6 +42,7 @@ void del_cstr(cstr *s);
 // when free_str is true
 void del_cstr_str(cstr *s);
 void cstr_set_last(cstr *string, char new_last_char);
+char cstr_get_last(cstr *s);
 
 // getters
 
@@ -53,6 +55,7 @@ char *cstr_str(cstr *s);
 char cstr_getc(cstr *s, int index); // return char at index or null if index is invalid
 int cstr_len(cstr *s); // returns number of chars in cstr (without including null termination)
 int cstr_size(cstr *s); // return number of chars including null termination
+int string_find(char *string, char c);
 // change cstr value to new value
 // generates a new cstr from a char *
 cstr *get_newcstr(cstr *cs, char *src);

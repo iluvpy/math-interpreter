@@ -51,36 +51,41 @@ svector *generate_tokens(cstr *m_expression) {
 svector *optimize_tokens(svector *tokens) {
 	DEBUG_MESSAGE("started optimize tokens function\n");
 
-	for (int i = 0; i < svec_len(tokens); i++) {
-		cstr *token = svec_get(tokens, i);
-		DEBUG_MESSAGE_VAR("token: %s\n", cstr_str(token));
-		cstr *next_token = NULL;
-		if (i < svec_len(tokens)-1) { next_token = svec_get(tokens, i+1); }
-		if (is_op_token(token)) {
-			char op_char = get_op_char(token);
-			if (i == 0) { // remove the current token as +1, *1, /1, will always be 1 (the minus token doesnt exist for now)
-				svec_pop(tokens, i);
-			} 
-			else if (i == svec_len(tokens)-1) {
-				print_color(FgRed, "removed unused operator '%c'\n", op_char);
-				svec_pop(tokens, i);
-			}
+	bool optimized = false;
+	while (!optimized) {
+		optimized = true;
+		for (int i = 0; i < svec_len(tokens); i++) {
+			cstr *token = svec_get(tokens, i);
+			DEBUG_MESSAGE_VAR("token: %s\n", cstr_str(token));
+			cstr *next_token = NULL;
+			if (i < svec_len(tokens)-1) { next_token = svec_get(tokens, i+1); }
+			if (is_op_token(token)) {
+				char op_char = get_op_char(token);
+				if (i == 0) { // remove the current token as +1, *1, /1, will always be 1 (the minus token doesnt exist for now)
+					svec_pop(tokens, i);
+				} 
+				else if (i == svec_len(tokens)-1) {
+					print_color(FgRed, "removed unused operator '%c'\n", op_char);
+					svec_pop(tokens, i);
+				}
 
-			else if (next_token) {
-				char next_op_char = get_op_char(next_token);
-				if (op_char == next_op_char) { // remove double operators (++, **, //, etc)
-					for (char *s = USED_OPERATORS; *s != '\0'; s++) {
-						if (op_char == *s) {
-							print_color(FgRed, "replaced '%c%c' with '%c'\n", *s, *s, *s);
-							svec_pop(tokens, i); // removes one of the '*'
+				else if (next_token) {
+					char next_op_char = get_op_char(next_token);
+					if (op_char == next_op_char) { // remove double operators (++, **, //, etc)
+						for (char *s = USED_OPERATORS; *s != '\0'; s++) {
+							if (op_char == *s) {
+								print_color(FgRed, "replaced '%c%c' with '%c'\n", *s, *s, *s);
+								svec_pop(tokens, i); // removes one of the '*'
+								optimized = false;
+							}
 						}
 					}
 				}
+				
 			}
-			
 		}
 	}
-	
+		
 	return tokens;
 }
 

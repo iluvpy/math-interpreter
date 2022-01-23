@@ -21,3 +21,5 @@ char get_before_operator(svector *tokens, int index);
     was at '+' it would return '*' as the operator used after the pointer is '*'
 */
 char get_after_operator(svector *tokens, int index);
+
+int get_direction(svector *tokens, int index);
