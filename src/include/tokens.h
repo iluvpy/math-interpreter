@@ -10,6 +10,7 @@
 #define TOKEN_SEPERATOR ':'
 // operators in order 
 #define USED_OPERATORS "^*/+-" 
+#define IMPORTANT_OPERATORS "^*/" // operators that come before + and - 
 #define OPERATOR_TOKEN "OP:"
 #define OP_PLUS "OP:+"
 #define OP_MINUS "OP:-"

@@ -84,4 +84,5 @@ int cstr_toi(cstr *str); // to int
 double cstr_tof(cstr *str); // to float
 char *bool_str(bool b);
 cstr *bool_cstr(bool b);
+bool str_contains(char * str, char c);
 

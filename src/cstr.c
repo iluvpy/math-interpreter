@@ -273,3 +273,7 @@ char *bool_str(bool b) {
 cstr *bool_cstr(bool b) {
 	return get_cstr(bool_str(b));
 }
+
+bool str_contains(char * str, char c) {
+	
+}

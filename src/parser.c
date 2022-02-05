@@ -3,7 +3,7 @@
 bool error_occured = false;
 
 // returns the result of the parsed tokens
-Ast *parser(svector *tokens) {
+Ast *parse(svector *tokens) {
 	Ast *ast = alloc_ast();
 	AstNode *start_node = alloc_astNode();
 	ast_set_node(ast, start_node);
@@ -27,6 +27,78 @@ Ast *parser(svector *tokens) {
 
 
 void parse_(svector *tokens, AstNode *_node) {
+
+	// int len = svec_len(tokens);
+	// if (len > 0) { // if len > 0
+	// 	int pos1 = svec_findc(tokens, '+');
+	// 	DEBUG_MESSAGE_VAR("value of pos1: %d\n", pos1);
+	// 	// int pos2 = pos1 != SVEC_NOT_FOUND ? pos1 : svec_findc(tokens, '-');
+	// 	// the minus token doesnt exist so theres no need to look for it
+	// 	int pos2 = pos1; 
+	// 	// a number can also be INT:-1 so i need to see if it contains an 'O' for 'OP:-' 
+	// 	bool contains = false;
+	// 	if (pos2 != SVEC_NOT_FOUND) { contains = cstr_contains(svec_get(tokens, pos2), 'O'); }
+	// 	if (pos2 != SVEC_NOT_FOUND && contains) {
+	// 		node_set_value(_node, svec_get(tokens, pos2));
+	// 		svec_pop(tokens, pos2);
+	// 		pos1 = pos2;
+	// 	}
+	// 	else if ((pos1 = svec_findc(tokens, '*')) != SVEC_NOT_FOUND) {
+	// 		node_set_value(_node, svec_get(tokens, pos1));
+	// 		svec_pop(tokens, pos1);
+	// 	}
+	// 	else if ((pos1 = svec_findc(tokens, '/')) != SVEC_NOT_FOUND) {
+	// 		node_set_value(_node, svec_get(tokens, pos1));
+	// 		svec_pop(tokens, pos1);
+	// 	} 
+	// 	else if ((pos1 = svec_findc(tokens, '^')) != SVEC_NOT_FOUND) {
+	// 		node_set_value(_node, svec_get(tokens, pos1));
+	// 		svec_pop(tokens, pos1);
+	// 	}
+	// 	else {
+	// 		// the token array should now only contain the token, if not, that means one token wasnt used and some error occured
+	// 		if (len > 1) {
+	// 			error_occured = true;
+	// 			return;
+	// 		}
+	// 		DEBUG_MESSAGE("parser finished\n")
+	// 		node_set_value(_node, svec_get(tokens, len-1));
+	// 		return;
+	// 	}
+	// 	// get direction analyzes the order of operation and chooses if 
+	// 	// pos1 needs to index the left or right number 
+	// 	// NOTE: pos1 IS currently indexing the right number as the operator that it was indexing before was deleted
+	// 	pos1 += get_direction(tokens, pos1);
+
+	// 	if (pos1 >= 0 && pos1 < len) { // if pos1 exists (in our cirucmstances)
+	// 		AstNode *left = get_node(svec_get(tokens, pos1)); // the left number
+	// 		if (!node_get_value(left)) {
+	// 			error_occured = true;
+	// 			return;
+	// 		}
+	// 		DEBUG_MESSAGE_VAR("left number: %s\n", cstr_str(svec_get(tokens, pos1)));
+	// 		svec_pop(tokens, pos1);
+	// 		AstNode *right = alloc_astNode();
+	// 		node_set_left(_node, left);
+	// 		node_set_right(_node, right);
+	// 		parse_(tokens, right);
+
+	// 		if (!node_get_value(right)) {
+	// 			error_occured = true;
+	// 			return;
+	// 		}
+
+	// 		DEBUG_MESSAGE_VAR("right val: %s, left-val: %s, right-val: %s\n", cstr_str(node_get_value(right)),
+	// 			cstr_str(node_get_value(node_get_left(right))), cstr_str(node_get_value(node_get_right(right))));
+	// 	}
+	// 	else { 
+	// 		DEBUG_MESSAGE_VAR("Error inside parser caused by the token index being outside range, pos1: %d\n", pos1);
+	// 		error_occured = true;
+	// 		return;
+	// 	}
+
+	// }
+
 
 	int len = svec_len(tokens);
 	if (len > 0) { // if len > 0
@@ -68,7 +140,12 @@ void parse_(svector *tokens, AstNode *_node) {
 		// get direction analyzes the order of operation and chooses if 
 		// pos1 needs to index the left or right number 
 		// NOTE: pos1 IS currently indexing the right number as the operator that it was indexing before was deleted
-		pos1 += get_direction(tokens, pos1);
+		char before = get_before_operator(tokens, pos1);
+		char after = get_after_operator(tokens, pos2);
+
+		
+
+		pos1 += get_direction(before, after, tokens);
 
 		if (pos1 >= 0 && pos1 < len) { // if pos1 exists (in our cirucmstances)
 			AstNode *left = get_node(svec_get(tokens, pos1)); // the left number
@@ -123,9 +200,7 @@ char get_after_operator(svector *tokens, int index) {
 	0 for the right number, as the index is already pointing to the right number 0 wouldnt change
 	it and thus we would point at the right number, while index-1 would be pointing at the left number
 */
-int get_direction(svector *tokens, int index) {
-	char before = get_before_operator(tokens, index);
-	char after = get_after_operator(tokens, index);
+int get_direction(char before, char after, svector *tokens) {
 	int before_index = string_find(USED_OPERATORS, before);
 	int after_index = string_find(USED_OPERATORS, after);
 	

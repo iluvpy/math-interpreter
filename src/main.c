@@ -21,7 +21,7 @@ int main(int argc, char **argv)
         int res = handle_input(input);
 		if (res == QUIT_COMMAND) {
 			del_cstr(input);
-			break; // go back to start
+			break;
 		}
 		else if (res == COMMAND_EXECUTED) {
 			del_cstr(input);
@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 			}
 		)
         DEBUG_MESSAGE("parsing...\n");
-		Ast *ast = parser(tokens);
+		Ast *ast = parse(tokens);
 		if (ast) {
 			DEBUG_MESSAGE("interpreting...\n");
 			print_ast(ast, NULL);

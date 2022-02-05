@@ -11,7 +11,7 @@
 #include "console.h"
 #include "debug.h"
 
-Ast *parser(svector *tokens);
+Ast *parse(svector *tokens);
 void parse_(svector *tokens,  AstNode *node);
 /*  returns the char of the operator before the pointer, ie: in case the input was '1*2+1' and the pointer
     was at '+' it would return '*' as the operator used before the pointer is '*'
@@ -22,4 +22,4 @@ char get_before_operator(svector *tokens, int index);
 */
 char get_after_operator(svector *tokens, int index);
 
-int get_direction(svector *tokens, int index);
+int get_direction(char before, char after, svector *tokens);
