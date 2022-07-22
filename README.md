@@ -1,9 +1,5 @@
-# PROJECT INFO
-the project is broken :( <br>
-I am working on fixing all the issues and refactoring the code.
-
 # math-interpreter
-a math tool for interpretation and compilation of math expression
+a fun little math project for interpretation and compilation of math expression, its pretty buggy 
 
 # dependencies
 - ninja
@@ -15,12 +11,6 @@ and then just run `ninja` in the main dir
 you can also change the $cc variable in the build file
 to a compiler you like (needs to support C11)
 
-
-# State 
-in development; none of the current syntax is working <br>
-![Markdown Logo](https://img.shields.io/badge/state-development-red) <br>
-![Markdown Logo](https://img.shields.io/badge/build-unstable-red) <br>
-![Markdown Logo](https://tokei.rs/b1/github/iluvpy/mathc) <br>
 
 ## Usage
 type in `./mathc` in the console after compiling 
@@ -34,14 +24,9 @@ where you can start typing your math expressions and commands
 - q - to quit
 
 ## Syntax
-- brackets
-you can use `() [] {}`
-
 - operators
 you can use `+ - * / ^`
 
-- functions
-you will be able to use `log(base=10, n) pow(x, y) mod(x, y) and much more`
 
 
 ## TODO
