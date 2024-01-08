@@ -21,7 +21,7 @@ int main(int argc, char **argv)
         int res = handle_input(input);
 		if (res == QUIT_COMMAND) {
 			del_cstr(input);
-			break; // go back to start
+			break; // quit
 		}
 		else if (res == COMMAND_EXECUTED) {
 			del_cstr(input);
